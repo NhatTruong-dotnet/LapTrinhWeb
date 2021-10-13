@@ -1,0 +1,292 @@
+<!--Header-->
+<div class="header_top d-none d-md-block">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="contentsticky_logo col-xl-3 col-lg-2 col-md-2">
+
+                <div class="h2 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+
+
+                    <a href="/" itemprop="url" class="site-header__logo-image" style="max-width: 150px">
+
+                        <img class="lazyload js img-fluid"
+                            data-src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/logo_9fff04d7-e541-49e0-bae4-a0d865070aa5_300x.png?v=1603188082"
+                            alt="">
+                    </a>
+
+
+                </div>
+
+            </div>
+            <div class="contentsticky_group col-xl-9 col-lg-10 col-md-10">
+                <div class="site-header__icons-wrapper style_2">
+
+                    <div class="policy_header d-flex align-items-center">
+                    </div>
+
+                    <div class="group_items">
+                        <div class="form-account">
+                            <div class="form-account-title d-flex align-items-center"
+                                data-toggle="modal" data-target="#CustomerAccountForm">
+                                <i class="icon-form-account"></i>
+                            </div>
+                        </div>
+                        <div id="swym-anchor" class="swym-swym-heart">
+                            <a href="/pages/page-wishlist">
+                                <i class="swym-icon"></i>
+                            </a>
+                        </div>
+                        <div id="cart_block">
+                            <div class="site-header__cart style_2 d-flex align-items-center">
+                                <span class="site-header__cart-icon"></span>
+                                <div id="_desktop_cart_count" class="site-header__cart-count">
+                                    <span id="CartCount">0</span>
+                                </div>
+                            </div>
+                            <div id="_desktop_cart">
+                                <div id="cart-info"></div>
+                            </div>
+                        </div>
+                        <div class="site-header_myaccount dropdown">
+                            <div class="myaccount-title dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-account"></i>
+                            </div>
+                            <div class="account-list dropdown-menu dropdown-menu-right"
+                                id="_desktop_account_list">
+                                <div class="nov_sideward_content">
+                                    <div class="account-list-content">
+
+
+                                        <div>
+                                            <a class="myaccount"
+                                                href="https://nuranium-electronic.myshopify.com/account"
+                                                rel="nofollow" title="My Account">
+                                                <i class="icon-myaccount d-inline-block"></i>
+                                                <span>My Account</span>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a class="logout"
+                                                href="https://nuranium-electronic.myshopify.com/account/logout"
+                                                rel="nofollow" title="Log out">
+                                                <i class="icon-logout d-inline-block"></i>
+                                                <span>Log out</span>
+                                            </a>
+                                        </div>
+
+
+                                        <div>
+                                            <a class="check-out"
+                                                href="https://nuranium-electronic.myshopify.com/checkout"
+                                                rel="nofollow" title="Check out">
+                                                <i class="icon-checkout d-inline-block"></i>
+                                                <span>Check out</span>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a class="wishlist" href="/pages/page-wishlist"
+                                                rel="nofollow" title="My Wishlist">
+                                                <i class="icon-wishlist d-inline-block"></i>
+                                                <span>My Wishlist</span>
+                                            </a>
+                                        </div>
+                                        <div class="currency_header">
+                                            <div class="heading">Currency</div>
+
+                                            <div id="_desktop_currency_selector"
+                                                class="currency-selector groups-selector">
+
+                                                <ul id="currencies" class="list-inline">
+
+
+
+
+                                                    <li class="currency__item list-inline-item">
+                                                        <span data-currency="USD">USD</span>
+                                                    </li>
+
+
+
+
+                                                    <li class="currency__item list-inline-item">
+                                                        <span data-currency="EUR">EUR</span>
+                                                    </li>
+
+
+
+
+                                                    <li class="currency__item list-inline-item">
+                                                        <span data-currency="GBP">GBP</span>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Footer-->
+    <div id="shopify-section-nov-footer" class="shopify-section nov-footer wow fadeIn animated">
+        <footer data-section-id="nov-footer">
+            <div class="footer-top">
+
+                <div class="block_footer">
+                    <div class="container">
+                        <div class="avenger">
+                            <div class="row">
+                                <div
+                                    class="footer-contact footer-block footer-block__1 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+                                    <div class="title-block">
+                                        Warehouse
+                                    </div>
+                                    <div class="block-content">
+
+                                        <div class="contact d-flex">
+                                            <div class="icon-contact">
+                                                <i class="icon-phone"></i>
+                                            </div>
+                                            <div class="phone-content">
+                                                <div class="number">(+612) 2531 5600<p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="contact d-flex">
+                                            <div class="icon-contact">
+                                                <i class="icon-mail"></i>
+                                            </div>
+                                            <div class="email-content">
+                                                <div class="email">vinova@gmail.com<p></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="contact d-flex">
+                                            <div class="icon-contact">
+                                                <i class="icon-location"></i>
+                                            </div>
+                                            <div class="address-content">
+                                                <div class="content-address">PO Box 1622 Visaosang Street West</div>
+                                            </div>
+                                        </div>
+                                        <div class="contact d-flex">
+                                            <div class="icon-contact">
+                                                <i class="icon-hours"></i>
+                                            </div>
+                                            <div class="hours-content">
+                                                <div class="content-hours">Opening Hours : 8.00AM - 21.00AM</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="footer-menu footer-block footer-block__2 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+
+                                    <div class="title-block">
+                                        Customer Service
+                                    </div>
+                                    <ul class="site-footer__linklist list-unstyled">
+
+                                        <li class="site-footer__linklist-item">
+                                            <a href="/pages/contact-us">Contact us</a>
+                                        </li>
+
+                                        <li class="site-footer__linklist-item">
+                                            <a href="#">Help and advice</a>
+                                        </li>
+
+                                        <li class="site-footer__linklist-item">
+                                            <a href="#">Shipping & Returns</a>
+                                        </li>
+
+                                        <li class="site-footer__linklist-item">
+                                            <a href="#">Terms and conditions</a>
+                                        </li>
+
+                                        <li class="site-footer__linklist-item">
+                                            <a href="#">Refund Policy</a>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
+
+                                <div
+                                    class="newsletter btn_icon footer-block footer-block__3 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                                    <div class="title-block">
+                                        Newsletter
+                                    </div>
+
+
+                                    <div class="des">Sign up for newsletter to receive special offers and exclusive news
+                                        about Nuranium products</div>
+
+
+                                    <div class="block-content">
+                                        <div class="site-footer__newsletter">
+                                            <form method="post" action="/contact#contact_form" id="contact_form"
+                                                accept-charset="UTF-8" class="contact-form"><input type="hidden"
+                                                    name="form_type" value="customer" /><input type="hidden" name="utf8"
+                                                    value="✓" />
+
+
+                                                <div class="input-group">
+                                                    <input type="hidden" name="contact[tags]" value="newsletter">
+                                                    <input type="email" name="contact[email]" id="Email_Footer"
+                                                        class="input-group__field newsletter__input form-control pl-15"
+                                                        value="builehoangnhattruong@gmail.com"
+                                                        placeholder="Enter your email">
+                                                    <span class="input-group__btn">
+                                                        <button type="submit"
+                                                            class="btn newsletter__submit d-flex align-items-center"
+                                                            name="commit" id="Subscribe_footer">
+                                                            <span
+                                                                class="newsletter__submit-text--large">Subscribe</span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_copyright">
+                <div class="container">
+
+                    <div class="row align-items-center">
+                    
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center wow fadeIn animated">
+                            <div class="copyright">Copyright © 2020 Vinovathemes. All rights reserved.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div id="_mobile_vertical_menu" class="vertical_menu"></div>
+    </div>
+
+<!--Style-->
+Color-Background:#0c549f;
+font-size: 1.4rem;
+font-family: Roboto,HelveticaNeue,"Helvetica Neue",sans-serif;
+color: #666
