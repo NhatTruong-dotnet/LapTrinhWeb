@@ -1343,6 +1343,27 @@
     </div>
     <main class="main-content" id="MainContent">
         <section class="page-container" id="PageContainer">
+            <section id="NovBreadcrumbs">
+                <div class="container">
+                  <ol class="breadcrumb list-inline" itemscope itemtype="http://schema.org/BreadcrumbList">
+                    <li class="list-inline-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                      <a href="/" title="Home" itemprop="item">
+                        <span itemprop="name">Home</span>
+                      </a>
+                      <meta itemprop="position" content="1" />
+                    </li>
+        
+                    <li class="active list-inline-item list-inline-item" itemprop="itemListElement" itemscope
+                      itemtype="http://schema.org/ListItem">
+        
+                      <span itemprop="item"><span itemprop="name">Shopping Cart</span></span>
+        
+                      <meta itemprop="position" content="2" />
+                    </li>
+        
+                  </ol>
+                </div>
+              </section>
             <div id="shopify-section-cart-template" class="shopify-section cart-section">
                 <div class="page-width" data-section-id="cart-template" data-section-type="cart-template">
                   <div class="container">
@@ -1353,7 +1374,7 @@
         
                     <form action="/cart" method="post" novalidate class="cart">
                       <div class="row data-sticky_parent">
-                        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12">
                           <div class="cart__layout_left">
                             <div class="cart__header d-xs-none">
                               <div class="row spacing-0">
@@ -1747,7 +1768,7 @@
         
                           </div>
                         </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 data-sticky_column mt-md-40">
+                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 data-sticky_column mt-md-40">
                           <div class="cart__layout_right">
                             <div class="cart__heading">
                               <span>There are 1 items in your cart</span>
