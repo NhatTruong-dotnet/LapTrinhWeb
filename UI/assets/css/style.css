@@ -1,3 +1,35 @@
+/* commons css*/
+
+.grid_product {
+    width: 1170px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.grid__column-2 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 16.666%;
+}
+
+.grid__column-2-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 20%;
+}
+
+.edit_block {
+    min-height: 350px !important;
+}
+
+
 /* header */
 
 .site-header__logo-image>img {
@@ -47,3 +79,86 @@
 
 
 /* End mode edit create account and login */
+
+
+/* Start products */
+
+.product-item {
+    display: block;
+    position: relative;
+    margin-top: 10px;
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    transition: transform linear 0.1s;
+    will-change: transform;
+}
+
+.product-item:hover {
+    transform: translateY(1px);
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.product-item__img {
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top center;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.product-item__name {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #333;
+    line-height: 2.8rem;
+    height: 3.0rem;
+    margin: 5px;
+    text-align: center;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.product-item__rating {
+    font-size: 1.4rem;
+    color: #D5D5D5;
+    padding: auto 12px;
+    text-align: center;
+}
+
+.product-item__start-gold {
+    color: #FFCE3E;
+}
+
+.product-item__price {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 6px 4px 16px;
+    color: #333;
+}
+
+.btnSize {
+    min-width: 70px !important;
+    transform: translateY(0px) !important;
+}
+
+.concenter {
+    justify-content: center;
+}
+
+.catagory-item {
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: #333;
+    margin: 12px 0;
+    border-bottom: solid 2px #105caa;
+}
+
+
+/* End product  */
