@@ -42,6 +42,19 @@
 
 /* Start mode create account and login */
 
+#CustomerAccountForm .modal-dialog {
+    max-width: 550px !important;
+}
+
+#CustomerAccountForm .title_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+#CustomerAccountForm .title_block:after {
+    background: none !important;
+}
+
 .title_block .title-block__item {
     /* color: #8190a0; */
     color: #000;
