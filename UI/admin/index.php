@@ -18,26 +18,27 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/logo.png" />
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="navbar-brand-wrapper d-flex justify-content-center">
-        <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="index.html"><img src="./images/logo.png" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo"/></a>
+      <div class="navbar-brand-wrapper d-flex justify-content-center">
+        <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+          <a class="navbar-brand brand-logo" href="index.html"><img src="./images/logo.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
-        </div>  
+        </div>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-  
+
         <ul class="navbar-nav navbar-nav-right">
 
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="images/faces/face5.jpg" alt="profile"/>
+              <img src="images/faces/face5.jpg" alt="profile" />
               <span class="nav-profile-name">Louis Barnett</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
@@ -71,25 +72,25 @@
 
           <li class="nav-item">
             <a class="nav-link" href="./pages/category/category.html">
-              <i class=" menu-icon"><img src="https://img.icons8.com/ios/16/000000/categorize.png"/></i>
+              <i class=" menu-icon"><img src="https://img.icons8.com/ios/16/000000/categorize.png" /></i>
               <span class="menu-title">Categories</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./pages/category/category.html">
-              <i class=" menu-icon"><img src="https://img.icons8.com/external-prettycons-lineal-prettycons/16/000000/external-products-user-interface-vol-3-prettycons-lineal-prettycons.png"/></i>
+              <i class=" menu-icon"><img src="https://img.icons8.com/external-prettycons-lineal-prettycons/16/000000/external-products-user-interface-vol-3-prettycons-lineal-prettycons.png" /></i>
               <span class="menu-title">Products</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./pages/category/category.html">
-              <i class="menu-icon"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/16/000000/external-users-cyber-security-kiranshastry-lineal-kiranshastry-1.png"/></i>
+              <i class="menu-icon"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/16/000000/external-users-cyber-security-kiranshastry-lineal-kiranshastry-1.png" /></i>
               <span class="menu-title">Users</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./pages/category/category.html">
-              <i class=" menu-icon"><img src="https://img.icons8.com/ios/16/000000/cash-receipt.png"/></i>
+              <i class=" menu-icon"><img src="https://img.icons8.com/ios/16/000000/cash-receipt.png" /></i>
               <span class="menu-title">Biilling</span>
             </a>
           </li>
@@ -258,7 +259,7 @@
               </div>
             </div>
           </div>
-<!--Row table Recent Purchase-->
+          <!--Row table Recent Purchase-->
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
@@ -269,42 +270,63 @@
                       <thead>
                         <tr>
                           <th>User</th>
-                          <th>Product</th>
-                          <th>Sale</th>
-                          <th>Status</th>
+                          <th>Total</th>
+                          <th>Payment Method</th>
+                          <th>Delivery Status</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Jacob</td>
-                          <td>Photoshop</td>
-                          <td class="text-danger"> 28.76% <i class="mdi mdi-arrow-down"></i></td>
-                          <td><label class="badge badge-danger">Pending</label></td>
-                        </tr>
-                        <tr>
-                          <td>Messsy</td>
-                          <td>Flash</td>
-                          <td class="text-danger"> 21.06% <i class="mdi mdi-arrow-down"></i></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                        </tr>
-                        <tr>
-                          <td>John</td>
-                          <td>Premier</td>
-                          <td class="text-danger"> 35.00% <i class="mdi mdi-arrow-down"></i></td>
-                          <td><label class="badge badge-info">Fixed</label></td>
-                        </tr>
-                        <tr>
-                          <td>Peter</td>
-                          <td>After effects</td>
-                          <td class="text-success"> 82.00% <i class="mdi mdi-arrow-up"></i></td>
-                          <td><label class="badge badge-success">Completed</label></td>
-                        </tr>
-                        <tr>
-                          <td>Dave</td>
-                          <td>53275535</td>
-                          <td class="text-success"> 98.05% <i class="mdi mdi-arrow-up"></i></td>
-                          <td><label class="badge badge-warning">In progress</label></td>
-                        </tr>
+                        <?php
+                        $servername = "localhost:3307";
+                        $username = "root";
+                        $password = '';
+                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing"." Order By billing_id desc Limit 0,10 ";
+                        error_reporting(0);
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        } else {
+                          echo '<script>console.log("Connect success")</script>';
+
+                          #region Load Billing to 
+                          echo '<script>console.log("Running showAllBillingCommand")</script>';
+                          $result = mysqli_query($conn, $showAllBillingCommand);
+                          if (mysqli_num_rows($result) > 0) {
+                            echo '<script>console.log("Finshied running return data")</script>';
+                            echo '<script>console.log("Start loading data to table")</script>';
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              $username = "";
+                              $getUserByIdCommand = "SELECT hoten FROM laptrinhweb.user where user_id =" . $row['user_id'];
+                              $resultQuery = mysqli_query($conn, $getUserByIdCommand);
+                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
+                                $username = $rowInner['hoten'];
+                              }
+                              echo '<tr>';
+                              echo '<td>' . $username . '</td>';
+                              echo '<td>' . number_format($row['total']) . '</td>';
+                              echo '<td>' . $row['delivery_method'] . '</td>';
+                              if ($row['delivery_status'] == "đang giao hàng") {
+                                echo '<td><label class="badge badge-warning">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              } else {
+                                echo '<td><label class="badge badge-success">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              }
+                            }
+                            echo '<script>console.log("End loading data to table")</script>';
+                          } else {
+                            echo '<script>console.log("Finshied running no data return")</script>';
+                          }
+                          #endregion
+
+                          mysqli_close($conn);
+                        }
+
+                        ?>
+
                       </tbody>
                     </table>
                   </div>
@@ -323,79 +345,66 @@
                     <table id="recent-purchases-listing" class="table">
                       <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Status report</th>
-                            <th>Office</th>
-                            <th>Price</th>
-                            <th>Date</th>
-                            <th>Gross amount</th>
+                          <th>Name</th>
+                          <th>Total Sold</th>
+                          <th>Net Profit</th>
+                          <th>Price</th>
+                          <th>Date</th>
+                          <th>Gross amount</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                            <td>Jeremy Ortega</td>
-                            <td>Levelled up</td>
-                            <td>Catalinaborough</td>
-                            <td>$790</td>
-                            <td>06 Jan 2018</td>
-                            <td>$2274253</td>
-                        </tr>
-                        <tr>
-                            <td>Alvin Fisher</td>
-                            <td>Ui design completed</td>
-                            <td>East Mayra</td>
-                            <td>$23230</td>
-                            <td>18 Jul 2018</td>
-                            <td>$83127</td>
-                        </tr>
-                        <tr>
-                            <td>Emily Cunningham</td>
-                            <td>support</td>
-                            <td>Makennaton</td>
-                            <td>$939</td>
-                            <td>16 Jul 2018</td>
-                            <td>$29177</td>
-                        </tr>
-                        <tr>
-                            <td>Minnie Farmer</td>
-                            <td>support</td>
-                            <td>Agustinaborough</td>
-                            <td>$30</td>
-                            <td>30 Apr 2018</td>
-                            <td>$44617</td>
-                        </tr>
-                        <tr>
-                            <td>Betty Hunt</td>
-                            <td>Ui design not completed</td>
-                            <td>Lake Sandrafort</td>
-                            <td>$571</td>
-                            <td>25 Jun 2018</td>
-                            <td>$78952</td>
-                        </tr>
-                        <tr>
-                            <td>Myrtie Lambert</td>
-                            <td>Ui design completed</td>
-                            <td>Cassinbury</td>
-                            <td>$36</td>
-                            <td>05 Nov 2018</td>
-                            <td>$36422</td>
-                        </tr>
-                        <tr>
-                            <td>Jacob Kennedy</td>
-                            <td>New project</td>
-                            <td>Cletaborough</td>
-                            <td>$314</td>
-                            <td>12 Jul 2018</td>
-                            <td>$34167</td>
-                        </tr>
-                        <tr>
-                            <td>Ernest Wade</td>
-                            <td>Levelled up</td>
-                            <td>West Fidelmouth</td>
-                            <td>$484</td>
-                            <td>08 Sep 2018</td>
-                            <td>$50862</td>
-                        </tr>
+                      <?php
+                        $servername = "localhost:3307";
+                        $username = "root";
+                        $password = '';
+                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing"." Order By billing_id desc Limit 0,10 ";
+                        error_reporting(0);
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        } else {
+                          echo '<script>console.log("Connect success")</script>';
+
+                          #region Load Billing to 
+                          echo '<script>console.log("Running showAllBillingCommand")</script>';
+                          $result = mysqli_query($conn, $showAllBillingCommand);
+                          if (mysqli_num_rows($result) > 0) {
+                            echo '<script>console.log("Finshied running return data")</script>';
+                            echo '<script>console.log("Start loading data to table")</script>';
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              $username = "";
+                              $getUserByIdCommand = "SELECT hoten FROM laptrinhweb.user where user_id =" . $row['user_id'];
+                              $resultQuery = mysqli_query($conn, $getUserByIdCommand);
+                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
+                                $username = $rowInner['hoten'];
+                              }
+                              echo '<tr>';
+                              echo '<td>' . $username . '</td>';
+                              echo '<td>' . number_format($row['total']) . '</td>';
+                              echo '<td>' . $row['delivery_method'] . '</td>';
+                              if ($row['delivery_status'] == "đang giao hàng") {
+                                echo '<td><label class="badge badge-warning">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              } else {
+                                echo '<td><label class="badge badge-success">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              }
+                            }
+                            echo '<script>console.log("End loading data to table")</script>';
+                          } else {
+                            echo '<script>console.log("Finshied running no data return")</script>';
+                          }
+                          #endregion
+
+                          mysqli_close($conn);
+                        }
+
+                        ?>
+                        
                       </tbody>
                     </table>
                   </div>
@@ -414,78 +423,78 @@
                     <table id="recent-purchases-listing" class="table">
                       <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Status report</th>
-                            <th>Office</th>
-                            <th>Price</th>
-                            <th>Date</th>
-                            <th>Gross amount</th>
+                          <th>Name</th>
+                          <th>Status report</th>
+                          <th>Office</th>
+                          <th>Price</th>
+                          <th>Date</th>
+                          <th>Gross amount</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
-                            <td>Jeremy Ortega</td>
-                            <td>Levelled up</td>
-                            <td>Catalinaborough</td>
-                            <td>$790</td>
-                            <td>06 Jan 2018</td>
-                            <td>$2274253</td>
+                          <td>Jeremy Ortega</td>
+                          <td>Levelled up</td>
+                          <td>Catalinaborough</td>
+                          <td>$790</td>
+                          <td>06 Jan 2018</td>
+                          <td>$2274253</td>
                         </tr>
                         <tr>
-                            <td>Alvin Fisher</td>
-                            <td>Ui design completed</td>
-                            <td>East Mayra</td>
-                            <td>$23230</td>
-                            <td>18 Jul 2018</td>
-                            <td>$83127</td>
+                          <td>Alvin Fisher</td>
+                          <td>Ui design completed</td>
+                          <td>East Mayra</td>
+                          <td>$23230</td>
+                          <td>18 Jul 2018</td>
+                          <td>$83127</td>
                         </tr>
                         <tr>
-                            <td>Emily Cunningham</td>
-                            <td>support</td>
-                            <td>Makennaton</td>
-                            <td>$939</td>
-                            <td>16 Jul 2018</td>
-                            <td>$29177</td>
+                          <td>Emily Cunningham</td>
+                          <td>support</td>
+                          <td>Makennaton</td>
+                          <td>$939</td>
+                          <td>16 Jul 2018</td>
+                          <td>$29177</td>
                         </tr>
                         <tr>
-                            <td>Minnie Farmer</td>
-                            <td>support</td>
-                            <td>Agustinaborough</td>
-                            <td>$30</td>
-                            <td>30 Apr 2018</td>
-                            <td>$44617</td>
+                          <td>Minnie Farmer</td>
+                          <td>support</td>
+                          <td>Agustinaborough</td>
+                          <td>$30</td>
+                          <td>30 Apr 2018</td>
+                          <td>$44617</td>
                         </tr>
                         <tr>
-                            <td>Betty Hunt</td>
-                            <td>Ui design not completed</td>
-                            <td>Lake Sandrafort</td>
-                            <td>$571</td>
-                            <td>25 Jun 2018</td>
-                            <td>$78952</td>
+                          <td>Betty Hunt</td>
+                          <td>Ui design not completed</td>
+                          <td>Lake Sandrafort</td>
+                          <td>$571</td>
+                          <td>25 Jun 2018</td>
+                          <td>$78952</td>
                         </tr>
                         <tr>
-                            <td>Myrtie Lambert</td>
-                            <td>Ui design completed</td>
-                            <td>Cassinbury</td>
-                            <td>$36</td>
-                            <td>05 Nov 2018</td>
-                            <td>$36422</td>
+                          <td>Myrtie Lambert</td>
+                          <td>Ui design completed</td>
+                          <td>Cassinbury</td>
+                          <td>$36</td>
+                          <td>05 Nov 2018</td>
+                          <td>$36422</td>
                         </tr>
                         <tr>
-                            <td>Jacob Kennedy</td>
-                            <td>New project</td>
-                            <td>Cletaborough</td>
-                            <td>$314</td>
-                            <td>12 Jul 2018</td>
-                            <td>$34167</td>
+                          <td>Jacob Kennedy</td>
+                          <td>New project</td>
+                          <td>Cletaborough</td>
+                          <td>$314</td>
+                          <td>12 Jul 2018</td>
+                          <td>$34167</td>
                         </tr>
                         <tr>
-                            <td>Ernest Wade</td>
-                            <td>Levelled up</td>
-                            <td>West Fidelmouth</td>
-                            <td>$484</td>
-                            <td>08 Sep 2018</td>
-                            <td>$50862</td>
+                          <td>Ernest Wade</td>
+                          <td>Levelled up</td>
+                          <td>West Fidelmouth</td>
+                          <td>$484</td>
+                          <td>08 Sep 2018</td>
+                          <td>$50862</td>
                         </tr>
                       </tbody>
                     </table>
@@ -533,4 +542,3 @@
 </body>
 
 </html>
-
