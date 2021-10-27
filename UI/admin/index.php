@@ -265,7 +265,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Đơn hàng gần đây</h4>
-                  <div class="table-responsive">
+                  <div class="table-responsive"> 
                     <table class="table table-hover">
                       <thead>
                         <tr>
@@ -275,6 +275,7 @@
                           <th>Delivery Status</th>
                         </tr>
                       </thead>
+                      
                       <tbody>
                         <?php
                         $servername = "localhost:3307";
