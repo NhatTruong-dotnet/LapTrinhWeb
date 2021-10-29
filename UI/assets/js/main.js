@@ -28,3 +28,11 @@ modalTittle.forEach((title, index) => {
 
 
 // End modal sign up and login
+
+// Start Pagination product
+
+// const containerPro = $('#page-container');
+
+
+
+// End Paginantion product
