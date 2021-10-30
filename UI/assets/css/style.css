@@ -1,0 +1,252 @@
+/* commons css*/
+
+.grid_product {
+    width: 1170px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.grid__column-2 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 16.666%;
+}
+
+.grid__column-3 {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 33.3333%;
+    max-width: 400px;
+}
+
+.grid__column-2-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    max-width: 20%;
+    min-width: 236px;
+}
+
+.edit_block {
+    min-height: 350px !important;
+}
+
+
+/* header */
+
+.site-header__logo-image>img {
+    height: 90px;
+}
+
+
+/* End edit header */
+
+
+/* Button Login */
+
+.btn__login {
+    padding: 8px 40px;
+    border: solid 1px #105caa;
+    border-radius: 10px;
+    color: #105caa;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn__login:hover {
+    color: #fff;
+    background-color: #105caa;
+    border: solid 1px #105caa;
+}
+
+.site-header .icon-form-account.icon-none {
+    display: none;
+}
+
+
+/* End Button Login */
+
+
+/* Start mode create account and login */
+
+#CustomerAccountForm .modal-dialog {
+    max-width: 550px !important;
+}
+
+#CustomerAccountForm .title_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+#CustomerAccountForm .title_block:after {
+    background: none !important;
+}
+
+.title_block .title-block__item {
+    /* color: #8190a0; */
+    color: #000;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.title-block__line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 6px;
+    border-radius: 15px;
+    background-color: #105caa;
+    transition: all 0.2s ease;
+}
+
+.title_block .title-block__item.active {
+    opacity: 1;
+}
+
+.title_block .title-block__item:hover {
+    opacity: 1;
+}
+
+.content__modal .content__modal--block {
+    display: none;
+}
+
+.content__modal .content__modal--block.active {
+    display: block;
+}
+
+
+/* End mode edit create account and login */
+
+
+/* Start products */
+
+.product-item {
+    display: block;
+    position: relative;
+    margin-top: 10px;
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    transition: transform linear 0.1s;
+    will-change: transform;
+}
+
+.product-item:hover {
+    transform: translateY(1px);
+    box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.product-item__img {
+    padding-top: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top center;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.product-item__name {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #333;
+    line-height: 2.8rem;
+    height: 3.0rem;
+    margin: 5px;
+    text-align: center;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.product-item__rating {
+    font-size: 1.4rem;
+    color: #D5D5D5;
+    padding: auto 12px;
+    text-align: center;
+}
+
+.product-item__start-gold {
+    color: #FFCE3E;
+}
+
+.product-item__price {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 6px 4px 16px;
+    color: #333;
+}
+
+.btnSize {
+    min-width: 70px !important;
+    transform: translateY(0px) !important;
+}
+
+.concenter {
+    justify-content: center;
+}
+
+.catagory-item {
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: #333;
+    margin: 12px 0;
+    border-bottom: solid 2px #105caa;
+}
+
+.tab-content .loading {
+    background: none !important;
+}
+
+.section-custom .custom_collection_tab .nov-collection-tabs.tab_style_1 .title_block {
+    display: flex;
+}
+
+
+/* End product  */
+
+
+/* Start Pagenation */
+
+.product_pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.page-width {
+    margin-bottom: 30px;
+}
+
+.product_pagination a {
+    color: #000;
+    padding: 8px 16px;
+    margin-top: 50px;
+    text-decoration: none;
+    border: solid 1px #105caa;
+    margin: 0 4px;
+}
+
+.product_pagination a:hover {
+    color: #fff;
+    background-color: #105caa;
+}
+
+.product_pagination a.active {
+    color: #fff;
+    background-color: #105caa;
+}
+
+
+/* End Pagenation */
