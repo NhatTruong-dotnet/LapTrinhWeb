@@ -1168,8 +1168,14 @@
 								<!-- ============================================================ -->
 								<div class="page-width product_deals col-md-9">
 								<?php
+                                 if(isset($_GET['id'])&& $_GET['id']>0){                    
+                                    danhmuc($_GET['id']);
+                                }else{
+                                    include "Product.php";
+                                }
+                                function danhmuc($a){
 									$conn= new mysqli('localhost','root','','laptrinhweb');
-									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM product join product_image on product.product_id=product_image.product_id  order by product.product_id desc limit 15";
+									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM product join product_image on product.product_id=product_image.product_id   Where category_id=$a";
 									$result=mysqli_query($conn,$sql);
 									$arr= array();
 									$i=0;
@@ -1384,7 +1390,7 @@
 											</div>
 										</div>
 									</div>';
-								}
+								}}
 								?>									
 									<!-- ===================================================================== -->
 									<!-- Pagination -->
