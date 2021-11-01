@@ -1168,11 +1168,11 @@
 								<!-- ============================================================ -->
 								<div class="page-width product_deals col-md-9">
 								<?php
-                                 if(isset($_GET['id'])&& $_GET['id']>0){                    
-                                    danhmuc($_GET['id']);
-                                }else{
-                                    include "Product.php";
-                                }
+                                    if(isset($_GET['id'])&& $_GET['id']>0){                    
+                                        danhmuc($_GET['id']);
+                                    }else{
+                                        include "Product.php";
+                                    }
                                 function danhmuc($a){
 									$conn= new mysqli('localhost','root','','laptrinhweb');
 									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM product join product_image on product.product_id=product_image.product_id   Where category_id=$a";
@@ -1180,7 +1180,7 @@
 									$arr= array();
 									$i=0;
 									while($row=mysqli_fetch_assoc($result) ){
-										$arr[$i]= array($row['name'], $row['image_blob'], $row['price'], $row['currency']);
+										$arr[$i]= array($row['name'], $row['image_blob'], $row['price'], $row['currency'],$row['product_id']);
 										$i++;
 									}
 									
@@ -1200,7 +1200,7 @@
 												<div class="item-shadow">
 													<div class="item-product" >
 														<div class="thumbnail-container has-multiimage">
-															<a href="/products/diamond-halo-stud-earrings">
+															<a href="Details.php?id=%27'.$arr[$j][4].'%27">
 																<img class="img-fluid product__thumbnail lazyload"
 																	src="'.$arr[$j][1].'"
 																	alt=""style="width:150px; height:150px;">
@@ -1234,7 +1234,7 @@
 														</div>
 														<div class="product__info">
 															<div class="product__title">
-																<a href="/products/diamond-halo-stud-earrings">'
+																<a href="Details.php?id=%27'.$arr[$j][4].'%27">'
 																	.$arr[$j][0].'</a>
 															</div>
 															<div class="product__price" style="display:flex;justify-content: space-between; ">
@@ -1264,7 +1264,7 @@
 												<div class="item-shadow">
 													<div class="item-product" >
 														<div class="thumbnail-container has-multiimage">
-															<a href="/products/diamond-halo-stud-earrings">
+															<a href="Details.php?id=%27'.$arr[$j+1][4].'%27">
 																<img class="img-fluid product__thumbnail lazyload"
 																	src="'.$arr[$j+1][1].'"
 																	alt=""style="width:150px; height:150px;">
@@ -1298,7 +1298,7 @@
 														</div>
 														<div class="product__info">
 															<div class="product__title">
-																<a href="/products/diamond-halo-stud-earrings">'
+																<a href="Details.php?id=%27'.$arr[$j+1][4].'%27">'
 																	.$arr[$j+1][0].'</a>
 															</div>
 															<div class="product__price" style="display:flex;justify-content: space-between; ">
@@ -1328,7 +1328,7 @@
 												<div class="item-shadow">
 													<div class="item-product">
 														<div class="thumbnail-container has-multiimage">
-															<a href="/products/diamond-halo-stud-earrings">
+															<a href="Details.php?id=%27'.$arr[$j+2][4].'%27">
 																<img class="img-fluid product__thumbnail lazyload"
 																	src="'.$arr[$j+2][1].'"
 																	alt=""style="width:150px; height:150px;">
@@ -1362,7 +1362,7 @@
 														</div>
 														<div class="product__info">
 															<div class="product__title">
-																<a href="/products/diamond-halo-stud-earrings">'
+																<a href="Details.php?id=%27'.$arr[$j+2][4].'%27">'
 																.$arr[$j+2][0].'</a>
 															</div>
 															<div class="product__price" style="display:flex;justify-content: space-between; ">
