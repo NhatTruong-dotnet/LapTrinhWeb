@@ -14,11 +14,51 @@
 
 
   <link rel="shortcut icon" href="images/TitleIcon.png" type="image/png">
-
-
+    <?php
+      include('config/connectdb.php');
+      if(isset($_GET['id'])){
+        //Truy xuất chi tiết sản phẩm
+        $sqlSelectSanPham = "SELECT * FROM `product` sp 
+                              JOIN `category` cate ON sp.category_id = cate.category_id
+                              JOIN `product_image` pdi ON sp.product_id = pdi.product_id  
+                              WHERE sp.product_id =".$_GET['id'];
+        $resultSelectSanPham = mysqli_query($conn, $sqlSelectSanPham);
+        $row = mysqli_fetch_row($resultSelectSanPham);
+        //Truy xuất các sản phẩm liên quan
+        $sqlSelectSanPhamRelated = "SELECT * FROM `product` sp
+                              JOIN `product_image` pdi ON sp.product_id = pdi.product_id  
+                              WHERE sp.category_id =".$row[5];
+        $resultSelectSanPhamRelated = mysqli_query($conn, $sqlSelectSanPhamRelated);
+        $sanphamRelatedRow = array();
+        $i_length = 0;
+        while ($rowRelated = mysqli_fetch_array($resultSelectSanPhamRelated, MYSQLI_ASSOC)) {
+            $sanphamRelatedRow[] = array(
+                $rowRelated['product_id'],
+                $rowRelated['name'],
+                $rowRelated['description'],
+                $rowRelated['status'],
+                $rowRelated['discount'],
+                $rowRelated['category_id'],
+                number_format($rowRelated['price'], 0, ",", "."),
+                $rowRelated['unit'],
+                $rowRelated['created_date'],
+                $rowRelated['currency'],
+                $rowRelated['amount'],
+                $rowRelated['image_blob']
+            );
+            $i_length++;
+        }
+        // echo "<pre>";
+        // print_r($row);
+        // echo "<pre>";
+        // print_r($sanphamRelatedRow);
+        // echo "<pre>";
+        // die;
+      }
+    ?>
 
   <title>
-    Rimond Balo Stud Cum
+    <?php echo $row[1]; ?>&ndash; Hexa Food
   </title>
 
 
@@ -1183,7 +1223,7 @@
 
     </div>
   </div>
-  <main class="main-content" id="MainContent">
+  <main class="main-content" id="MainContent">    
     <section class="page-container" id="PageContainer">
       <section id="NovBreadcrumbs">
         <div class="container">
@@ -1196,7 +1236,7 @@
             </li>
             <li class="active list-inline-item" itemprop="itemListElement" itemscope
               itemtype="http://schema.org/ListItem">
-              <span itemprop="item"><span itemprop="name">Rimond Balo Stud Cum</span></span>
+              <span itemprop="item"><span itemprop="name"><?php echo $row[1]; ?></span></span>
               <meta itemprop="position" content="2" />
             </li>
           </ol>
@@ -1219,8 +1259,8 @@
                       <div class="proFeaturedImage">
                         <div class="block_content d-flex">
                           <img id="ProductPhotoImg" class="img-fluid image-zoom img-responsive lazyload"
-                            data-src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_900x900.jpg?v=1603253183"
-                            alt="Rimond Balo Stud Cum" />
+                            src="<?php echo $row[16]; ?>" 
+                            alt="<?php echo $row[1]; ?>" />
                         </div>
                       </div>
                       <div id="productThumbs" class="mt-10">
@@ -1230,64 +1270,14 @@
                             data-items_tablet="4" data-items_mobile="5">
                             <div class="thumbItem">
                               <a href="javascript:void(0)"
-                                data-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_900x900.jpg?v=1603253183"
-                                data-zoom-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_small.jpg?v=1603253183"
+                                data-image="<?php echo $row[16]; ?>"
+                                data-zoom-image="<?php echo $row[16]; ?>"
                                 class="product-single__thumbnail">
-                                <img
-                                  src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_100x125.jpg?v=1603253183"
-                                  alt="Rimond Balo Stud Cum">
+                                <img id="ProductPhotoImg" class="img-fluid image-zoom img-responsive lazyload"
+                                  src="<?php echo $row[16]; ?>" 
+                                  alt="<?php echo $row[1]; ?>" />
                               </a>
-                            </div>
-                            <div class="thumbItem">
-                              <a href="javascript:void(0)"
-                                data-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/9_903bd6e5-4773-4b43-8e5c-053061f35e15_900x900.jpg?v=1603253186"
-                                data-zoom-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/9_903bd6e5-4773-4b43-8e5c-053061f35e15_small.jpg?v=1603253186"
-                                class="product-single__thumbnail">
-                                <img
-                                  src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/9_903bd6e5-4773-4b43-8e5c-053061f35e15_100x125.jpg?v=1603253186"
-                                  alt="Rimond Balo Stud Cum">
-                              </a>
-                            </div>
-                            <div class="thumbItem">
-                              <a href="javascript:void(0)"
-                                data-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a56e67ac-4cfc-40fd-81b0-18aaa2704535_900x900.jpg?v=1603253186"
-                                data-zoom-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a56e67ac-4cfc-40fd-81b0-18aaa2704535_small.jpg?v=1603253186"
-                                class="product-single__thumbnail">
-                                <img
-                                  src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a56e67ac-4cfc-40fd-81b0-18aaa2704535_100x125.jpg?v=1603253186"
-                                  alt="Rimond Balo Stud Cum">
-                              </a>
-                            </div>
-                            <div class="thumbItem">
-                              <a href="javascript:void(0)"
-                                data-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/11_9c812859-193f-4915-ba44-331db41a4e57_900x900.jpg?v=1603253186"
-                                data-zoom-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/11_9c812859-193f-4915-ba44-331db41a4e57_small.jpg?v=1603253186"
-                                class="product-single__thumbnail">
-                                <img
-                                  src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/11_9c812859-193f-4915-ba44-331db41a4e57_100x125.jpg?v=1603253186"
-                                  alt="Rimond Balo Stud Cum">
-                              </a>
-                            </div>
-                            <div class="thumbItem">
-                              <a href="javascript:void(0)"
-                                data-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/12_8166249c-3709-40c8-8b75-2c2602799b6c_900x900.jpg?v=1603253187"
-                                data-zoom-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/12_8166249c-3709-40c8-8b75-2c2602799b6c_small.jpg?v=1603253187"
-                                class="product-single__thumbnail">
-                                <img
-                                  src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/12_8166249c-3709-40c8-8b75-2c2602799b6c_100x125.jpg?v=1603253187"
-                                  alt="Rimond Balo Stud Cum">
-                              </a>
-                            </div>
-                            <div class="thumbItem">
-                              <a href="javascript:void(0)"
-                                data-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/13_ff24ac6c-f628-4b9a-9aaa-f2c058ec0ab6_900x900.jpg?v=1603253187"
-                                data-zoom-image="//cdn.shopify.com/s/files/1/0272/1493/8165/products/13_ff24ac6c-f628-4b9a-9aaa-f2c058ec0ab6_small.jpg?v=1603253187"
-                                class="product-single__thumbnail">
-                                <img
-                                  src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/13_ff24ac6c-f628-4b9a-9aaa-f2c058ec0ab6_100x125.jpg?v=1603253187"
-                                  alt="Rimond Balo Stud Cum">
-                              </a>
-                            </div>
+                            </div>                          
                           </div>
                         </div>
                       </div>
@@ -1295,7 +1285,7 @@
                   </div>
                   <div class="block_information position-static col-md-6 col-xs-12 mt-xs-30">
                     <div class="info_content">
-                      <h1 itemprop="name" class="product-single__title">Rimond Balo Stud Cum</h1>
+                      <h1 itemprop="name" class="product-single__title"><?php echo $row[1]; ?></h1>
                       <div class="product-single__meta">
                         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                           <meta itemprop="priceCurrency" content="USD">
@@ -1310,42 +1300,18 @@
                               Available:
                             </div>
                             <span class="product__available in-stock">
-                              <span>In stock</span>
-                              <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                              <span><?php echo $row[3]; ?></span>
                             </span>
                           </div>
-                          <div class="group-single__sku has-border">
-                            <p itemprop="sku" class="product-single__sku">
-                              <span class="label control-label">SKU:</span>
-                              <span class="label-sku">E-00214</span>
-                            </p>
+                          <div class="group-single__sku has-border">                  
                             <p itemprop="cat" class="product-single__cat">
                               <span class="label control-label">Category:</span>
-                              <span class="pr-lt__collec">
-                                <a href="/collections/all-product" title="all product">all product</a>,
-                                <a href="/collections/featured-products-digimart"
-                                  title="Featured Products ( Digimart )">Featured Products ( Digimart )</a>,
-                                <a href="/collections/smartwatch" title="Smartwatch">Smartwatch</a>
+                              <span class="pr-lt__collec">                                
+                                <a href="/collections/smartwatch" title="<?php echo $row[12]; ?>"><?php echo $row[12]; ?></a>
                               </span>
-                            </p>
-                            <p itemprop="tags" class="product-single__tags">
-                              <span class="label control-label">Tags:</span>
-                              <span class="pr-lt__tags">
-                                <a href="/collections/all/apple" title="">apple</a>,
-                                <a href="/collections/all/black" title="">black</a>,
-                                <a href="/collections/all/ios" title="">ios</a>,
-                                <a href="/collections/all/iphone" title="">iphone</a>,
-                                <a href="/collections/all/iphone-x" title="">iphone x</a>,
-                                <a href="/collections/all/m" title="">m</a>,
-                                <a href="/collections/all/pink" title="">Pink</a>,
-                                <a href="/collections/all/red" title="">Red</a>,
-                                <a href="/collections/all/white" title="">White</a>
-                              </span>
-                            </p>
+                            </p>                            
                             <div class="product-single__shortdes mb-20" itemprop="description">
-                              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                              dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                              nascetur ridicu lus mus. Donec quam...
+                              Sản phẩm của Hexa Food tươi ngon được tuyển chọn từ các nguồn cung đạt chuẩn chất lượng về an toàn vệ sinh thực phẩm. Đảm bảo vừa tươi ngon vừa giàu chất dinh dưỡng.
                             </div>
                           </div>
                         </div>
@@ -1353,10 +1319,9 @@
                       <p
                         class="product-single__price product-single__price-nov-product-template d-flex align-items-center">
                         <span class="visually-hidden">Regular price</span>
-                        <span class="product-price__price product-price__price-nov-product-template">
-                          <span id="ProductPrice-nov-product-template" itemprop="price" content="636.0"
-                            class="money mr-10">
-                            <span class="money">$636.00</span>
+                        <span>
+                          <span>
+                            <span class="money"><?php echo number_format($row[6], 0, ',', '.')." ".$row[9]; ?></span>
                           </span>
                           <span
                             class="money product-price__sale-label product-price__sale-label-nov-product-template d-none">Sale</span>
@@ -1443,109 +1408,13 @@
                   <div class="block_nav d-flex justify-content-center">
                     <ul class="nav nav-tabs">
                       <li><a class="active" href="#proTabs1" data-toggle="tab">Description</a></li>
-                      <li><a href="#tabreview" data-toggle="tab">Customer reviews</a></li>
-                      <li><a href="#tabCustom-1" data-toggle="tab">Delivery policy</a></li>
-                      <li><a href="#tabCustom-2" data-toggle="tab">Returns & Exchanges Policy</a></li>
-                      <li><a href="#tabCustom-3" data-toggle="tab">Size Guide</a></li>
-                      <li><a href="#tabCustom-4" data-toggle="tab">Video</a></li>
                     </ul>
                   </div>
                   <div class="tab-content">
-
                     <div class="tab-pane active" id="proTabs1">
                       <div>
-                        <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                          Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu
-                          lus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat
-                          massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Lorem
-                          ipsum dolor sit amet, consectetuer adipiscing elit. </div>
+                        <div><?php echo $row[2]; ?></div>
                         <div><br></div>
-                        <div><img style="display: block; margin-left: auto; margin-right: auto;" alt=""
-                            src="https://cdn.shopify.com/s/files/1/0272/1493/8165/files/20_large.jpg?v=1569387317"
-                            data-mce-src="https://cdn.shopify.com/s/files/1/0272/1493/8165/files/20_large.jpg?v=1569387317">
-                        </div>
-                        <div><br></div>
-                        <div>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                          Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                          mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat
-                          massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. Lorem
-                          ipsum dolor sit amet, consectetuer adipiscing elit. </div>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tabreview">
-                      <div id="shopify-product-reviews" data-id="4907756027957"></div>
-                    </div>
-                    <div class="tab-pane" id="tabCustom-1">
-                      <div class="product-description">
-                        <p><strong>Lorem ipsum dolor sit amet</strong></p>
-                        <p><br></p>
-                        <p>Vivamus a placerat dolor. Proin ut vehicula mauris. Etiam sagittis augue ipsum. Aliquam
-                          vestibulum massa nulla, ullamcorper aliquam diam feugiat vel. Fusce porttitor ultrices ante,
-                          posuere vehicula lacus tempor eu. Sed et purus et massa mattis aliquet ac vel dolor.
-                          Pellentesque eros lectus, placerat nec finibus ac, lobortis eu risus.</p>
-                        <p></p>
-                        <p>Donec fringilla metus ligula, sit amet fermentum ex laoreet non</p>
-                        <p><br></p>
-                        <p>- Ribbed and double stitched collar and armholes</p>
-                        <p>- High-density fabric for vivid print clarity</p>
-                        <p>- Machine-wash safeSingle right rear button flap pocket</p>
-                        <p>- Products are proudly printed in the United States</p>
-                        <p><br></p>
-                        <p>Curabitur egestas suscipit odio. Nam vitae aliquam dui</p>
-                        <p></p>
-                        <p>in laoreet elit. In posuere augue id velit placerat, vitae porttitor leo aliquet. Aenean non
-                          ligula sed lorem eleifend aliquam. Morbi posuere faucibus viverra. Proin ullamcorper, lorem
-                          lacinia cursus finibus.</p>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tabCustom-2">
-                      <div class="product-description">
-                        <p><em><strong>Nullam at mi accumsan, fermentum turpis at, hendrerit tortor</strong></em></p>
-                        <p><br></p>
-                        <p>Vivamus commodo magna rutrum ipsum convallis luctus. Maecenas sollicitudin tincidunt sem at
-                          consectetur. Sed ligula elit, sodales feugiat porttitor non, commodo in ipsum. Donec vehicula
-                          orci et pharetra laoreet. Donec feugiat, nibh ac ornare hendrerit, dui augue semper felis, a
-                          finibus dui felis quis magna. Curabitur a ligula purus. Suspendisse vestibulum lorem non
-                          tellus aliquet blandit.</p>
-                        <p>Proin cursus sollicitudin scelerisque. Donec ultrices elit quis magna lobortis porttitor.
-                          Quisque et consectetur mauris. Sed facilisis malesuada ante eget blandit. Class aptent taciti
-                          sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque rutrum
-                          mattis ex ac sagittis. Nulla convallis euismod ipsum, a mollis sapien fringilla eget. Nam
-                          dignissim ornare nisi, in bibendum nibh auctor id.</p>
-                        <p>Quisque dictum justo id velit dapibus, id mollis diam tincidunt. Donec luctus tincidunt
-                          ultrices. Sed condimentum ante accumsan, sagittis lorem quis, dictum enim. Nam et facilisis
-                          odio. Ut iaculis dui non interdum accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Fusce lacus sem, molestie non convallis nec, tristique a lacus. Proin eget lacus semper
-                          dui imperdiet accumsan. Morbi sagittis erat ac justo congue, a ornare tortor mollis. Aenean eu
-                          vulputate diam. Praesent suscipit ex non elit finibus ultricies.</p>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tabCustom-3">
-                      <div class="block_img mt-20" data-toggle="modal"
-                        data-src="https://www.youtube.com/embed/N3745iSLUWU" data-target="#ImageModal">
-                        <img
-                          src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/sizechart_EN_women_1170x.jpg?v=1602035283"
-                          alt="img">
-                      </div>
-                      <div class="modal fade" id="ImageModal" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-body">
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                              <img
-                                src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/sizechart_EN_women_1170x.jpg?v=1602035283"
-                                alt="img">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tabCustom-4">
-                      <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/WAap_UHzIbc" id="video"
-                          allowfullscreen></iframe>
                       </div>
                     </div>
                   </div>
@@ -1560,543 +1429,14 @@
                     <div class="block__content">
                       <div class="grid grid--view-items">
                         <div class="owl-relatedproduct owl-carousel owl-drag" data-autoplay="false"
-                          data-autoplayTimeout="6000" data-items="4" data-nav="true" data-dots="false" data-loop="true"
+                          data-autoplayTimeout="6000" data-items="4" data-nav="true" data-dots="false" data-loop="false"
                           data-items_tablet="3" data-items_mobile="2" data-margin="30">
-                          <div class="item">
-                            <div class="item-product">
 
-                              <div class="thumbnail-container has-multiimage has_variants">
-                                <a href="/collections/all-product/products/hiamond-calo-stud-aenean-1">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/14_fc556a81-dc84-4b29-9069-875d9906f6ea_570x570.jpg?v=1603253113"
-                                    alt="Hiamond Calo Stud Aenean">
-                                  <img class="img-fluid product__thumbnail-second" alt="Hiamond Calo Stud Aenean"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/5_56514da7-84ba-45f6-9ee0-989448d194a1_570x570.jpg?v=1603253121"
-                                    alt="Hiamond Calo Stud Aenean">
-                                </a>
-                                <div class="badge_sale">
-                                  <div class="badge badge--sale-rt">New</div>
-                                  <span class="badge badge--sale-pt">-66%</span>
-                                </div>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="hiamond-calo-stud-aenean-1" data-id="4907753898037"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/hiamond-calo-stud-aenean-1?view=quick_view"
-                                      data-handle="hiamond-calo-stud-aenean-1" data-pid="33119325126709"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/hiamond-calo-stud-aenean-1">Hiamond Calo
-                                      Stud Aenean</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price product-price__sale">
-                                      <span class="money">$223.00</span>
-                                    </span>
-                                    <s class="product-price__price"><span class="money">$658.00</span></s>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119325126709" />
-                                      <a class="btn btnAddToCart btnChooseVariant" href="javascript:void(0);"
-                                        data-url="/products/hiamond-calo-stud-aenean-1?view=json" title="" tabindex="0">
-                                        <i class="zmdi zmdi-check"></i>
-                                        <span>Select Options</span>
-                                      </a>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage">
-                                <a href="/collections/all-product/products/bimond-balo-stud-cum-1">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/13_6c780880-f82a-4c2b-b246-38a52f575582_570x570.jpg?v=1603253080"
-                                    alt="Bimond Balo Stud Cum">
-                                  <img class="img-fluid product__thumbnail-second" alt="Bimond Balo Stud Cum"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/1_28abe42e-069c-4e6b-8d23-5cfb9bbb844d_570x570.jpg?v=1603253080"
-                                    alt="Bimond Balo Stud Cum">
-                                </a>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="bimond-balo-stud-cum-1" data-id="4907752390709"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/bimond-balo-stud-cum-1?view=quick_view"
-                                      data-handle="bimond-balo-stud-cum-1" data-pid="33119320145973"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/bimond-balo-stud-cum-1">Bimond Balo Stud
-                                      Cum</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price"><span class="money">$479.00</span></span>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119320145973" />
-                                      <button class="btn btnAddToCart" type="submit" value="Submit"
-                                        data-handle="bimond-balo-stud-cum-1" data-pid="33119320145973" title=""
-                                        tabindex="0">
-                                        <i class="icon_cart"></i>
-                                        <span>Add to cart</span>
-                                      </button>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage has_variants">
-                                <a href="/collections/all-product/products/aiamond-calo-stud-aenean">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/12_c47e2a56-1b49-4937-b54d-8c1b8cb97e0d_570x570.jpg?v=1603252966"
-                                    alt="Aiamond Calo Stud Aenean">
-                                  <img class="img-fluid product__thumbnail-second" alt="Aiamond Calo Stud Aenean"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/5_aceaed55-1dcd-4395-96ad-5ebadf751416_570x570.jpg?v=1603252966"
-                                    alt="Aiamond Calo Stud Aenean">
-                                </a>
-                                <div class="badge_sale">
-                                  <div class="badge badge--sale-rt">New</div>
-                                  <span class="badge badge--sale-pt">-77%</span>
-                                </div>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="aiamond-calo-stud-aenean" data-id="4907749146677"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/aiamond-calo-stud-aenean?view=quick_view"
-                                      data-handle="aiamond-calo-stud-aenean" data-pid="33119309725749"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/aiamond-calo-stud-aenean">Aiamond Calo
-                                      Stud Aenean</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price product-price__sale">
-                                      <span class="money">$147.00</span>
-                                    </span>
-                                    <s class="product-price__price"><span class="money">$658.00</span></s>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119309725749" />
-                                      <a class="btn btnAddToCart btnChooseVariant" href="javascript:void(0);"
-                                        data-url="/products/aiamond-calo-stud-aenean?view=json" title="" tabindex="0">
-                                        <i class="zmdi zmdi-check"></i>
-                                        <span>Select Options</span>
-                                      </a>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage">
-                                <a href="/collections/all-product/products/jimond-balo-stud-cum-1">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/11_5d731e89-ceba-4b43-9056-67afab96339a_570x570.jpg?v=1603252915"
-                                    alt="Jimond Balo Stud Cum">
-                                  <img class="img-fluid product__thumbnail-second" alt="Jimond Balo Stud Cum"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/2_57ffcab4-4c78-4764-8607-207b52864731_570x570.jpg?v=1603252915"
-                                    alt="Jimond Balo Stud Cum">
-                                </a>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="jimond-balo-stud-cum-1" data-id="4907747835957"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/jimond-balo-stud-cum-1?view=quick_view"
-                                      data-handle="jimond-balo-stud-cum-1" data-pid="33119304941621"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/jimond-balo-stud-cum-1">Jimond Balo Stud
-                                      Cum</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price"><span class="money">$556.00</span></span>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119304941621" />
-                                      <button class="btn btnAddToCart" type="submit" value="Submit"
-                                        data-handle="jimond-balo-stud-cum-1" data-pid="33119304941621" title=""
-                                        tabindex="0">
-                                        <i class="icon_cart"></i>
-                                        <span>Add to cart</span>
-                                      </button>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage has_variants">
-                                <a href="/collections/all-product/products/uiamond-calo-stud-aenean">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a71a1e2a-7f88-40a3-a58e-14317a53a54a_570x570.jpg?v=1603252831"
-                                    alt="Uiamond Calo Stud Aenean">
-                                  <img class="img-fluid product__thumbnail-second" alt="Uiamond Calo Stud Aenean"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/1_a401efa3-723e-4cc9-957b-202a13afe1fe_570x570.jpg?v=1603252831"
-                                    alt="Uiamond Calo Stud Aenean">
-                                </a>
-                                <div class="badge_sale">
-                                  <div class="badge badge--sale-rt">New</div>
-                                  <span class="badge badge--sale-pt">-28%</span>
-                                </div>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="uiamond-calo-stud-aenean" data-id="4907744919605"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/uiamond-calo-stud-aenean?view=quick_view"
-                                      data-handle="uiamond-calo-stud-aenean" data-pid="33119297470517"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/uiamond-calo-stud-aenean">Uiamond Calo
-                                      Stud Aenean</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price product-price__sale">
-                                      <span class="money">$472.00</span>
-                                    </span>
-                                    <s class="product-price__price"><span class="money">$658.00</span></s>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119297470517" />
-                                      <a class="btn btnAddToCart btnChooseVariant" href="javascript:void(0);"
-                                        data-url="/products/uiamond-calo-stud-aenean?view=json" title="" tabindex="0">
-                                        <i class="zmdi zmdi-check"></i>
-                                        <span>Select Options</span>
-                                      </a>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage">
-                                <a href="/collections/all-product/products/dimond-balo-stud-cum-1">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/9_b22e0554-2b94-4581-88d3-3557b45c2b4c_570x570.jpg?v=1603252800"
-                                    alt="Dimond Balo Stud Cum">
-                                  <img class="img-fluid product__thumbnail-second" alt="Dimond Balo Stud Cum"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/11_33aa6c0e-2f74-4549-a6bd-46e0d7792843_570x570.jpg?v=1603252800"
-                                    alt="Dimond Balo Stud Cum">
-                                </a>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="dimond-balo-stud-cum-1" data-id="4907744755765"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/dimond-balo-stud-cum-1?view=quick_view"
-                                      data-handle="dimond-balo-stud-cum-1" data-pid="33119297044533"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/dimond-balo-stud-cum-1">Dimond Balo Stud
-                                      Cum</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price"><span class="money">$745.00</span></span>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119297044533" />
-                                      <button class="btn btnAddToCart" type="submit" value="Submit"
-                                        data-handle="dimond-balo-stud-cum-1" data-pid="33119297044533" title=""
-                                        tabindex="0">
-                                        <i class="icon_cart"></i>
-                                        <span>Add to cart</span>
-                                      </button>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage has_variants">
-                                <a href="/collections/all-product/products/yiamond-calo-stud-aenean">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/8_5cc396ca-c787-4fec-b733-c6752de51a94_570x570.jpg?v=1603252729"
-                                    alt="Yiamond Calo Stud Aenean">
-                                  <img class="img-fluid product__thumbnail-second" alt="Yiamond Calo Stud Aenean"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/11_d71ea62b-b9f6-4bda-a939-4d6dce744911_570x570.jpg?v=1603252730"
-                                    alt="Yiamond Calo Stud Aenean">
-                                </a>
-                                <div class="badge_sale">
-                                  <div class="badge badge--sale-rt">New</div>
-                                  <span class="badge badge--sale-pt">-27%</span>
-                                </div>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="yiamond-calo-stud-aenean" data-id="4907742560309"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/yiamond-calo-stud-aenean?view=quick_view"
-                                      data-handle="yiamond-calo-stud-aenean" data-pid="33119290523701"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/yiamond-calo-stud-aenean">Yiamond Calo
-                                      Stud Aenean</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price product-price__sale">
-                                      <span class="money">$478.00</span>
-                                    </span>
-                                    <s class="product-price__price"><span class="money">$658.00</span></s>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119290523701" />
-                                      <a class="btn btnAddToCart btnChooseVariant" href="javascript:void(0);"
-                                        data-url="/products/yiamond-calo-stud-aenean?view=json" title="" tabindex="0">
-                                        <i class="zmdi zmdi-check"></i>
-                                        <span>Select Options</span>
-                                      </a>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage">
-                                <a href="/collections/all-product/products/zimond-balo-stud-cum-1">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/7_76af7ca0-5d26-48dd-b8cb-184a8285540d_570x570.jpg?v=1603252686"
-                                    alt="Zimond Balo Stud Cum">
-                                  <img class="img-fluid product__thumbnail-second" alt="Zimond Balo Stud Cum"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/10_099eae6c-c955-4158-8a64-009d8ed5e9e3_570x570.jpg?v=1603252687"
-                                    alt="Zimond Balo Stud Cum">
-                                </a>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="zimond-balo-stud-cum-1" data-id="4907741675573"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/zimond-balo-stud-cum-1?view=quick_view"
-                                      data-handle="zimond-balo-stud-cum-1" data-pid="33119288426549"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/zimond-balo-stud-cum-1">Zimond Balo Stud
-                                      Cum</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price"><span class="money">$359.00</span></span>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119288426549" />
-                                      <button class="btn btnAddToCart" type="submit" value="Submit"
-                                        data-handle="zimond-balo-stud-cum-1" data-pid="33119288426549" title=""
-                                        tabindex="0">
-                                        <i class="icon_cart"></i>
-                                        <span>Add to cart</span>
-                                      </button>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="item">
-                            <div class="item-product">
-                              <div class="thumbnail-container has-multiimage has_variants">
-                                <a href="/collections/all-product/products/qiamond-calo-stud-aenean">
-                                  <img class="img-fluid product__thumbnail lazyload"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/6_0f33b770-84f2-4634-be0c-a7f804b5da2e_570x570.jpg?v=1603252626"
-                                    alt="Qiamond Calo Stud Aenean">
-                                  <img class="img-fluid product__thumbnail-second" alt="Qiamond Calo Stud Aenean"
-                                    src="//cdn.shopify.com/s/files/1/0272/1493/8165/products/10_45164f42-7c28-4906-94da-3a5b95142cee_570x570.jpg?v=1603252626"
-                                    alt="Qiamond Calo Stud Aenean">
-                                </a>
-                                <div class="badge_sale">
-                                  <div class="badge badge--sale-rt">New</div>
-                                  <span class="badge badge--sale-pt">-35%</span>
-                                </div>
-                                <div class="group-buttons d-flex">
-                                  <div class="productWishList mr-5" onclick="return false;">
-                                    <a class="wishlist btn btnProduct btnProductWishlist" data-icon-wishlist href="#"
-                                      data-product-handle="qiamond-calo-stud-aenean" data-id="4907739906101"
-                                      data-toggle="tooltip" data-placement="top" data-original-title="Add to wishlist">
-                                      <i class="fa_wishlist"></i>
-                                    </a>
-                                  </div>
-                                  <div class="productQuickView d-md-block">
-                                    <a class="btn btnProduct btnProductQuickview" href="#"
-                                      data-url="/products/qiamond-calo-stud-aenean?view=quick_view"
-                                      data-handle="qiamond-calo-stud-aenean" data-pid="33119282987061"
-                                      data-toggle="tooltip" data-placement="top" title="Quick view">
-                                      <i class="fa_quickview"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="product__info text-center">
-                                <div class="block_product_info">
-                                  <div class="product__title">
-                                    <a href="/collections/all-product/products/qiamond-calo-stud-aenean">Qiamond Calo
-                                      Stud Aenean</a>
-                                  </div>
-                                  <div class="product__price">
-                                    <!-- snippet/product-price.liquid -->
-                                    <span class="visually-hidden">Regular price</span>
-                                    <span class="product-price__price product-price__sale">
-                                      <span class="money">$423.00</span>
-                                    </span>
-                                    <s class="product-price__price"><span class="money">$658.00</span></s>
-                                  </div>
-                                  <div class="group-buttons">
-                                    <form class="formAddToCart" action="/cart/add" method="post"
-                                      enctype="multipart/form-data">
-                                      <input type="hidden" name="id" value="33119282987061" />
-                                      <a class="btn btnAddToCart btnChooseVariant" href="javascript:void(0);"
-                                        data-url="/products/qiamond-calo-stud-aenean?view=json" title="" tabindex="0">
-                                        <i class="zmdi zmdi-check"></i>
-                                        <span>Select Options</span>
-                                      </a>
-                                    </form>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                         <?php
+                          for($i = 0 ;$i < $i_length;$i++){
+                             include'module/RelatedProduct.php';
+                        }
+                        ?>
                         </div>
                       </div>
                     </div>

@@ -64,7 +64,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="index.php">
               <i class="mdi mdi-home menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -265,23 +265,23 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Đơn hàng gần đây</h4>
-                  <div class="table-responsive"> 
+                  <div class="table-responsive">
                     <table class="table table-hover">
                       <thead>
                         <tr>
                           <th>User</th>
-                          <th>Total</th>
-                          <th>Payment Method</th>
-                          <th>Delivery Status</th>
+                          <th>Product</th>
+                          <th>Sale</th>
+                          <th>Status</th>
                         </tr>
                       </thead>
-                      
+
                       <tbody>
                         <?php
-                        $servername = "localhost:3307";
-                        $username = "root";
-                        $password = '';
-                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing"." Order By billing_id desc Limit 0,10 ";
+                        $servername = "sql6.freemysqlhosting.net";
+                        $username = "sql6448508";
+                        $password = '2SHPjvRite';
+                        $showAllBillingCommand = "SELECT * FROM sql6448508.billing" . " Order By billing_id desc Limit 0,10 ";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
@@ -300,7 +300,7 @@
                             echo '<script>console.log("Start loading data to table")</script>';
                             while ($row = mysqli_fetch_assoc($result)) {
                               $username = "";
-                              $getUserByIdCommand = "SELECT hoten FROM laptrinhweb.user where user_id =" . $row['user_id'];
+                              $getUserByIdCommand = "SELECT hoten FROM sql6448508.user where user_id =" . $row['user_id'];
                               $resultQuery = mysqli_query($conn, $getUserByIdCommand);
                               while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
                                 $username = $rowInner['hoten'];
@@ -346,20 +346,18 @@
                     <table id="recent-purchases-listing" class="table">
                       <thead>
                         <tr>
-                          <th>Name</th>
-                          <th>Total Sold</th>
-                          <th>Net Profit</th>
-                          <th>Price</th>
-                          <th>Date</th>
-                          <th>Gross amount</th>
+                          <th>Tên sản phẩm</th>
+                          <th>Status</th>
+                          <th>Tổng số bán</th>
+                          <th>Lợi nhuận</th>
                         </tr>
                       </thead>
                       <tbody>
-                      <?php
-                        $servername = "localhost:3307";
-                        $username = "root";
-                        $password = '';
-                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing"." Order By billing_id desc Limit 0,10 ";
+                        <?php
+                        $servername = "sql6.freemysqlhosting.net";
+                        $username = "sql6448508";
+                        $password = '2SHPjvRite';
+                        $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM sql6448508.billing_detail"." group by product_id" . " Order By billing_id desc Limit 0,10 ";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
@@ -368,33 +366,37 @@
                         if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                         } else {
-                          echo '<script>console.log("Connect success")</script>';
-
                           #region Load Billing to 
-                          echo '<script>console.log("Running showAllBillingCommand")</script>';
-                          $result = mysqli_query($conn, $showAllBillingCommand);
+                          $result = mysqli_query($conn, $showTop10ProductCommand);
                           if (mysqli_num_rows($result) > 0) {
-                            echo '<script>console.log("Finshied running return data")</script>';
-                            echo '<script>console.log("Start loading data to table")</script>';
                             while ($row = mysqli_fetch_assoc($result)) {
-                              $username = "";
-                              $getUserByIdCommand = "SELECT hoten FROM laptrinhweb.user where user_id =" . $row['user_id'];
-                              $resultQuery = mysqli_query($conn, $getUserByIdCommand);
+                              $productName = "";
+                              $status ="";
+                              $priceProduct = 0;
+                              $getProductNameByIDCommand = "SELECT * FROM sql6448508.product where product_id =" . "'" . strval($row['product_id'] . "'");
+                              $resultQuery = $conn->query($getProductNameByIDCommand);
                               while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
-                                $username = $rowInner['hoten'];
+                                $productName = $rowInner['name'];
+                                $status = $rowInner["status"];         
+                                $priceProduct = $rowInner["price"];                     
                               }
                               echo '<tr>';
-                              echo '<td>' . $username . '</td>';
-                              echo '<td>' . number_format($row['total']) . '</td>';
-                              echo '<td>' . $row['delivery_method'] . '</td>';
-                              if ($row['delivery_status'] == "đang giao hàng") {
-                                echo '<td><label class="badge badge-warning">' . $row['delivery_status'] . '</label></td>';
-                                echo '</tr>';
+                              echo '<td>' . $productName . '</td>';
+                              if ($status == "hết hàng") {
+                                echo '<td><label class="badge badge-warning">' . $status . '</label></td>';
+                                
                               } else {
-                                echo '<td><label class="badge badge-success">' . $row['delivery_status'] . '</label></td>';
-                                echo '</tr>';
+                                echo '<td><label class="badge badge-success">' .$status . '</label></td>';
+                               
                               }
+                              echo '<td>' . $row['sum'] . '</td>';
+
+                              
+                              echo '<td>' . number_format($row['sum'] * $priceProduct *0.45). '</td>';
+                              echo '</tr>';
                             }
+                           
+              
                             echo '<script>console.log("End loading data to table")</script>';
                           } else {
                             echo '<script>console.log("Finshied running no data return")</script>';
@@ -405,7 +407,6 @@
                         }
 
                         ?>
-                        
                       </tbody>
                     </table>
                   </div>
@@ -433,70 +434,56 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>Jeremy Ortega</td>
-                          <td>Levelled up</td>
-                          <td>Catalinaborough</td>
-                          <td>$790</td>
-                          <td>06 Jan 2018</td>
-                          <td>$2274253</td>
-                        </tr>
-                        <tr>
-                          <td>Alvin Fisher</td>
-                          <td>Ui design completed</td>
-                          <td>East Mayra</td>
-                          <td>$23230</td>
-                          <td>18 Jul 2018</td>
-                          <td>$83127</td>
-                        </tr>
-                        <tr>
-                          <td>Emily Cunningham</td>
-                          <td>support</td>
-                          <td>Makennaton</td>
-                          <td>$939</td>
-                          <td>16 Jul 2018</td>
-                          <td>$29177</td>
-                        </tr>
-                        <tr>
-                          <td>Minnie Farmer</td>
-                          <td>support</td>
-                          <td>Agustinaborough</td>
-                          <td>$30</td>
-                          <td>30 Apr 2018</td>
-                          <td>$44617</td>
-                        </tr>
-                        <tr>
-                          <td>Betty Hunt</td>
-                          <td>Ui design not completed</td>
-                          <td>Lake Sandrafort</td>
-                          <td>$571</td>
-                          <td>25 Jun 2018</td>
-                          <td>$78952</td>
-                        </tr>
-                        <tr>
-                          <td>Myrtie Lambert</td>
-                          <td>Ui design completed</td>
-                          <td>Cassinbury</td>
-                          <td>$36</td>
-                          <td>05 Nov 2018</td>
-                          <td>$36422</td>
-                        </tr>
-                        <tr>
-                          <td>Jacob Kennedy</td>
-                          <td>New project</td>
-                          <td>Cletaborough</td>
-                          <td>$314</td>
-                          <td>12 Jul 2018</td>
-                          <td>$34167</td>
-                        </tr>
-                        <tr>
-                          <td>Ernest Wade</td>
-                          <td>Levelled up</td>
-                          <td>West Fidelmouth</td>
-                          <td>$484</td>
-                          <td>08 Sep 2018</td>
-                          <td>$50862</td>
-                        </tr>
+                        <?php
+                        $servername = "localhost:3307";
+                        $username = "root";
+                        $password = '';
+                        $showAllBillingCommand = "SELECT * FROM sql6448508.billing" . " Order By billing_id desc Limit 0,10 ";
+                        error_reporting(0);
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password);
+
+                        // Check connection
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        } else {
+                          echo '<script>console.log("Connect success")</script>';
+
+                          #region Load Billing to 
+                          echo '<script>console.log("Running showAllBillingCommand")</script>';
+                          $result = mysqli_query($conn, $showAllBillingCommand);
+                          if (mysqli_num_rows($result) > 0) {
+                            echo '<script>console.log("Finshied running return data")</script>';
+                            echo '<script>console.log("Start loading data to table")</script>';
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              $username = "";
+                              $getUserByIdCommand = "SELECT hoten FROM sql6448508.user where user_id =" . $row['user_id'];
+                              $resultQuery = mysqli_query($conn, $getUserByIdCommand);
+                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
+                                $username = $rowInner['hoten'];
+                              }
+                              echo '<tr>';
+                              echo '<td>' . $username . '</td>';
+                              echo '<td>' . number_format($row['total']) . '</td>';
+                              echo '<td>' . $row['delivery_method'] . '</td>';
+                              if ($row['delivery_status'] == "đang giao hàng") {
+                                echo '<td><label class="badge badge-warning">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              } else {
+                                echo '<td><label class="badge badge-success">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              }
+                            }
+                            echo '<script>console.log("End loading data to table")</script>';
+                          } else {
+                            echo '<script>console.log("Finshied running no data return")</script>';
+                          }
+                          #endregion
+
+                          mysqli_close($conn);
+                        }
+
+                        ?>
                       </tbody>
                     </table>
                   </div>
