@@ -1152,7 +1152,7 @@
 								</div>
 								<?php
 									function loadCategory() {
-										$conn= new mysqli('localhost','root','','laptrinhweb');
+										$conn= new mysqli('localhost:3307','root','','laptrinhweb');
 										$sql = "SELECT * FROM category";
 										$result=$conn->query($sql);
 										$stmt=array();
@@ -1174,7 +1174,7 @@
                                         include "Product.php";
                                     }
                                 function danhmuc($a){
-									$conn= new mysqli('localhost','root','','laptrinhweb');
+									$conn= new mysqli('localhost:3307','root','','laptrinhweb');
 									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM product join product_image on product.product_id=product_image.product_id   Where category_id=$a";
 									$result=mysqli_query($conn,$sql);
 									$arr= array();
