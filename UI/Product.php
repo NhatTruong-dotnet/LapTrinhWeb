@@ -1152,7 +1152,7 @@
 								</div>
 								<?php
 									function loadCategory() {
-										$conn= new mysqli('localhost:3307','root','','laptrinhweb');
+										$conn= new mysqli('localhost','root','','laptrinhweb');
 										$sql = "SELECT * FROM category";
 										$result=$conn->query($sql);
 										$stmt=array();
@@ -1168,8 +1168,14 @@
 								<!-- ============================================================ -->
 								<div class="page-width product_deals col-md-9">
 								<?php
-									$conn= new mysqli('localhost:3307','root','','laptrinhweb');
-									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM product join product_image on product.product_id=product_image.product_id  order by product.product_id desc limit 15";
+									$conn= new mysqli('localhost','root','','laptrinhweb');
+									$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:15;
+									$current_page=!empty($_GET['page'])?$_GET['page']:1;
+									$offset=($current_page-1)* $item_per_page;
+									$totalRecords= mysqli_query($conn,"select *from product");
+									$totalRecords=$totalRecords->num_rows;
+									$totalPages=ceil($totalRecords/$item_per_page);
+									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM product join product_image on product.product_id=product_image.product_id  order by product.product_id desc limit $item_per_page offset $offset";
 									$result=mysqli_query($conn,$sql);
 									$arr= array();
 									$i=0;
@@ -1198,9 +1204,7 @@
 																<img class="img-fluid product__thumbnail lazyload"
 																	src="'.$arr[$j][1].'"
 																	alt=""style="width:150px; height:150px;">
-																<img class="img-fluid product__thumbnail-second lazyload"
-																	src="'.$arr[$j][1].'"
-																	alt=""style="width:150px; height:150px;">
+																
 															</a>
 															<div class="group-buttons d-flex justify-content-center">
 																<div class="productWishList mr-5"
@@ -1235,7 +1239,7 @@
 																
 																<span class="product-price__price product-price__sale">
 																	<span class="money"
-																		style="height: 40px;line-height: 40px;">'.$arr[$j][2].' '.$arr[$j][3].'</span>
+																		style="height: 40px;line-height: 40px;">'.number_format($arr[$j][2], 0, ",", ".").' '.$arr[$j][3].'</span>
 																</span>
 																<div class="group-buttons" style="min-width: 60px;">
 																	<form class="formAddToCart" action="/cart/add" method="post" enctype="multipart/form-data">
@@ -1262,9 +1266,7 @@
 																<img class="img-fluid product__thumbnail lazyload"
 																	src="'.$arr[$j+1][1].'"
 																	alt=""style="width:150px; height:150px;">
-																<img class="img-fluid product__thumbnail-second lazyload"
-																	src="'.$arr[$j+1][1].'"
-																	alt=""style="width:150px; height:150px;">
+																
 															</a>
 															<div class="group-buttons d-flex justify-content-center">
 																<div class="productWishList mr-5"
@@ -1299,7 +1301,7 @@
 																
 																<span class="product-price__price product-price__sale">
 																	<span class="money"
-																		style="height: 40px;line-height: 40px;">'.$arr[$j+1][2].' '.$arr[$j+1][3].'</span>
+																		style="height: 40px;line-height: 40px;">'.number_format($arr[$j+1][2], 0, ",", ".").' '.$arr[$j+1][3].'</span>
 																</span>
 																<div class="group-buttons" style="min-width: 60px;">
 																	<form class="formAddToCart" action="/cart/add" method="post" enctype="multipart/form-data">
@@ -1326,9 +1328,7 @@
 																<img class="img-fluid product__thumbnail lazyload"
 																	src="'.$arr[$j+2][1].'"
 																	alt=""style="width:150px; height:150px;">
-																<img class="img-fluid product__thumbnail-second lazyload"
-																	src="'.$arr[$j+2][1].'"
-																	alt=""style="width:150px; height:150px;">
+																
 															</a>
 															<div class="group-buttons d-flex justify-content-center">
 																<div class="productWishList mr-5"
@@ -1363,7 +1363,7 @@
 																
 																<span class="product-price__price product-price__sale">
 																	<span class="money"
-																		style="height: 40px;line-height: 40px;">'.$arr[$j+2][2].' '.$arr[$j+2][3].'</span>
+																		style="height: 40px;line-height: 40px;">'.number_format($arr[$j+2][2], 0, ",", ".").' '.$arr[$j+2][3].'</span>
 																</span>
 																<div class="group-buttons" style="min-width: 60px;">
 																	<form class="formAddToCart" action="/cart/add" method="post" enctype="multipart/form-data">
@@ -1390,14 +1390,14 @@
 									<!-- Pagination -->
 									<div class="nov-pagination d-flex align-items-center justify-content-center">
 										<ul class="pagination d-flex justify-content-end align-items-center">
-											<li class="d-none d-sm-inline">
+											<!-- <li class="d-none d-sm-inline">
 												<a href="products.html" class="pagination__btn d-block">
 													<i class="zmdi zmdi-chevron-left"></i>
 													<span class="icon__fallback-text">Prev</span>
 												</a>
 											</li>
 											<li class="pagination__text">
-												<a href="#" title="">1</a>
+												<a href="?per_page=15&page=1" title="">1</a>
 											</li>
 											<li class="pagination__text active"><span>2</span></li>
 											<li class="pagination__text">
@@ -1408,7 +1408,43 @@
 													<span class="icon__fallback-text">Next</span>
 													<i class="zmdi zmdi-chevron-right"></i>
 												</a>
-											</li>
+											</li> -->
+											<?php
+												if($current_page>1){
+													$prev_page=$current_page-1;?>
+													<li class="d-none d-sm-inline">
+														<a href="?per_page=<?=$item_per_page?>&page=<?=$prev_page?>" class="pagination__btn d-block">
+															<i class="zmdi zmdi-chevron-left"></i>
+															<span class="icon__fallback-text">Prev</span>
+														</a>
+													</li>
+													<?php 
+												}
+													?>
+												<?php
+													for($num=1;$num<=$totalPages;$num++){
+														if($num!=$current_page){
+															if($num>$current_page-3&&$num<$current_page+3){?>
+																<li class="pagination__text">
+																	<a href="?per_page=<?=$item_per_page?>&page=<?=$num?>" title=""><?=$num?></a>
+																</li>
+															<?php }
+														}else{?>
+															<li class="pagination__text active"><span><?=$num?></span></li>
+														<?php }
+													}
+												?>
+												<?php
+													if($current_page<$totalPages-1){
+														$next_page=$current_page+1;?>
+														<li class="d-none d-sm-inline">
+															<a href="?per_page=<?=$item_per_page?>&page=<?=$next_page?>" class="pagination__btn d-block">
+																<span class="icon__fallback-text">Next</span>
+																<i class="zmdi zmdi-chevron-right"></i>
+															</a>
+														</li>
+													<?php }
+												?>
 										</ul>
 									</div>
 									<!-- End of /.pagination -->
