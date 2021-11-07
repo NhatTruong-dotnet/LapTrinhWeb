@@ -1,3 +1,9 @@
+:root {
+    --margin-left-50: 50px;
+    --margin-right-50: 50px;
+}
+
+
 /* commons css*/
 
 .grid_product {
@@ -43,6 +49,35 @@
 .site-header__logo-image>img {
     height: 90px;
 }
+
+.mrleft-40 {
+    margin-left: 40px !important;
+}
+
+.site-nav__dropdown ul li.category-item {
+    cursor: pointer;
+}
+
+
+/* Start Reponsive Header */
+
+@media (max-width: 991px) {
+    .none_info {
+        display: none;
+    }
+    .icon-margin-left {
+        margin-left: var(--margin-left-50);
+    }
+    .icon-margin-right {
+        margin-right: var(--margin-right-50);
+    }
+    .mar-top {
+        margin-top: 10px;
+    }
+}
+
+
+/* End Reponsive Header */
 
 
 /* End edit header */
