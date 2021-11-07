@@ -12,7 +12,6 @@
   <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum">
 
-
   <link rel="shortcut icon" href="images/TitleIcon.png" type="image/png">
     <?php
       include('config/connectdb.php');
