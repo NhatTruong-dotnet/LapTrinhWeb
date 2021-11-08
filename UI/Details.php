@@ -12,6 +12,7 @@
   <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum">
 
+
   <link rel="shortcut icon" href="images/TitleIcon.png" type="image/png">
     <?php
       include('config/connectdb.php');
@@ -1327,8 +1328,7 @@
                         </span>
                         <s id="ComparePrice-nov-product-template"></s>
                       </p>
-                      <form action="/cart/add" method="post" enctype="multipart/form-data"
-                        class="product-form product-form-nov-product-template" data-section="nov-product-template">
+                      <form  action="addcart.php?id=%27<?php echo $row[0]; ?>%27" method="post">
                         <div class="selectorVariants">
                           <select name="id" id="productSelect" data-section="nov-product-template"
                             class="enable_swatch hide">
@@ -1343,7 +1343,7 @@
                             <label for="Quantity" class="quantity-selector"></label>
                             <div class="quick_view_qty">
                               <a href="javascript:void(0);" class="quick_view-qty quick_view-qty-minus">-</a>
-                              <input type="number" id="Quantity" name="quantity" value="1" min="1" max="10" step="1"
+                              <input type="number" id="soluong" name="quantity" value="1" min="1" max="10" step="1"
                                 class="quantity-selector product-form__input" pattern="[0-9]*">
                               <a href="javascript:void(0);" class="quick_view-qty quick_view-qty-plus">+</a>
                             </div>
@@ -1357,25 +1357,11 @@
                           </div>
                           <div class="product_option_sub">
                             <div class="product-form__item product-form__item--submit">
-                              <button data-handle="rimond-balo-stud-cum" type="submit" name="add" id="AddToCart"
-                                class="btnAddToCart btn product-form__cart-submit mb-15 product-form__cart-submit--small">
-                                <span id="AddToCartText">Add to cart</span>
-                              </button>
-                            </div>
-                            <div class="product-form__item product-form__item--checkout">
-                              <form method="post" action="/cart/add" id="product_form_4907756027957"
-                                accept-charset="UTF-8" enctype="multipart/form-data" novalidate="novalidate"
-                                data-product-form=""><input type="hidden" name="form_type" value="product" /><input
-                                  type="hidden" name="utf8" value="✓" />
-                                <div data-shopify="payment-button" class="shopify-payment-button"><button
-                                    class="shopify-payment-button__button shopify-payment-button__button--unbranded shopify-payment-button__button--hidden"
-                                    disabled="disabled" aria-hidden="true"> </button><button
-                                    class="shopify-payment-button__more-options shopify-payment-button__button--hidden"
-                                    disabled="disabled" aria-hidden="true"> </button></div>
-                              </form>
+                                <button name="add-to-cart" onclick="addCart(<?php echo $row[0]?>)">
+                                  <span id="AddToCartText">Add to cart</span>
+                                </button>
                             </div>
                           </div>
-                        </div>
                       </form>
                       <div class="productbuttons d-flex align-items-center mt-40 pb-30">
                         <a target="_blank"
@@ -1430,10 +1416,9 @@
                         <div class="owl-relatedproduct owl-carousel owl-drag" data-autoplay="false"
                           data-autoplayTimeout="6000" data-items="4" data-nav="true" data-dots="false" data-loop="false"
                           data-items_tablet="3" data-items_mobile="2" data-margin="30">
-
-                         <?php
+                        <?php
                           for($i = 0 ;$i < $i_length;$i++){
-                             include'module/RelatedProduct.php';
+                            include('module/RelatedProduct.php');
                         }
                         ?>
                         </div>
@@ -2400,7 +2385,7 @@
     }
     var txt = jQuery('#currencies span.selected').text();
     jQuery('.currency-selector .current-currency').text(txt);
-    // When customer clicks on a currency button.
+    // // When customer clicks on a currency button.
     buttons.click(function () {
       buttons.removeClass('selected');
       jQuery(this).addClass('selected');
@@ -2437,6 +2422,13 @@
         jQuery(this).parents('.watch_availabel').find('span.variant_current').text(optionValue);
       });
     });
+  </script>
+  <script>
+    function addCart(id){
+      num = document.getElementById(`soluong`).value;
+      // await fetch("Cart.php?id="+id+"&num="+num)
+      $.get("Cart.php?id="+id+"&num="+num);
+    }
   </script>
   <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/nuranium.js?v=9641916987731097208"
     type="text/javascript"></script>

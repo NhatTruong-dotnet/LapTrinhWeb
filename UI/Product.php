@@ -1242,10 +1242,10 @@
 																		style="height: 40px;line-height: 40px;">'.number_format($arr[$j][2], 0, ",", ".").' '.$arr[$j][3].'</span>
 																</span>
 																<div class="group-buttons" style="min-width: 60px;">
-																	<form class="formAddToCart" action="/cart/add" method="post" enctype="multipart/form-data">
+																	<form class="formAddToCart" action="addcart.php?id=%27'.$arr[$j][4].'%27" method="post">
 																		<input type="hidden" name="id" value="30262361260085" />
 																		<a class="btn btnAddToCart btnChooseVariant"
-																			href="javascript:void(0);"
+																			href="addcart.php?id=%27'.$arr[$j][4].'%27"
 																			data-url="/products/diamond-halo-stud-earrings?view=json"
 																			data-toggle="tooltip" data-placement="top"
 																			title="" tabindex="0">
@@ -1304,10 +1304,10 @@
 																		style="height: 40px;line-height: 40px;">'.number_format($arr[$j+1][2], 0, ",", ".").' '.$arr[$j+1][3].'</span>
 																</span>
 																<div class="group-buttons" style="min-width: 60px;">
-																	<form class="formAddToCart" action="/cart/add" method="post" enctype="multipart/form-data">
+																	<form class="formAddToCart" action="addcart.php?id=%27'.$arr[$j+1][4].'%27" method="post">
 																		<input type="hidden" name="id" value="30262361260085" />
 																		<a class="btn btnAddToCart btnChooseVariant"
-																			href="javascript:void(0);"
+																			href="addcart.php?id=%27'.$arr[$j+1][4].'%27"
 																			data-url="/products/diamond-halo-stud-earrings?view=json"
 																			data-toggle="tooltip" data-placement="top"
 																			title="" tabindex="0">
@@ -1366,10 +1366,10 @@
 																		style="height: 40px;line-height: 40px;">'.number_format($arr[$j+2][2], 0, ",", ".").' '.$arr[$j+2][3].'</span>
 																</span>
 																<div class="group-buttons" style="min-width: 60px;">
-																	<form class="formAddToCart" action="/cart/add" method="post" enctype="multipart/form-data">
+																	<form class="formAddToCart" action="addcart.php?id=%27'.$arr[$j+2][4].'%27" method="post" >
 																		<input type="hidden" name="id" value="30262361260085" />
 																		<a class="btn btnAddToCart btnChooseVariant"
-																			href="javascript:void(0);"
+																			href="addcart.php?id=%27'.$arr[$j+2][4].'%27"
 																			data-url="/products/diamond-halo-stud-earrings?view=json"
 																			data-toggle="tooltip" data-placement="top"
 																			title="" tabindex="0">
@@ -1947,7 +1947,7 @@
 			</span>
 		</div>
 	</div>
-	<script src="//cdn.shopify.com/s/javascripts/currencies.js" type="text/javascript"></script>
+	<!-- <script src="//cdn.shopify.com/s/javascripts/currencies.js" type="text/javascript"></script>
 	<script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.currencies.min.js?v=7811281348689238064"
 		type="text/javascript"></script>
 	<script>
@@ -2021,7 +2021,7 @@
 		});
 	</script>
 	<script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/nuranium.js?v=9641916987731097208"
-		type="text/javascript"></script>
+		type="text/javascript"></script> -->
 </body>
 </html>
 
