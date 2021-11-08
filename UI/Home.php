@@ -1,5 +1,5 @@
 <?php 
-    require_once("config/connectdb.php");
+    require_once("config/conndb.php");
 
     function execResult ($sql){
         $conn = new mysqli(HOST, USER, PASS, DATABASE);
@@ -601,19 +601,19 @@
                       
                                 <div id="product-tabs-categories-1602131451931" class="block product-tabs-categories">
                                     <div class="box-tab">
-                                        <div class="text-left">
+                                        <div class="row text-left marg-left-0">
 
                                             <div class="title_block">
                                                 <span>Categories</span>
                                             </div>
 
                                         </div>
-                                        <div class="list-menu">
+                                        <div class="row list-menu margin-tl">
                                             
-                                            <ul class="nav nav-tabs list-product-tabs" role="tablist">
+                                            <ul class="nav nav-tabs list-product-tabs mrgleft-15" role="tablist">
 
 
-                                                <li class="nav-item">
+                                                <li class="col-xs col-md col-lg nav-item">
                                                     <a class="nav-link tab-links active" href="#producttabd_AF" data-target="#producttab_AF" data-product-tabTop data-href="/collections/tablet?view=json" id="tab-AF" data-id="AF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -622,7 +622,7 @@
                                                     </a>
                                                 </li>
 
-                                                <li class="nav-item">
+                                                <li class="col-xs col-md col-lg nav-item">
                                                     <a class="nav-link tab-links " href="#producttab_DF" data-target="#producttab_DF" data-product-tabTop data-href="/collections/iphone?view=json" id="tab-DF" data-id="DF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -631,7 +631,7 @@
                                                     </a>
                                                 </li>
 
-                                                <li class="nav-item">
+                                                <li class="col-xs col-md col-lg nav-item">
                                                     <a class="nav-link tab-links " href="#producttab_CF" data-target="#producttab_CF" data-product-tabTop data-href="/collections/iphone?view=json" id="tab-CF" data-id="CF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -640,7 +640,7 @@
                                                     </a>
                                                 </li>
 
-                                                <li class="nav-item">
+                                                <li class="col-xs col-md col-lg nav-item">
                                                     <a class="nav-link tab-links" href="#producttab_FF" data-target="#producttab_FF" data-product-tabTop data-href="/collections/smartphone?view=json" id="tab-FF" data-id="FF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -729,7 +729,7 @@
                                                                                     
 
                                                                                     <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo $arr_AF[$af]['price'] ." ". $arr_AF[$af]['currency'];?></span></span>
+                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_AF[$af]['price'])." ". $arr_AF[$af]['currency'];?></span></span>
 
                                                                                 </div>
 
@@ -821,7 +821,7 @@
                                                                                     
 
                                                                                     <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo $arr_CF[$cf]['price'] ." ". $arr_CF[$cf]['currency'];?></span></span>
+                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_CF[$cf]['price'])." ". $arr_CF[$cf]['currency'];?></span></span>
 
                                                                                 </div>
 
@@ -913,7 +913,7 @@
                                                                                     
 
                                                                                     <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo $arr_DF[$df]['price'] ." ". $arr_DF[$df]['currency'];?></span></span>
+                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_DF[$df]['price'])." ". $arr_DF[$df]['currency'];?></span></span>
 
                                                                                 </div>
 
@@ -1005,7 +1005,7 @@
                                                                                     
 
                                                                                     <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo $arr_FF[$ff]['price'] ." ". $arr_FF[$ff]['currency'];?></span></span>
+                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_FF[$ff]['price'])." ". $arr_FF[$ff]['currency'];?></span></span>
 
                                                                                 </div>
 

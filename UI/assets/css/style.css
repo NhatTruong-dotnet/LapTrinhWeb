@@ -59,6 +59,28 @@
 }
 
 
+/* End edit header */
+
+
+/* Start Title category */
+
+.marg-left-0 {
+    margin-left: 0 !important;
+}
+
+.margin-tl {
+    margin-top: 10px;
+    margin-left: 0 !important;
+}
+
+.mrgleft-15 {
+    margin-left: -15px;
+}
+
+
+/* End Title Category */
+
+
 /* Start Reponsive Header */
 
 @media (max-width: 991px) {
@@ -78,9 +100,6 @@
 
 
 /* End Reponsive Header */
-
-
-/* End edit header */
 
 
 /* Button Login */
@@ -285,3 +304,11 @@
 
 
 /* End Pagenation */
+
+
+/* Start Reponsive */
+
+@media only screen {}
+
+
+/* End Reponsive */

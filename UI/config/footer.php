@@ -11,7 +11,7 @@
                                 <div class="footer-contact footer-block footer-block__1 col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
 
                                     <div class="title-block">
-                                        Warehouse
+                                        HEXA FOOD
                                     </div>
 
 
@@ -186,7 +186,7 @@
             <div class="footer_copyright">
                 <div class="container">
 
-                    <div class="list_category">
+                    <!-- <div class="list_category">
 
                         <ul class="site-footer__linklist list-unstyled">
 
@@ -276,7 +276,7 @@
 
                         </ul>
 
-                    </div>
+                    </div> -->
 
 
                     <div class="row align-items-center">
