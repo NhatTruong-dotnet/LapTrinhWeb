@@ -69,26 +69,26 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="./../category/category.html">
+            <a class="nav-link" href="./../category/category.php">
               <i class=" menu-icon"><img src="https://img.icons8.com/ios/16/000000/categorize.png"/></i>
               <span class="menu-title">Categories</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../products/product.html">
+            <a class="nav-link" href="../products/product.php">
               <i class=" menu-icon"><img src="https://img.icons8.com/external-prettycons-lineal-prettycons/16/000000/external-products-user-interface-vol-3-prettycons-lineal-prettycons.png"/></i>
 
               <span class="menu-title">Products</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../users/user.html">
+            <a class="nav-link" href="../users/user.php">
               <i class="menu-icon"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/16/000000/external-users-cyber-security-kiranshastry-lineal-kiranshastry-1.png"/></i>
               <span class="menu-title">Users</span>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="../billing/billing.html">
+            <a class="nav-link" href="../billing/billing.php">
               <i class="menu-icon"><img src="https://img.icons8.com/ios/16/000000/cash-receipt.png"/></i>
               <span class="menu-title">Biilling</span>
             </a>
@@ -277,70 +277,58 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                            <td>Jeremy Ortega</td>
-                            <td>Levelled up</td>
-                            <td>Catalinaborough</td>
-                            <td>$790</td>
-                            <td>06 Jan 2018</td>
-                            <td>$2274253</td>
-                        </tr>
-                        <tr>
-                            <td>Alvin Fisher</td>
-                            <td>Ui design completed</td>
-                            <td>East Mayra</td>
-                            <td>$23230</td>
-                            <td>18 Jul 2018</td>
-                            <td>$83127</td>
-                        </tr>
-                        <tr>
-                            <td>Emily Cunningham</td>
-                            <td>support</td>
-                            <td>Makennaton</td>
-                            <td>$939</td>
-                            <td>16 Jul 2018</td>
-                            <td>$29177</td>
-                        </tr>
-                        <tr>
-                            <td>Minnie Farmer</td>
-                            <td>support</td>
-                            <td>Agustinaborough</td>
-                            <td>$30</td>
-                            <td>30 Apr 2018</td>
-                            <td>$44617</td>
-                        </tr>
-                        <tr>
-                            <td>Betty Hunt</td>
-                            <td>Ui design not completed</td>
-                            <td>Lake Sandrafort</td>
-                            <td>$571</td>
-                            <td>25 Jun 2018</td>
-                            <td>$78952</td>
-                        </tr>
-                        <tr>
-                            <td>Myrtie Lambert</td>
-                            <td>Ui design completed</td>
-                            <td>Cassinbury</td>
-                            <td>$36</td>
-                            <td>05 Nov 2018</td>
-                            <td>$36422</td>
-                        </tr>
-                        <tr>
-                            <td>Jacob Kennedy</td>
-                            <td>New project</td>
-                            <td>Cletaborough</td>
-                            <td>$314</td>
-                            <td>12 Jul 2018</td>
-                            <td>$34167</td>
-                        </tr>
-                        <tr>
-                            <td>Ernest Wade</td>
-                            <td>Levelled up</td>
-                            <td>West Fidelmouth</td>
-                            <td>$484</td>
-                            <td>08 Sep 2018</td>
-                            <td>$50862</td>
-                        </tr>
+                        <?php
+                        $servername = "sql6.freemysqlhosting.net";
+                        $username = "sql6448508";
+                        $password = '2SHPjvRite';
+                        $showAllBillingCommand = "SELECT * FROM sql6448508.billing" . " Order By billing_id desc Limit 0,10 ";
+                        error_reporting(0);
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password);
+                        // use utf8 character
+                        $conn->set_charset("utf8");
+                        // Check connection
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        } else {
+                          echo '<script>console.log("Connect success")</script>';
+
+                          #region Load Billing to 
+                          echo '<script>console.log("Running showAllBillingCommand")</script>';
+                          $result = mysqli_query($conn, $showAllBillingCommand);
+                          if (mysqli_num_rows($result) > 0) {
+                            echo '<script>console.log("Finshied running return data")</script>';
+                            echo '<script>console.log("Start loading data to table")</script>';
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              $username = "";
+                              $getUserByIdCommand = "SELECT hoten FROM sql6448508.user where user_id =" . $row['user_id'];
+                              $resultQuery = mysqli_query($conn, $getUserByIdCommand);
+                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
+                                $username = $rowInner['hoten'];
+                              }
+                              echo '<tr>';
+                              echo '<td>' . $username . '</td>';
+                              echo '<td>' . number_format($row['total']) . '</td>';
+                              echo '<td>' . $row['delivery_method'] . '</td>';
+                              if ($row['delivery_status'] == "đang giao hàng") {
+                                echo '<td><label class="badge badge-warning">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              } else {
+                                echo '<td><label class="badge badge-success">' . $row['delivery_status'] . '</label></td>';
+                                echo '</tr>';
+                              }
+                            }
+                            echo '<script>console.log("End loading data to table")</script>';
+                          } else {
+                            echo '<script>console.log("Finshied running no data return")</script>';
+                          }
+                          #endregion
+
+                          mysqli_close($conn);
+                        }
+
+                        ?>
+
                       </tbody>
                     </table>
                   </div>

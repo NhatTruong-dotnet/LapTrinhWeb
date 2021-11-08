@@ -69,26 +69,26 @@
 
          
           <li class="nav-item">
-            <a class="nav-link" href="./../category/category.html">
+            <a class="nav-link" href="./../category/category.php">
               <i class=" menu-icon"><img src="https://img.icons8.com/ios/16/000000/categorize.png"/></i>
               <span class="menu-title">Categories</span>
             </a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="../products/product.html">
+            <a class="nav-link" href="../products/product.php">
               <i class=" menu-icon"><img src="https://img.icons8.com/external-prettycons-lineal-prettycons/16/000000/external-products-user-interface-vol-3-prettycons-lineal-prettycons.png"/></i>
 
               <span class="menu-title">Products</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../users/user.html">
+            <a class="nav-link" href="../users/user.php">
               <i class="menu-icon"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/16/000000/external-users-cyber-security-kiranshastry-lineal-kiranshastry-1.png"/></i>
               <span class="menu-title">Users</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="../billing/billing.html">
+            <a class="nav-link" href="../billing/billing.php">
               <i class="menu-icon"><img src="https://img.icons8.com/ios/16/000000/cash-receipt.png"/></i>
               <span class="menu-title">Biilling</span>
             </a>
@@ -132,140 +132,60 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td class="py-1">
-                              <img src="../../images/faces/face1.jpg" alt="image"/>
-                            </td>
-                            <td>
-                              Herman Beck
-                            </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              $ 77.99
-                            </td>
-                            <td>
-                              May 15, 2015
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="py-1">
-                              <img src="../../images/faces/face2.jpg" alt="image"/>
-                            </td>
-                            <td>
-                              Messsy Adam
-                            </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              $245.30
-                            </td>
-                            <td>
-                              July 1, 2015
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="py-1">
-                              <img src="../../images/faces/face3.jpg" alt="image"/>
-                            </td>
-                            <td>
-                              John Richards
-                            </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              $138.00
-                            </td>
-                            <td>
-                              Apr 12, 2015
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="py-1">
-                              <img src="../../images/faces/face4.jpg" alt="image"/>
-                            </td>
-                            <td>
-                              Peter Meggik
-                            </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              $ 77.99
-                            </td>
-                            <td>
-                              May 15, 2015
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="py-1">
-                              <img src="../../images/faces/face5.jpg" alt="image"/>
-                            </td>
-                            <td>
-                              Edward
-                            </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              $ 160.25
-                            </td>
-                            <td>
-                              May 03, 2015
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="py-1">
-                              <img src="../../images/faces/face6.jpg" alt="image"/>
-                            </td>
-                            <td>
-                              John Doe
-                            </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              $ 123.21
-                            </td>
-                            <td>
-                              April 05, 2015
-                            </td>
-                          </tr>
-                          <tr>
-                            <td class="py-1">
-                              <img src="../../images/faces/face7.jpg" alt="image"/>
-                            </td>
-                            <td>
-                              Henry Tom
-                            </td>
-                            <td>
-                              <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
-                            </td>
-                            <td>
-                              $ 150.00
-                            </td>
-                            <td>
-                              June 16, 2015
-                            </td>
-                          </tr>
-                        </tbody>
+                        <?php
+                        $servername = "sql6.freemysqlhosting.net";
+                        $username = "sql6448508";
+                        $password = '2SHPjvRite';
+                        $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM sql6448508.billing_detail" . " group by product_id" . " Order By billing_id desc Limit 0,10 ";
+                        error_reporting(0);
+                        // Create connection
+                        $conn = new mysqli($servername, $username, $password);
+                        // use utf8 character
+                        $conn->set_charset("utf8");
+                        // Check connection
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        } else {
+                          #region Load Billing to 
+                          $result = mysqli_query($conn, $showTop10ProductCommand);
+                          if (mysqli_num_rows($result) > 0) {
+                            while ($row = mysqli_fetch_assoc($result)) {
+                              $productName = "";
+                              $status = "";
+                              $priceProduct = 0;
+                              $getProductNameByIDCommand = "SELECT * FROM sql6448508.product where product_id =" . "'" . strval($row['product_id'] . "'");
+                              $resultQuery = $conn->query($getProductNameByIDCommand);
+                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
+                                $productName = $rowInner['name'];
+                                $status = $rowInner["status"];
+                                $priceProduct = $rowInner["price"];
+                              }
+                              echo '<tr>';
+                              echo '<td>' . $productName . '</td>';
+                              if ($status == "hết hàng") {
+                                echo '<td><label class="badge badge-warning">' . $status . '</label></td>';
+                              } else {
+                                echo '<td><label class="badge badge-success">' . $status . '</label></td>';
+                              }
+                              echo '<td>' . $row['sum'] . '</td>';
+
+
+                              echo '<td>' . number_format($row['sum'] * $priceProduct * 0.45) . '</td>';
+                              echo '</tr>';
+                            }
+
+
+                            echo '<script>console.log("End loading data to table")</script>';
+                          } else {
+                            echo '<script>console.log("Finshied running no data return")</script>';
+                          }
+                          #endregion
+
+                          mysqli_close($conn);
+                        }
+
+                        ?>
+                      </tbody>
                       </table>
                     </div>
                   </div>
