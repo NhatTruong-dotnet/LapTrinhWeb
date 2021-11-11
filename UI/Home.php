@@ -1,3 +1,11 @@
+<?php
+// Start the session
+session_start();
+// unset($_SESSION['error']);4
+// setcookie('error','Invalid username or password');
+
+?>
+
 <?php 
     require_once("config/conndb.php");
 
@@ -117,88 +125,74 @@
                                     </div>
 
                                     <div class="group_items">
-                                        <div class="btn__login" data-toggle="modal" data-target="#CustomerAccountForm">LOGIN
-
-                                        </div>
-                                        <div class="form-account">
-                                            <div class="form-account-title d-flex align-items-center" data-toggle="modal" data-target="#CustomerAccountForm">
-                                                <i class="icon-form-account icon-none"></i>
-                                            </div>
-                                        </div>
-                                        <div id="swym-anchor" class="swym-swym-heart">
-                                            <a href="/pages/page-wishlist">
-                                                <i class="swym-icon"></i>
-                                            </a>
-                                        </div>
+                                        <?php 
+                                            if(isset($_SESSION['isLogin']) === TRUE){
+                                                echo '<div class="form-account">
+                                                <div class="form-account-title d-flex align-items-center" >
+                                                    <i class="icon-form-account "></i>
+                                                </div>
+                                            </div>';
+                                            }else{
+                                                echo '<div class="btn__login " data-toggle="modal" data-target="#CustomerAccountForm">LOGIN</div>';
+                                            }
+                                        ?>
+                                        
+                                        
+                                        
                                         <div id="cart_block">
-                                            <div class="site-header__cart style_2 d-flex align-items-center">
+                                            <a href="Cart.php" class="site-header__cart style_2 d-flex align-items-center">
                                                 <span class="site-header__cart-icon"></span>
                                                 <div id="_desktop_cart_count" class="site-header__cart-count">
                                                     <span id="CartCount">0</span>
                                                 </div>
-                                            </div>
+                                            </a>
                                             <div id="_desktop_cart">
                                                 <div id="cart-info"></div>
                                             </div>
                                         </div>
-                                        <div class="site-header_myaccount dropdown">
-                                            <div class="myaccount-title dropdown-toggle" data-toggle="dropdown">
+                                        <?php
+                                            $adminPageLink = isset($_SESSION['role']) && $_SESSION['role'] == 'admin' ? '<div>
+                                            <a  href="admin/index.php" rel="nofollow" title="Check out">
+                                            <i class="fas fa-user-tie d-inline-block" style="background:none"></i>
+                                                <span>Admin Page</span>
+                                            </a> </div>' : '';
+
+                                            echo isset($_SESSION['isLogin']) === TRUE ? 
+                                            '<div class="site-header_myaccount dropdown">
+                                             <div class="myaccount-title dropdown-toggle" data-toggle="dropdown">
                                                 <i class="icon-account"></i>
-                                            </div>
+                                            </div> 
                                             <div class="account-list dropdown-menu dropdown-menu-right" id="_desktop_account_list">
                                                 <div class="nov_sideward_content">
                                                     <div class="account-list-content">
-                                                        <div>
-                                                            <a class="myaccount" href="https://nuranium-electronic.myshopify.com/account" rel="nofollow" title="My Account">
+                                                         <div>
+                                                            <a class="myaccount" href="account/My_Account.php" rel="nofollow" title="My Account">
                                                                 <i class="icon-myaccount d-inline-block"></i>
                                                                 <span>My Account</span>
                                                             </a>
-                                                        </div>
-                                                        <div>
-                                                            <a class="logout" href="https://nuranium-electronic.myshopify.com/account/logout" rel="nofollow" title="Log out">
+                                                        </div> 
+                                                         <div>
+                                                            <a class="logout" href="account/logout.php" rel="nofollow" title="Log out">
                                                                 <i class="icon-logout d-inline-block"></i>
-                                                                <span>Log out</span>
+                                                                <span>
+                                                                Log out
+                                                                </span>
                                                             </a>
-                                                        </div>
+                                                        </div> 
 
-                                                        <div>
+                                                         <div>
                                                             <a class="check-out" href="https://nuranium-electronic.myshopify.com/checkout" rel="nofollow" title="Check out">
                                                                 <i class="icon-checkout d-inline-block"></i>
                                                                 <span>Check out</span>
                                                             </a>
-                                                        </div>
-                                                        <div>
-                                                            <a class="wishlist" href="/pages/page-wishlist" rel="nofollow" title="My Wishlist">
-                                                                <i class="icon-wishlist d-inline-block"></i>
-                                                                <span>My Wishlist</span>
-                                                            </a>
-                                                        </div>
-                                                        <div class="currency_header">
-                                                            <div class="heading">Currency</div>
-
-                                                            <div id="_desktop_currency_selector" class="currency-selector groups-selector">
-
-                                                                <ul id="currencies" class="list-inline">
-
-                                                                    <li class="currency__item list-inline-item">
-                                                                        <span data-currency="USD">USD</span>
-                                                                    </li>
-
-                                                                    <li class="currency__item list-inline-item">
-                                                                        <span data-currency="EUR">EUR</span>
-                                                                    </li>
-
-                                                                    <li class="currency__item list-inline-item">
-                                                                        <span data-currency="GBP">GBP</span>
-                                                                    </li>
-
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                                        </div>'.$adminPageLink.'
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+
+                                        </div>' : ''
+                                        ?>
+                                        <!--  -->
                                     </div>
                                 </div>
                             </div>
@@ -298,12 +292,9 @@
 
                                         <li class="site-nav--has-dropdown" aria-controls="SiteNavLabel-blog">
                                             <a href="News.html" class="site-nav__link site-nav__link--main" title="News">NEWS
-                                                
-                                                <!-- <i class="zmdi zmdi-chevron-down fas fa-chevron-down"></i> -->
                                             </a>
-
-                                            
                                         </li>
+                                        
 
                                     </ul>
 
@@ -4397,7 +4388,7 @@
 
     <div id="CustomerAccountForm" class="form-vertical modal fade">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="max-height:none">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
@@ -4420,41 +4411,46 @@
 
                             <div class="content__modal">
                                 <div class="content__modal--block active">
-                                        <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8">
-                                            <input type="hidden" name="form_type" value="customer_login" />
-                                            <input type="hidden" name="utf8" value="✓" />
+                                <form method="post" action="account/login.php" id="customer_login" accept-charset="UTF-8">
+                                        <input type="hidden" name="form_type" value="customer_login" />
+                                        <input type="hidden" name="utf8" value="✓" />
 
-                                            <div class="block-form-login">
-                                                <div class="title_form">
-                                                    <span>Insert your account information:</span>
-                                                </div>
-                                                <div class="form-group novform-email">
-                                                    <input type="email" name="customer[email]" id="Email_login" class="" placeholder="Email" required autofocus>
-                                                </div>
+                                        <div class="block-form-login">
+                                            <div class="title_form">
+                                                <span>Insert your account information:</span>
+                                            </div>
+                                            <div class="form-group custom-form novform-email" style="margin-bottom:30px">
+                                                <input type="email" name="email" id="Email_login"   value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ""?>" placeholder="Email"  autofocus>
+                                                <div class="message"></div>
+                                            </div>
 
-                                                <div class="form-group novform-password">
+                                            <div class="form-group custom-form novform-password" style="margin-bottom:30px">
 
-                                                    <input type="password" value="" name="customer[password]" id="HeaderPassword" class="" placeholder="Password" required>
+                                                <input type="password" value="" name="password" id="HeaderPassword" class="" placeholder="Password" >
+                                                <div class="message"></div>
 
-                                                    <div class="hide_show_password" style="display: block;">
-                                                        <span class="show"><i class="zmdi zmdi-eye-off"></i></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="forgot_password">
-                                                    <i class="zmdi zmdi-email"></i>
-
-                                                    <a href="#recover" id="RecoversPassword">
-                                                        Forgot your <strong>Password ?</strong>
-                                                    </a>
-
-                                                </div>
-
-                                                <div class="form_submit">
-                                                    <input type="submit" class="btn" value="Login">
+                                                <div class="hide_show_password" style="display: block;">
+                                                    <span class="show" ><i class="zmdi zmdi-eye-off"></i></span>
+                                                    <!-- <span class="show"><i class="zmdi zmdi-eye"></i></span> -->
                                                 </div>
                                             </div>
-                                        </form>
+
+                                            <div class="forgot_password">
+                                                <i class="zmdi zmdi-email"></i>
+
+                                                <a href="#recover" id="RecoversPassword">
+                                                    Forgot your <strong>Password ?</strong>
+                                                </a>
+
+                                            </div>
+
+                                            <div class="form_submit">
+                                                <input type="submit" class="btn" value="Login">
+                                            </div>
+                                        </div>
+                                    </form>
+
+
 
                                         <div id="RecoverPasswordFormIndex" class="hide">
                                             <div class="title">
@@ -4479,7 +4475,7 @@
 
                                     </div>
                                 <div class="content__modal--block">
-                                    <form method="post" action="/account" id="create_customer" accept-charset="UTF-8">
+                                    <form method="post" action="account/register.php" id="create_customer" accept-charset="UTF-8">
                                         <input type="hidden" name="form_type" value="create_customer" />
                                         <input type="hidden" name="utf8" value="✓" />
 
@@ -4487,17 +4483,24 @@
 
 
                                         <div class="block-form-register">
-                                            <div class="form-group novform-firstname">
-                                                <input type="text" name="customer[first_name]" id="FirstName" placeholder="First Name" required>
+                                            <div class="form-group   custom-form novform-firstname">
+                                                <input type="text" name="name" id="name" placeholder="Họ tên" >
+                                                <div class="message"></div>
+                                              </div>
+                                            <div class="form-group  custom-form novform-lastname">
+                                                <input type="text" name="numberphone" id="numberphone" placeholder="Số điện thoại" >
+                                                <div class="message"></div>
+
                                             </div>
-                                            <div class="form-group novform-lastname">
-                                                <input type="text" name="customer[last_name]" id="LastName" placeholder="Last Name" required>
+                                            <div class="form-group custom-form novform-email">
+                                                <input type="email" name="email" id="email" class="" placeholder="Email" >
+                                                <div class="message"></div>
+
                                             </div>
-                                            <div class="form-group novform-email">
-                                                <input type="email" name="customer[email]" id="email_rigester" class="" placeholder="Email" required>
-                                            </div>
-                                            <div class="form-group novform-password">
-                                                <input type="password" name="customer[password]" id="CreatePassword" class="" placeholder="Password" required>
+                                            <div class="form-group custom-form novform-password">
+                                                <input type="password" name="password" id="CreatePassword" class="" placeholder="Password" >
+                                                <div class="message"></div>
+
                                             </div>
                                             <div class="form-checkbox novform-newsletter">
                                                 <label id="form-checkbox" class="custom_checkbox d-inline-flex">
@@ -4561,6 +4564,17 @@
     </div>
 
 
+    <!-- Toast message -->
+    <?php 
+    echo isset($_COOKIE['error']) ? '<div class="alert alert-danger" id="toast-message" role="alert" style="position:fixed;bottom:20px;left:20px;">'.
+                                         $_COOKIE['error'].   
+                                    '</div>' : '';
+
+    echo isset($_COOKIE['success']) ? '<div class="alert alert-success" id="toast-message" role="alert" style="position:fixed;bottom:20px;left:20px;">'.
+    $_COOKIE['success'].   
+    '</div>' : '';
+    ?>
+    
 
 
     <script src="//cdn.shopify.com/s/javascripts/currencies.js" type="text/javascript"></script>
@@ -4656,6 +4670,109 @@
     </script>
     <script src="./assets/js/main.js"></script>
     <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/27/assets/nuranium.js?v=11704140786233088045" type="text/javascript"></script>
+
+    <script>
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function deleteCookie(cname){
+  document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+}
+
+
+</script>
+<script src="./assets/js/main.js"></script>
+<script src="./assets/js/validator.js"></script>
+<script>
+Validator({
+  form:'#create_customer',
+  errorSelector:".message",
+  rules:[
+    Validator.isRequired('#name'),
+    Validator.isRequired('#numberphone'),
+    Validator.amountNumber('#numberphone', 10),
+    Validator.startWithNumber("#numberphone", 0),
+    Validator.validNumberPhone('#numberphone'),
+    Validator.isRequired('#CreatePassword'),
+    Validator.minLength('#CreatePassword', 6),
+    Validator.atLeastOneUppercaseLetter('#CreatePassword'),
+    Validator.isRequired('#email'),
+    Validator.isEmail('#email'),
+  ]
+})
+
+
+Validator({
+  form:'#customer_login',
+  errorSelector:".message",
+  rules:[
+    Validator.isRequired('#Email_login'),
+    Validator.isEmail('#Email_login'),
+    Validator.isRequired('#HeaderPassword'),
+  ]
+})
+
+Validator({
+  form:'#contact_form',
+  errorSelector:".message",
+  rules:[
+    Validator.isRequired('#ContactFormName'),
+
+    Validator.isRequired('#ContactFormEmail'),
+    Validator.isEmail('#ContactFormEmail'),
+    
+    Validator.isRequired('#ContactFormPhone'),
+    Validator.amountNumber('#ContactFormPhone', 10),
+    Validator.startWithNumber("#ContactFormPhone", 0),
+    Validator.validNumberPhone('#ContactFormPhone'),
+    
+    
+    Validator.isRequired('#ContactFormMessage'),
+  ]
+})
+</script>
+
+<script>
+
+  const hidePasswordbtn = document.querySelector('.hide_show_password')
+  const icon = hidePasswordbtn.querySelector('.show > i')
+  hidePasswordbtn.onclick = () => {
+    if(icon.classList[1] === 'zmdi-eye-off'){
+      icon.classList.remove('zmdi-eye-off')
+      icon.classList.add('zmdi-eye')
+      document.querySelector('#HeaderPassword').type = 'text'
+    }else{
+      icon.classList.remove('zmdi-eye')
+      icon.classList.add('zmdi-eye-off')
+      document.querySelector('#HeaderPassword').type = 'password'
+    }
+  }
+</script>
+
+
+<script defer>
+    const toastMessage = document.querySelector('#toast-message')
+    if(toastMessage){
+        setTimeout(() => {
+            toastMessage.remove()
+        }, 5000);
+    }
+</script>
+
 </body>
 
 </html>
