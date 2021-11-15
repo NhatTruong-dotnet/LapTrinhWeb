@@ -1327,7 +1327,12 @@ session_start();
 
     <div id="stickymenu_bottom_mobile" class="d-flex align-items-center justify-content-center d-md-none text-center">
         <div class="stickymenu-item"><a href="/"><i class="icon-home"></i><span>Home</span></a></div>
-        <div class="stickymenu-item"><a href="/pages/page-wishlist"><i class="zmdi zmdi-favorite-outline"></i><span>Wishlist</span></a></div>
+        <!-- <div class="stickymenu-item">
+            <a href="/pages/page-wishlist">
+                <i class="zmdi zmdi-favorite-outline"></i>
+                <span>Wishlist</span>
+            </a>
+        </div> -->
         <div class="stickymenu-item"><a href="#" class="nov-toggle-page" data-target="#mobile-blockcart"><span id="_mobile_cart_count" class="cart-products-count"></span><i class="icon-shopping-cart"></i><span>Cart</span></a></div>
         <div class="stickymenu-item"><a href="#" class="nov-toggle-page" data-target="#mobile-pageaccount"><i class="icon-account"></i><span>Setting</span></a></div>
         <div class="stickymenu-item">
