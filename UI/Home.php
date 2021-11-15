@@ -511,10 +511,11 @@ session_start();
                                         </div>
                                         <div class="row list-menu margin-tl">
                                             
-                                            <ul class="nav nav-tabs list-product-tabs mrgleft-15" role="tablist">
+                                        <!-- nav-tabs -->
+                                            <ul class="row nav nav-tabs list-product-tabs w-100 mrgleft-15 ovef-auto" role="tablist">
 
 
-                                                <li class="col-xs col-md col-lg nav-item">
+                                                <li class="col-sm-6 col-md col-lg nav-item">
                                                     <a class="nav-link tab-links active" href="#producttabd_AF" data-target="#producttab_AF" data-product-tabTop data-href="/collections/tablet?view=json" id="tab-AF" data-id="AF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -523,7 +524,7 @@ session_start();
                                                     </a>
                                                 </li>
 
-                                                <li class="col-xs col-md col-lg nav-item">
+                                                <li class="col-sm-6 col-md col-lg nav-item">
                                                     <a class="nav-link tab-links " href="#producttab_DF" data-target="#producttab_DF" data-product-tabTop data-href="/collections/iphone?view=json" id="tab-DF" data-id="DF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -532,7 +533,7 @@ session_start();
                                                     </a>
                                                 </li>
 
-                                                <li class="col-xs col-md col-lg nav-item">
+                                                <li class="col-sm-6 col-md col-lg nav-item">
                                                     <a class="nav-link tab-links " href="#producttab_CF" data-target="#producttab_CF" data-product-tabTop data-href="/collections/iphone?view=json" id="tab-CF" data-id="CF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -541,7 +542,7 @@ session_start();
                                                     </a>
                                                 </li>
 
-                                                <li class="col-xs col-md col-lg nav-item">
+                                                <li class="col-sm-6 col-md col-lg nav-item padrigh-0">
                                                     <a class="nav-link tab-links" href="#producttab_FF" data-target="#producttab_FF" data-product-tabTop data-href="/collections/smartphone?view=json" id="tab-FF" data-id="FF" data-toggle="tab" role="tab">
                                                         <div class="content-nav">
 
@@ -605,9 +606,9 @@ session_start();
                                                                 <div class="grid__column-2-4">
 
                                                                     <div class="item">
-                                                                        <div class="item-product item-animate ">
+                                                                        <div class="item-product item-animate">
 
-                                                                            <div class="thumbnail-container has-multiimage">
+                                                                            <div class="thumbnail-container has-multiimage ">
                                                                                 <a href="/products/rimond-balo-stud-cum">
                                                                                     <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
                                                                                     <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
@@ -1021,7 +1022,7 @@ session_start();
 
                                                         for($j = 0 ;$j < count($result_allpro); $j++){
                                                         ?>
-                                                                                    <div class="col-md-4 col-sm-12">
+                                                                                    <div class="col-md-6 col-lg-4">
                                                                                         <div class="item">
                                                                                             <div class="item-product item-animate ">
 
@@ -1051,7 +1052,7 @@ session_start();
                                                                                                     <div class="product__price">
 
                                                                                                         <span class="visually-hidden">Regular price</span>
-                                                                                                        <span class="product-price__price"><span class="money"><?php echo $result_allpro[$j]['price'].' '.$result_allpro[$j]['currency'];?></span></span>
+                                                                                                        <span class="product-price__price"><span class="money"><?php echo number_format($result_allpro[$j]['price']).' '.$result_allpro[$j]['currency'];?></span></span>
 
                                                                                                     </div>
 

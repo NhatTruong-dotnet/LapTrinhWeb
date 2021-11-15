@@ -1,6 +1,7 @@
 :root {
     --margin-left-50: 50px;
     --margin-right-50: 50px;
+    --w-100: 100%;
 }
 
 
@@ -79,6 +80,10 @@
 
 .left_30 {
     left: 32% !important;
+}
+
+.padrigh-0 {
+    padding-right: 0 !important;
 }
 
 
@@ -179,6 +184,14 @@
 
 .content__modal .content__modal--block.active {
     display: block;
+}
+
+.nav-item:not(:last-child) {
+    margin-right: 0 !important;
+}
+
+.nav-item {
+    margin-bottom: 10px !important;
 }
 
 
@@ -350,12 +363,14 @@
 
 /* Tablet: width >= 740px and width < 1024px */
 
-
-/* @media (max-width: 750px) {
-    .marbottom-10 {
-        margin-bottom: 10px !important;
+@media (max-width: 767px) {
+    .ovef-auto {
+        overflow-x: auto !important;
     }
-} */
+    .padrigh-0 {
+        padding-right: 14px !important;
+    }
+}
 
 
 /* Mobile width < 740px */
