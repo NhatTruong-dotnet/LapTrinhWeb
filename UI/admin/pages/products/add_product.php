@@ -96,104 +96,120 @@
         </ul>
       </nav>
       <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
+    <div class="main-panel">
+      <?php
+        $conn= new mysqli('localhost','root','','laptrinhweb');
+        $sql = "SELECT * FROM category";
+        $cate= mysqli_query($conn,$sql);
+        if(isset($_POST['name'])){
+          $name=$_POST['name'];
+          $price=$_POST['price'];
+          $currency=$_POST['currency'];
+          $category=$_POST['category'];
+          $unit=$_POST['unit'];
+          $amount=$_POST['amount'];
+          $description=$_POST['description'];
+          if(isset($_FILES['img'])){
+            $file=$_FILES['img'];
+            $file_name=$file['name'];
+            move_uploaded_file($file['tmp_name'],'D:/xampp/htdocs/LapTrinhWeb/UI/assets/img/'.$file_name);
+          }
+          
+          $shortname=mysqli_query($conn,"SELECT * FROM category where category_id=$category");
+         
+          while($row=mysqli_fetch_assoc($shortname)){
+            $s=$row['shortname'];
+          };	
+          $num= mysqli_query($conn,"select count(product_id)as so from product where category_id=$category");
+					while($row=mysqli_fetch_assoc($num)){
+            $n=$row['so'];
+          };	
+          $id= $s.$n;
+          
+          $date= date("Y-m-d").' '.date("H:i:s");
+          
+          $insert="INSERT INTO product(product_id,name,description,category_id,price,unit,created_date,currency,amount) 
+                    VALUES('$id','$name','$description','$category','$price','$unit','$date','$currency','$amount')";
 
-          <div class="row">
-            <p>Thanh filter ở đây</p>
-          </div>
+          $query=mysqli_query($conn,$insert);
+          $insert_img=mysqli_query($conn,"INSERT INTO product_image(product_id,image_blob) VALUES('$id','$file_name')");
 
-          <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Danh sách sản phẩm</h4>
-                   <a href="add_product.php"><button type="button" class="btn btn-secondary btn-rounded btn-fw">New Product</button></a> 
-
-                    <div class="table-responsive">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th>
-                              Product image
-                            </th>
-                            <th>
-                              Name
-                            </th>
-                            <th>
-                              Price
-                            </th>
-                            <th>
-                              Amount
-                            </th>
-                            <th>
-                              Net Profit
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $servername = "sql6.freemysqlhosting.net";
-                        $username = "sql6448508";
-                        $password = '2SHPjvRite';
-                        $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM sql6448508.billing_detail" . " group by product_id" . " Order By billing_id desc Limit 0,10 ";
-                        error_reporting(0);
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password);
-                        // use utf8 character
-                        $conn->set_charset("utf8");
-                        // Check connection
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        } else {
-                          #region Load Billing to 
-                          $result = mysqli_query($conn, $showTop10ProductCommand);
-                          if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                              $productName = "";
-                              $status = "";
-                              $priceProduct = 0;
-                              $getProductNameByIDCommand = "SELECT * FROM sql6448508.product where product_id =" . "'" . strval($row['product_id'] . "'");
-                              $resultQuery = $conn->query($getProductNameByIDCommand);
-                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
-                                $productName = $rowInner['name'];
-                                $status = $rowInner["status"];
-                                $priceProduct = $rowInner["price"];
-                              }
-                              echo '<tr>';
-                              echo '<td>' . $productName . '</td>';
-                              if ($status == "hết hàng") {
-                                echo '<td><label class="badge badge-warning">' . $status . '</label></td>';
-                              } else {
-                                echo '<td><label class="badge badge-success">' . $status . '</label></td>';
-                              }
-                              echo '<td>' . $row['sum'] . '</td>';
-
-
-                              echo '<td>' . number_format($row['sum'] * $priceProduct * 0.45) . '</td>';
-                              echo '</tr>';
-                            }
-
-
-                            echo '<script>console.log("End loading data to table")</script>';
-                          } else {
-                            echo '<script>console.log("Finshied running no data return")</script>';
-                          }
-                          #endregion
-
-                          mysqli_close($conn);
-                        }
-
-                        ?>
-                      </tbody>
-                      </table>
+          // if($query){
+          //   header('location: product.php');
+  
+          // }else
+          // echo "loi";
+         
+        }
+       
+       
+      ?>
+        <!-- =========================== -->
+        <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add a new product</h4>
+                  <p class="card-description">
+                    
+                  </p>
+                  <form class="forms-sample" action="product.php" method="POST" role="form" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label for="exampleInputName1">Name</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name">
                     </div>
-                  </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3">Price</label>
+                      <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Price" name="price">
+                    </div>
+                    
+                    <div class="form-group">
+                      
+                      <label for="exampleInputPassword4" style="padding:20px 20px 20px 0px">Currency</label>
+                          <label  style="padding:20px">
+                              <input type="radio" name="currency" value="VND" checked="checked">VND
+                          </label>
+                          <label  style="padding:20px">
+                              <input  type="radio" name="currency" value="$" >$
+                          </label>
+                      
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleSelectGender">Category</label>
+                        <select class="form-control" id="exampleSelectGender"name="category">
+                         <?php foreach($cate as $key =>$value){?>
+                          <option value="<?php echo $value['category_id'] ?>"><?php echo $value['name'] ?></option>
+                          <?php }?>
+                        </select>
+                      </div>
+                    <div class="form-group">
+                      <label>File upload</label>
+                      <input type="file" name="img" class="form-control file-upload-info" placeholder="Upload Image">
+                      <!-- <div class="input-group col-xs-12">
+                        <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                        <span class="input-group-append">
+                          <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                        </span>
+                      </div> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Unit</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" placeholder="Unit" name="unit">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputCity1">Amount</label>
+                      <input type="text" class="form-control" id="exampleInputCity1" placeholder="Amount"name="amount">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleTextarea1">Description</label>
+                      <textarea class="form-control" id="exampleTextarea1" rows="4" name="description"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                   
+                  </form>
                 </div>
               </div>
-          </div>
-        </div>
-        <!-- content-wrapper ends -->
+            </div>
+        <!-- ================-->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
