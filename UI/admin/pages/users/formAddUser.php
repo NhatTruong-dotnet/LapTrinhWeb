@@ -96,106 +96,66 @@
         </ul>
       </nav>
       <!-- partial -->
+      <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $conn = new mysqli($servername, $username, $password);
+        $conn->set_charset("utf8");
+        // include('/config/connectdb.php');
+        $sqlSelect = "SELECT * FROM laptrinhweb.user";
+        $resultSelect = mysqli_query($conn, $sqlSelect);
+        // $result = mysqli_fetch_row($resultSelect);
+      ?>
       <div class="main-panel">
         <div class="content-wrapper">
-
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Khách hàng</h4>
-                  <a href="./formAddUser.php"><button type="button" class="btn btn-secondary btn-rounded btn-fw">New User</button></a>
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                          <th>
-                            Total Buy
-                          </th>
-                          <th>
-                            Date Join
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        // $servername = "sql6.freemysqlhosting.net";
-                        // $username = "sql6448508";
-                        // $password = '2SHPjvRite';
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        // $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing" . " Order By billing_id desc Limit 0,10 ";
-                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.user";
-                        error_reporting(0);
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password);
-                        // use utf8 character
-                        $conn->set_charset("utf8");
-                        // Check connection
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        } else {
-                          echo '<script>console.log("Connect success")</script>';
-
-                          #region Load Billing to 
-                          echo '<script>console.log("Running showAllBillingCommand")</script>';
-                          $result = mysqli_query($conn, $showAllBillingCommand);
-                          if (mysqli_num_rows($result) > 0) {
-                            echo '<script>console.log("Finshied running return data")</script>';
-                            echo '<script>console.log("Start loading data to table")</script>';
-                            while ($row = mysqli_fetch_assoc($result)) {
-                              $username = "";
-                              $email = "";
-                              $sodienthoai="";
-                              $getUserByIdCommand = "SELECT * FROM laptrinhweb.user where user_id =" . $row['user_id'];
-                              $resultQuery = mysqli_query($conn, $getUserByIdCommand);
-                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
-                                $username = $rowInner['hoten'];
-                                $email = $rowInner['email'];
-                                $sodienthoai = $rowInner['sdt'];
-                              }
-                              echo '<tr>';
-                              echo '<td>' . $username . '</td>';
-                              echo '<td>' . $email . '</td>';
-                              echo '<td>' .  $sodienthoai . '</td>';
-                              echo '<tr>';
-                            }
-                            // while ($row = mysqli_fetch_assoc($result)) {
-                            //   echo '<tr>';
-                            //   echo '<td>' . $row['hoten'] . '</td>';
-                            //   echo '<td>' . $row['email']. '</td>';
-                            //   echo '<td>' . $row['delivery_status'] . '</td>';
-                            //   echo '<td>' . $row['total'] . '</td>';
-                            //   echo '</tr>';
-                            // }
-                            echo '<script>console.log("End loading data to table")</script>';
-                          } else {
-                            echo '<script>console.log("Finshied running no data return")</script>';
-                          }
-                          #endregion
-
-                          mysqli_close($conn);
-                        }
-
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+                  <h4 class="card-title">Thêm Thông Tin User</h4>                
+                  <!-- <div class="form-group">
+                    <label for="exampleFormControlSelect1">User ID</label>
+                    <select class="form-control form-control-lg" id="exampleFormControlSelect1">
+                    <option>--Chọn User ID--</option>
+                    <?php
+                      while ($result = mysqli_fetch_assoc($resultSelect)) {
+                        echo '<option>' . $result['user_id'] . '</option>';
+                      }
+                    ?>
+                    </select>
+                  </div> -->
+                  <form action="./addUser.php" class="forms-sample" method="POST">
+                    <div class="form-group">
+                      <label for="userID">User ID</label>
+                      <input type="text" class="form-control" id="userID" name="userID" placeholder="User ID">
+                    </div>
+                    <div class="form-group">
+                      <label for="user">User</label>
+                      <input type="text" class="form-control" id="user" name="user" placeholder="User">
+                    </div>
+                    <div class="form-group">
+                      <label for="firstname">First name</label>
+                      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name">
+                    </div>
+                    <div class="form-group">
+                      <label for="process">Process</label>
+                      <input type="text" class="form-control" id="process" name="process" placeholder="Process">
+                    </div>
+                    <div class="form-group">
+                      <label for="total">Total Buy</label>
+                      <input type="text" class="form-control" id="total" name="total" placeholder="Total Buy">
+                    </div>
+                    <div class="form-group">
+                      <label for="date">Date Join</label>
+                      <input type="text" class="form-control" id="date" name="date" placeholder="Date Join">
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
+                  </form>
+                </div>        
+              </div>            
             </div>
           </div>
-
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

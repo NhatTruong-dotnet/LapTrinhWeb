@@ -105,7 +105,7 @@
               <div class="card">
                 <div class="card-body">
                   <p class="card-title">Danh mục sản phẩm</p>
-                  <button type="button" class="btn btn-secondary btn-rounded btn-fw">New Category</button>
+                  <a href="formAddCate.php"><button type="button" class="btn btn-secondary btn-rounded btn-fw">New Category</button></a>
                   <div class="table-responsive">
                     <table id="recent-purchases-listing" class="table">
                       <thead>
@@ -119,10 +119,13 @@
                       <tbody>
                       <tbody>
                         <?php
-                        $servername = "sql6.freemysqlhosting.net";
-                        $username = "sql6448508";
-                        $password = '2SHPjvRite';
-                        $showAllBillingCommand = "SELECT * FROM sql6448508.category";
+                        // $servername = "sql6.freemysqlhosting.net";
+                        // $username = "sql6448508";
+                        // $password = '2SHPjvRite';
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.category";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
