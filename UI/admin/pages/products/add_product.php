@@ -125,13 +125,14 @@
             $n=$row['so'];
           };	
           $id= $s.$n;
-          
+         
           $date= date("Y-m-d").' '.date("H:i:s");
-          
+         
           $insert="INSERT INTO product(product_id,name,description,category_id,price,unit,created_date,currency,amount) 
                     VALUES('$id','$name','$description','$category','$price','$unit','$date','$currency','$amount')";
 
           $query=mysqli_query($conn,$insert);
+         
           $insert_img=mysqli_query($conn,"INSERT INTO product_image(product_id,image_blob) VALUES('$id','$file_name')");
 
           // if($query){
@@ -152,14 +153,15 @@
                   <p class="card-description">
                     
                   </p>
-                  <form class="forms-sample" action="product.php" method="POST" role="form" enctype="multipart/form-data">
+                  <form class="forms-sample" action="" method="POST" role="form" enctype="multipart/form-data" id="add_product">
                     <div class="form-group">
                       <label for="exampleInputName1">Name</label>
-                      <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="name">
+                      <input type="text" class="form-control" id="name" placeholder="Name" name="name"><div class="message"></div>
                     </div>
+                    
                     <div class="form-group">
                       <label for="exampleInputEmail3">Price</label>
-                      <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Price" name="price">
+                      <input type="text" class="form-control" id="price" placeholder="Price" name="price"><div class="message"></div>
                     </div>
                     
                     <div class="form-group">
@@ -193,15 +195,15 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputCity1">Unit</label>
-                      <input type="text" class="form-control" id="exampleInputCity1" placeholder="Unit" name="unit">
+                      <input type="text" class="form-control" id="unit" placeholder="Unit" name="unit"><div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputCity1">Amount</label>
-                      <input type="text" class="form-control" id="exampleInputCity1" placeholder="Amount"name="amount">
+                      <input type="text" class="form-control" id="amount" placeholder="Amount"name="amount"><div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="exampleTextarea1">Description</label>
-                      <textarea class="form-control" id="exampleTextarea1" rows="4" name="description"></textarea>
+                      <textarea class="form-control" id="description" rows="4" name="description"></textarea><div class="message"></div>
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                    
@@ -226,24 +228,136 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <!-- <script src="vendors/base/vendor.bundle.base.js"></script> -->
   <!-- endinject -->
   <!-- Plugin js for this page-->
-  <script src="vendors/chart.js/Chart.min.js"></script>
+  <!-- <script src="vendors/chart.js/Chart.min.js"></script>
   <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script> -->
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
+  <!-- <script src="js/off-canvas.js"></script>
   <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
+  <script src="js/template.js"></script> -->
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
+  <!-- <script src="js/dashboard.js"></script>
   <script src="js/data-table.js"></script>
   <script src="js/jquery.dataTables.js"></script>
-  <script src="js/dataTables.bootstrap4.js"></script>
+  <script src="js/dataTables.bootstrap4.js"></script> -->
   <!-- End custom js for this page-->
+  <script >
+    const handleUI = (inputElement, errorSelector, errorMessage) => {
+    const parentElement = inputElement.parentElement
+    const formMessageElement = parentElement.querySelector(errorSelector)
+
+    if (errorMessage) {
+        formMessageElement.innerText = errorMessage
+        parentElement.classList.add("invalid")
+    } else {
+        formMessageElement.innerText = ""
+        parentElement.classList.remove("invalid")
+    }
+}
+    const Validator = ({ form, errorSelector, rules }) => {
+    let firstSubmit = false
+
+    const selectorRules = {}
+
+    const formElement = document.querySelector(form)
+
+    if (formElement) {
+        formElement.addEventListener("submit", (event) => {
+            firstSubmit = true
+            rules.forEach(({ selector }) => {
+                const inputElement = formElement.querySelector(selector)
+                let errorMessage
+                const inputElementRules = selectorRules[selector]
+
+                for (let i = 0; i < inputElementRules.length; i++) {
+                    errorMessage = inputElementRules[i](inputElement.value)
+
+                    if (errorMessage) {
+                        event.stopImmediatePropagation()
+                        event.preventDefault()
+                        handleUI(inputElement, errorSelector, errorMessage)
+                        break
+                    }
+                }
+            })
+        })
+
+        rules.forEach(({ selector, validate }) => {
+            const inputElement = formElement.querySelector(selector)
+
+            if (Array.isArray(selectorRules[selector])) {
+                selectorRules[selector].push(validate)
+            } else {
+                selectorRules[selector] = [validate]
+            }
+
+            if (inputElement) {
+                inputElement.onblur = () => {
+                    if (firstSubmit) {
+                        let errorMessage
+                        const inputElementRules = selectorRules[selector]
+                        for (let i = 0; i < inputElementRules.length; i++) {
+                            errorMessage = inputElementRules[i](
+                                inputElement.value
+                            )
+                            if (errorMessage) break
+                        }
+
+                        handleUI(inputElement, errorSelector, errorMessage)
+                    }
+                }
+                inputElement.oninput = () => {
+                    handleUI(inputElement, errorSelector)
+                }
+            }
+        })
+    }
+}
+
+// return undefined if pass rule
+Validator.isRequired = (selector, message) => {
+    return {
+        selector,
+        validate(value) {
+            return value.trim()
+                ? undefined
+                : message || "Vui lòng nhập trường này"
+        },
+    }
+}
+  </script>
+<script>
+  Validator({
+  form:'#add_product',
+  errorSelector:".message",
+  rules:[
+    Validator.isRequired('#name'),
+
+    Validator.isRequired('#price'),
+    Validator.isRequired('#unit'),
+    Validator.isRequired('#amount'),
+    Validator.isRequired('#description')
+  ]
+})
+
+</script>
+<style>
+  .message {
+    position: absolute;
+    padding-left: 3px;
+    color: red;
+    font-size: 13px;
+  }
+  .form-control.invalid input{
+    border: 1px solid red !important;
+    background-color: rgba(255, 0, 0, 0.02) !important;
+  }
+</style>
 </body>
 
 </html>
