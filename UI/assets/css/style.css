@@ -3,7 +3,6 @@
     --margin-right-50: 50px;
 }
 
-
 /* commons css*/
 
 .grid_product {
@@ -43,10 +42,9 @@
     min-height: 350px !important;
 }
 
-
 /* header */
 
-.site-header__logo-image>img {
+.site-header__logo-image > img {
     height: 90px;
 }
 
@@ -58,9 +56,7 @@
     cursor: pointer;
 }
 
-
 /* End edit header */
-
 
 /* Start Title category */
 
@@ -77,9 +73,7 @@
     margin-left: -15px;
 }
 
-
 /* End Title Category */
-
 
 /* Start Reponsive Header */
 
@@ -98,9 +92,7 @@
     }
 }
 
-
 /* End Reponsive Header */
-
 
 /* Button Login */
 
@@ -123,9 +115,7 @@
     display: none;
 }
 
-
 /* End Button Login */
-
 
 /* Start mode create account and login */
 
@@ -177,9 +167,7 @@
     display: block;
 }
 
-
 /* End mode edit create account and login */
-
 
 /* Start products */
 
@@ -214,7 +202,7 @@
     font-weight: 400;
     color: #333;
     line-height: 2.8rem;
-    height: 3.0rem;
+    height: 3rem;
     margin: 5px;
     text-align: center;
     overflow: hidden;
@@ -226,13 +214,13 @@
 
 .product-item__rating {
     font-size: 1.4rem;
-    color: #D5D5D5;
+    color: #d5d5d5;
     padding: auto 12px;
     text-align: center;
 }
 
 .product-item__start-gold {
-    color: #FFCE3E;
+    color: #ffce3e;
 }
 
 .product-item__price {
@@ -264,13 +252,14 @@
     background: none !important;
 }
 
-.section-custom .custom_collection_tab .nov-collection-tabs.tab_style_1 .title_block {
+.section-custom
+    .custom_collection_tab
+    .nov-collection-tabs.tab_style_1
+    .title_block {
     display: flex;
 }
 
-
 /* End product  */
-
 
 /* Start Pagenation */
 
@@ -302,13 +291,43 @@
     background-color: #105caa;
 }
 
-
 /* End Pagenation */
-
 
 /* Start Reponsive */
 
-@media only screen {}
-
+@media only screen {
+}
 
 /* End Reponsive */
+
+/* map */
+@media (max-width: 750px) {
+    #MapSection--nov-page-contact {
+        display: none;
+    }
+}
+
+/* form */
+.form-group.custom-form {
+    margin-bottom: 30px;
+}
+.form-group.contact {
+    margin-bottom: 20px;
+}
+
+.form-group .message {
+    position: absolute;
+    padding-left: 3px;
+    color: red;
+    font-size: 13px;
+}
+.form-group.invalid input,
+.form-group.invalid textarea#ContactFormMessage {
+    border: 1px solid red !important;
+    background-color: rgba(255, 0, 0, 0.02) !important;
+}
+
+.form-group.invalid input:hover,
+.form-group.invalid textarea#ContactFormMessage:hover {
+    background-color: #fff !important;
+}
