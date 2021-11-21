@@ -443,56 +443,7 @@ session_start();
 
                 </div>
             </div>
-            <div id="shopify-section-1602139555363" class="shopify-section index-section section-gallery-image wow fadeIn animated">
-                <div class="distance" style="padding-top: 16px; padding-bottom: 30px">
-
-                    <div class="container">
-
-                        <div class="row spacing-20">
-
-
-
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallery-image_column mt-xs-10 mb-xs-10">
-                                <div class="gallery-image__item">
-
-                                    <a class="gallery-image__link" href="#">
-
-
-                                        <img class="lazyload" data-src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/banner-1_63af23ba-4449-45db-92c3-fd8e55c7c649_1920x1920.jpg?v=1602131118" alt="">
-
-
-                                    </a>
-
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallery-image_column">
-                                <div class="gallery-image__item">
-
-                                    <a class="gallery-image__link" href="#">
-
-
-                                        <img class="lazyload" data-src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/banner-2_877f4ae1-90d8-45f9-8e97-36b9de6dc297_1920x1920.jpg?v=1602139600" alt="">
-
-
-                                    </a>
-
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- End row -->
-
-                    </div>
-                    <!-- End container -->
-
-                </div>
-
-
-
-            </div>
+            
             <div id="shopify-section-1602131451931" class="shopify-section index-section section-collection-tabs wow fadeIn animated">
 
                 <div class="distance" style="padding-top: 41px;padding-bottom: 15px">
