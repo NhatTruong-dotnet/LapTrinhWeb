@@ -1,7 +1,9 @@
 :root {
     --margin-left-50: 50px;
     --margin-right-50: 50px;
+    --w-100: 100%;
 }
+
 
 /* commons css*/
 
@@ -42,9 +44,10 @@
     min-height: 350px !important;
 }
 
+
 /* header */
 
-.site-header__logo-image > img {
+.site-header__logo-image>img {
     height: 90px;
 }
 
@@ -56,7 +59,9 @@
     cursor: pointer;
 }
 
+
 /* End edit header */
+
 
 /* Start Title category */
 
@@ -73,7 +78,17 @@
     margin-left: -15px;
 }
 
+.left_30 {
+    left: 32% !important;
+}
+
+.padrigh-0 {
+    padding-right: 0 !important;
+}
+
+
 /* End Title Category */
+
 
 /* Start Reponsive Header */
 
@@ -92,7 +107,9 @@
     }
 }
 
+
 /* End Reponsive Header */
+
 
 /* Button Login */
 
@@ -115,7 +132,9 @@
     display: none;
 }
 
+
 /* End Button Login */
+
 
 /* Start mode create account and login */
 
@@ -167,7 +186,17 @@
     display: block;
 }
 
+.nav-item:not(:last-child) {
+    margin-right: 0 !important;
+}
+
+.nav-item {
+    margin-bottom: 10px !important;
+}
+
+
 /* End mode edit create account and login */
+
 
 /* Start products */
 
@@ -252,14 +281,13 @@
     background: none !important;
 }
 
-.section-custom
-    .custom_collection_tab
-    .nov-collection-tabs.tab_style_1
-    .title_block {
+.section-custom .custom_collection_tab .nov-collection-tabs.tab_style_1 .title_block {
     display: flex;
 }
 
+
 /* End product  */
+
 
 /* Start Pagenation */
 
@@ -291,26 +319,25 @@
     background-color: #105caa;
 }
 
+
 /* End Pagenation */
 
-/* Start Reponsive */
-
-@media only screen {
-}
-
-/* End Reponsive */
 
 /* map */
+
 @media (max-width: 750px) {
     #MapSection--nov-page-contact {
         display: none;
     }
 }
 
+
 /* form */
+
 .form-group.custom-form {
     margin-bottom: 30px;
 }
+
 .form-group.contact {
     margin-bottom: 20px;
 }
@@ -321,6 +348,7 @@
     color: red;
     font-size: 13px;
 }
+
 .form-group.invalid input,
 .form-group.invalid textarea#ContactFormMessage {
     border: 1px solid red !important;
@@ -331,3 +359,18 @@
 .form-group.invalid textarea#ContactFormMessage:hover {
     background-color: #fff !important;
 }
+
+
+/* Tablet: width >= 740px and width < 1024px */
+
+@media (max-width: 767px) {
+    .ovef-auto {
+        overflow-x: auto !important;
+    }
+    .padrigh-0 {
+        padding-right: 14px !important;
+    }
+}
+
+
+/* Mobile width < 740px */
