@@ -21907,3 +21907,46 @@ dl li {
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+/* form */
+
+.form-group.custom-form {
+    margin-bottom: 30px;
+}
+
+.form-group.contact {
+    margin-bottom: 20px;
+}
+
+.form-group .message {
+    position: absolute;
+    padding-left: 3px;
+    color: red;
+    font-size: 13px;
+}
+
+.form-group.invalid input,
+.form-group.invalid textarea#ContactFormMessage {
+    border: 1px solid red !important;
+    background-color: rgba(255, 0, 0, 0.02) !important;
+}
+
+.form-group.invalid input:hover,
+.form-group.invalid textarea#ContactFormMessage:hover {
+    background-color: #fff !important;
+}
+
+
+/* Tablet: width >= 740px and width < 1024px */
+
+@media (max-width: 767px) {
+    .ovef-auto {
+        overflow-x: auto !important;
+    }
+    .padrigh-0 {
+        padding-right: 14px !important;
+    }
+}
+
+
+/* Mobile width < 740px */

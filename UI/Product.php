@@ -84,10 +84,10 @@ session_start();
 								</div>
 								<?php
 									function loadCategory() {
-										// $servername = "sql6.freemysqlhosting.net";
-                        				// $username = "sql6448508";
-                        				// $password = '2SHPjvRite';
-										$conn= new mysqli('localhost:3307','root','','laptrinhweb');
+										$servername = "localhost";
+                        				$username = "root";
+                        				$password = '';
+										$conn = new mysqli($servername, $username, $password);
 										$conn->set_charset("utf8");
 										$sql = "SELECT * FROM category";
 										$result=$conn->query($sql);
@@ -104,10 +104,10 @@ session_start();
 								<!-- ============================================================ -->
 								<div class="page-width product_deals col-md-9">
 								<?php
-									// $servername = "sql6.freemysqlhosting.net";
-									// $username = "sql6448508";
-									// $password = '2SHPjvRite';
-									$conn= new mysqli('localhost:3307','root','','laptrinhweb');
+									$servername = "localhost";
+									$username = "root";
+									$password = '';
+									$conn = new mysqli($servername, $username, $password);
 									$conn->set_charset("utf8");
 									$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:15;
 									$current_page=!empty($_GET['page'])?$_GET['page']:1;
