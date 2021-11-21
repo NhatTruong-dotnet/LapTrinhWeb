@@ -1152,7 +1152,7 @@
 								</div>
 								<?php
 									function loadCategory() {
-										$servername = "localhost:3307";
+										$servername = "localhost";
                         				$username = "root";
                         				$password = '';
 										$conn = new mysqli($servername, $username, $password);
@@ -1172,7 +1172,7 @@
 								<!-- ============================================================ -->
 								<div class="page-width product_deals col-md-9">
 								<?php
-									$servername = "localhost:3307";
+									$servername = "localhost";
 									$username = "root";
 									$password = '';
 									$conn = new mysqli($servername, $username, $password);

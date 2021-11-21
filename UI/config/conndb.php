@@ -1,5 +1,5 @@
 <?php 
-    const HOST = "localhost:3307";
+    const HOST = "localhost";
     const USER = "root";
     const PASS = "";
     const DATABASE = "laptrinhweb";

@@ -125,30 +125,36 @@
                     ?>
                     </select>
                   </div> -->
-                  <form action="./addUser.php" class="forms-sample" method="POST">
+                  <form id="formUSER" action="./addUser.php" class="forms-sample" method="POST">
                     <div class="form-group">
                       <label for="userID">User ID</label>
                       <input type="text" class="form-control" id="userID" name="userID" placeholder="User ID">
+                      <div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="user">User</label>
                       <input type="text" class="form-control" id="user" name="user" placeholder="User">
+                      <div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="firstname">First name</label>
                       <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name">
+                      <div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="process">Process</label>
                       <input type="text" class="form-control" id="process" name="process" placeholder="Process">
+                      <div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="total">Total Buy</label>
                       <input type="text" class="form-control" id="total" name="total" placeholder="Total Buy">
+                      <div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="date">Date Join</label>
                       <input type="text" class="form-control" id="date" name="date" placeholder="Date Join">
+                      <div class="message"></div>
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                   </form>
@@ -192,6 +198,20 @@
   <script src="js/jquery.dataTables.js"></script>
   <script src="js/dataTables.bootstrap4.js"></script>
   <!-- End custom js for this page-->
+  ><script src="../../js/validator.js"></script>
+  <script>
+    Validator({
+      form:"#formUSER",
+      errorSelector:".message",
+      rules:[
+        Validator.isRequired("#user"),
+        Validator.isRequired("#firstname"),
+        Validator.isRequired("#process"),
+        Validator.isRequired("#total"),
+        Validator.isRequired("#date"),
+      ]
+    })
+  </script>
 </body>
 
 </html>
