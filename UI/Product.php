@@ -1,3 +1,32 @@
+<?php
+	const SERVER = "localhost";
+	const USERNAME = "root";
+	const PASSWORD = "";
+	const DB = "laptrinhweb";
+
+
+	function loadCategory() {
+		// $servername = "sql6.freemysqlhosting.net";
+		// $username = "sql6448508";
+		// $password = '2SHPjvRite';
+		// $conn = new mysqli($servername, $username, $password);
+		
+		$conn = new mysqli(SERVER,USERNAME,PASSWORD,DB);
+		$conn->set_charset("utf8");
+		$sql = "SELECT * FROM category";
+		$result=$conn->query($sql);
+		$stmt=array();
+		$i=0;
+		while($row=$result->fetch_assoc()){
+			$stmt[$i]= array($row['category_id'], $row['name'], $row['shortname']);
+				$i++;
+		};	
+		return $stmt;
+		$conn->close();
+	}
+
+?>
+
 <!doctype html>
 <!--[if IE 9]> <html class="ie9 no-js" lang="en"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
@@ -1151,39 +1180,47 @@
 									</div>
 								</div>
 								<?php
-									function loadCategory() {
-										$servername = "sql6.freemysqlhosting.net";
-                        				$username = "sql6448508";
-                        				$password = '2SHPjvRite';
-										$conn = new mysqli($servername, $username, $password);
-										$conn->set_charset("utf8");
-										$sql = "SELECT * FROM sql6448508.category";
-										$result=$conn->query($sql);
-										$stmt=array();
-										$i=0;
-										while($row=$result->fetch_assoc()){
-											$stmt[$i]= array($row['category_id'], $row['name'], $row['shortname']);
-           									 $i++;
-										};	
-										return $stmt;
-									}
+									// function loadCategory() {
+									// 	$servername = "sql6.freemysqlhosting.net";
+                        			// 	$username = "sql6448508";
+                        			// 	$password = '2SHPjvRite';
+									// 	$conn = new mysqli($servername, $username, $password);
+									// 	$conn->set_charset("utf8");
+									// 	$sql = "SELECT * FROM sql6448508.category";
+									// 	$result=$conn->query($sql);
+									// 	$stmt=array();
+									// 	$i=0;
+									// 	while($row=$result->fetch_assoc()){
+									// 		$stmt[$i]= array($row['category_id'], $row['name'], $row['shortname']);
+           							// 		 $i++;
+									// 	};	
+									// 	return $stmt;
+									// }
 								?>
 								<!--End catagories -->
 								<!-- ============================================================ -->
 								<div class="page-width product_deals col-md-9">
 								<?php
-									$servername = "sql6.freemysqlhosting.net";
-									$username = "sql6448508";
-									$password = '2SHPjvRite';
-									$conn = new mysqli($servername, $username, $password);
+									// $servername = "sql6.freemysqlhosting.net";
+									// $username = "sql6448508";
+									// $password = '2SHPjvRite';
+
+									$conn = new mysqli(SERVER, USERNAME, PASSWORD, DB);
+
 									$conn->set_charset("utf8");
 									$item_per_page=!empty($_GET['per_page'])?$_GET['per_page']:15;
 									$current_page=!empty($_GET['page'])?$_GET['page']:1;
 									$offset=($current_page-1)* $item_per_page;
-									$totalRecords= mysqli_query($conn,"select *from sql6448508.product");
+									$totalRecords= mysqli_query($conn,"select *from product");
 									$totalRecords=$totalRecords->num_rows;
 									$totalPages=ceil($totalRecords/$item_per_page);
-									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM sql6448508.product join sql6448508.product_image on product.product_id=product_image.product_id  order by product.product_id desc limit $item_per_page offset $offset";
+									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id 
+											FROM product 
+											join product_image 
+											on product.product_id=product_image.product_id  
+											order by product.product_id 
+											desc limit $item_per_page offset $offset";
+											
 									$result=mysqli_query($conn,$sql);
 									$arr= array();
 									$i=0;
