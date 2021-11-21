@@ -4,7 +4,7 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">x
   <title>Hexa Food Admin</title>
 
   <!-- plugins:css -->
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/logo.png" />
+
 </head>
 
 <body>
@@ -23,8 +24,8 @@
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-          <a class="navbar-brand brand-logo" href="./../../index.php"><img src="../../images/logo.png" alt="logo"/></a>
-          <a class="navbar-brand brand-logo-mini" href="./../../index.php"><img src="../../images/logo-mini.svg" alt="logo"/></a>
+          <a class="navbar-brand brand-logo" href="./../../index.html"><img src="../../images/logo.png" alt="logo"/></a>
+          <a class="navbar-brand brand-logo-mini" href="./../../index.html"><img src="../../images/logo-mini.svg" alt="logo"/></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
@@ -68,8 +69,8 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../category/category.php">
+          <li class="nav-item active">
+            <a class="nav-link" href="./category.php">
               <i class=" menu-icon"><img src="https://img.icons8.com/ios/16/000000/categorize.png"/></i>
               <span class="menu-title">Categories</span>
             </a>
@@ -81,7 +82,7 @@
               <span class="menu-title">Products</span>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="../users/user.php">
               <i class="menu-icon"><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/16/000000/external-users-cyber-security-kiranshastry-lineal-kiranshastry-1.png"/></i>
               <span class="menu-title">Users</span>
@@ -98,104 +99,26 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-
           <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
+            <div class="col-md-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Khách hàng</h4>
-                  <a href="./formAddUser.php"><button type="button" class="btn btn-secondary btn-rounded btn-fw">New User</button></a>
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                          <th>
-                            Total Buy
-                          </th>
-                          <th>
-                            Date Join
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                        // $servername = "sql6.freemysqlhosting.net";
-                        // $username = "sql6448508";
-                        // $password = '2SHPjvRite';
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        // $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing" . " Order By billing_id desc Limit 0,10 ";
-                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.user";
-                        error_reporting(0);
-                        // Create connection
-                        $conn = new mysqli($servername, $username, $password);
-                        // use utf8 character
-                        $conn->set_charset("utf8");
-                        // Check connection
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        } else {
-                          echo '<script>console.log("Connect success")</script>';
-
-                          #region Load Billing to 
-                          echo '<script>console.log("Running showAllBillingCommand")</script>';
-                          $result = mysqli_query($conn, $showAllBillingCommand);
-                          if (mysqli_num_rows($result) > 0) {
-                            echo '<script>console.log("Finshied running return data")</script>';
-                            echo '<script>console.log("Start loading data to table")</script>';
-                            while ($row = mysqli_fetch_assoc($result)) {
-                              $username = "";
-                              $email = "";
-                              $sodienthoai="";
-                              $getUserByIdCommand = "SELECT * FROM laptrinhweb.user where user_id =" . $row['user_id'];
-                              $resultQuery = mysqli_query($conn, $getUserByIdCommand);
-                              while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
-                                $username = $rowInner['hoten'];
-                                $email = $rowInner['email'];
-                                $sodienthoai = $rowInner['sdt'];
-                              }
-                              echo '<tr>';
-                              echo '<td>' . $username . '</td>';
-                              echo '<td>' . $email . '</td>';
-                              echo '<td>' .  $sodienthoai . '</td>';
-                              echo '<tr>';
-                            }
-                            // while ($row = mysqli_fetch_assoc($result)) {
-                            //   echo '<tr>';
-                            //   echo '<td>' . $row['hoten'] . '</td>';
-                            //   echo '<td>' . $row['email']. '</td>';
-                            //   echo '<td>' . $row['delivery_status'] . '</td>';
-                            //   echo '<td>' . $row['total'] . '</td>';
-                            //   echo '</tr>';
-                            // }
-                            echo '<script>console.log("End loading data to table")</script>';
-                          } else {
-                            echo '<script>console.log("Finshied running no data return")</script>';
-                          }
-                          #endregion
-
-                          mysqli_close($conn);
-                        }
-
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
+                    <h4 class="card-title">Thêm Danh Mục</h4>
+                    <form action="./addCategory.php" class="forms-sample" method="POST">
+                        <div class="form-group">
+                            <label for="cateName">Name</label>
+                            <input type="text" class="form-control" id="cateName" name="cateName" placeholder="Name" value="<?php echo !empty($row)?$row['name']:"";?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="cateShortName">Short Name</label>
+                            <input type="text" class="form-control" id="cateShortName" name="cateShortName" placeholder="Short Name" value="<?php echo !empty($row)?$row['shortname']:"";?>">
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-primary mr-2"><?php echo empty($row)?"Insert":"Update";?></button>
+                    </form>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -226,6 +149,13 @@
   <script src="js/hoverable-collapse.js"></script>
   <script src="js/template.js"></script>
   <!-- endinject -->
+  <!-- <script>
+    function InsertCate(){
+      name = document.getElementById('cateName').value;
+      shortname = document.getElementById('cateShortName').value;
+      $.get("addCatogery.php?cateName="+name+"&cateShortName="+shortname+"&submit=submit");
+    }
+  </script> -->
   <!-- Custom js for this page-->
   <script src="js/dashboard.js"></script>
   <script src="js/data-table.js"></script>
