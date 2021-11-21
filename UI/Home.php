@@ -42,6 +42,7 @@ session_start();
 
     <div id="shopify-section-nov-header" class="shopify-section">
         <div data-section-id="nov-header" data-section-type="header-section">
+
         <header class="site-header sticky-menu" style="background-color: #ffffff;">
                 <div class="header-mobile d-md-none">
                     <div class="d-flex align-items-center">
@@ -1295,8 +1296,7 @@ session_start();
         </section>
     </main>
     <div id="shopify-section-nov-footer" class="shopify-section nov-footer wow fadeIn animated">
-        <?php include 'config/footer.php' ?>
-
+        <?php include 'Common/Footer/footer.php' ?>
     </div>
 
     <div class="canvas-menu drawer-left">
