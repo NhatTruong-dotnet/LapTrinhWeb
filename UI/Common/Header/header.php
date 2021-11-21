@@ -197,7 +197,7 @@
                                                                         
                                                                     ?>
                                                                         <li class="category-item">
-                                                                            <a href="#" title=""><?php echo $result[$i]['name'];?></a>
+                                                                            <a href="Product_Category.php?act=category&id=<?php echo $result[$i]['category_id'] ?>" title=""><?php echo $result[$i]['name'];?></a>
                                                                         </li>
                                                                         
                                                                     <?php
