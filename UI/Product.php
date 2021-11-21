@@ -1,35 +1,9 @@
-<?php
-// Start the session
-session_start();
-// unset($_SESSION['error']);4
-// setcookie('error','Invalid username or password');
-
-?>
-
 <?php 
-    require_once("config/conndb.php");
 
-    function execResult ($sql){
-        $conn = new mysqli(HOST, USER, PASS, DATABASE);
-        
-        if($conn->connect_error){
-            die('ket noi that bai:' . $conn->connect_error);
-        }
-
-        $conn->set_charset("utf8");
-
-        $result = $conn->query($sql);
-
-        $data = array();
-
-        while($row = $result->fetch_array(1)){
-            $data[] = $row;
-        }
-        return $data;
-
-        $conn->close();
-    }
-
+	const SERVER = "localhost";
+	const USERNAME = "root";
+	const PASSWORD = "";
+	const DB = "laptrinhweb";
 ?>
 <!doctype html>
 <!--[if IE 9]> <html class="ie9 no-js" lang="en"> <![endif]-->

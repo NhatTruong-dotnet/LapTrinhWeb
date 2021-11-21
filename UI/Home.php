@@ -241,7 +241,7 @@ session_start();
                                                                         
                                                                     ?>
                                                                         <li class="category-item">
-                                                                            <a href="Product_Category.php?act=category&id=<?php echo $result[$i]['category_id'] ?>" title=""><?php echo $result[$i]['name'];?></a>
+                                                                            <a href="./Product.php" title="" id="<?php echo $result[$i]['category_id']; ?>"><?php echo $result[$i]['name'];?></a>
                                                                         </li>
                                                                         
                                                                     <?php
@@ -442,56 +442,7 @@ session_start();
 
                 </div>
             </div>
-            <div id="shopify-section-1602139555363" class="shopify-section index-section section-gallery-image wow fadeIn animated">
-                <div class="distance" style="padding-top: 16px; padding-bottom: 30px">
-
-                    <div class="container">
-
-                        <div class="row spacing-20">
-
-
-
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallery-image_column mt-xs-10 mb-xs-10">
-                                <div class="gallery-image__item">
-
-                                    <a class="gallery-image__link" href="#">
-
-
-                                        <img class="lazyload" data-src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/banner-1_63af23ba-4449-45db-92c3-fd8e55c7c649_1920x1920.jpg?v=1602131118" alt="">
-
-
-                                    </a>
-
-
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 gallery-image_column">
-                                <div class="gallery-image__item">
-
-                                    <a class="gallery-image__link" href="#">
-
-
-                                        <img class="lazyload" data-src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/banner-2_877f4ae1-90d8-45f9-8e97-36b9de6dc297_1920x1920.jpg?v=1602139600" alt="">
-
-
-                                    </a>
-
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- End row -->
-
-                    </div>
-                    <!-- End container -->
-
-                </div>
-
-
-
-            </div>
+            
             <div id="shopify-section-1602131451931" class="shopify-section index-section section-collection-tabs wow fadeIn animated">
 
                 <div class="distance" style="padding-top: 41px;padding-bottom: 15px">
@@ -609,7 +560,7 @@ session_start();
                                                                         <div class="item-product item-animate">
 
                                                                             <div class="thumbnail-container has-multiimage ">
-                                                                                <a href="/products/rimond-balo-stud-cum">
+                                                                                <a href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27">
                                                                                     <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
                                                                                     <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
                                                                                 </a>
@@ -618,7 +569,7 @@ session_start();
                                                                             </div>
                                                                             <div class="product__info">
                                                                                 <div class="product__title">
-                                                                                    <a href="/products/rimond-balo-stud-cum"><?php echo $arr_AF[$af]['name'];?></a>
+                                                                                    <a href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27"><?php echo $arr_AF[$af]['name'];?></a>
                                                                                 </div>
 
 
@@ -641,14 +592,22 @@ session_start();
                                                                                         <input type="hidden" name="id" value="33119332040757" />
 
 
-                                                                                        <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
-                                                                                        </button>
+                                                                                        </button> -->
+
+                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
+                                                                                                                href="addcart.php?id=%27<?php echo $arr_AF[$af]['product_id']?>%27"
+                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
+                                                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                                                title="" tabindex="0">
+                                                                                                                <i class="icon_cart"></i>
+                                                                                         </a>
 
                                                                                     </form>
 
                                                                                     <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="#" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
                                                                                             <i class="fa_quickview"></i>
                                                                                         </a>
                                                                                     </div>
@@ -697,7 +656,7 @@ session_start();
                                                                         <div class="item-product item-animate ">
 
                                                                             <div class="thumbnail-container has-multiimage">
-                                                                                <a href="/products/rimond-balo-stud-cum">
+                                                                                <a href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27">
                                                                                     <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt="">
                                                                                     <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt="">
                                                                                 </a>
@@ -706,7 +665,7 @@ session_start();
                                                                             </div>
                                                                             <div class="product__info">
                                                                                 <div class="product__title">
-                                                                                    <a href="/products/rimond-balo-stud-cum"><?php echo $arr_CF[$cf]['name'];?></a>
+                                                                                    <a href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27"><?php echo $arr_CF[$cf]['name'];?></a>
                                                                                 </div>
 
 
@@ -729,14 +688,22 @@ session_start();
                                                                                         <input type="hidden" name="id" value="33119332040757" />
 
 
-                                                                                        <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
-                                                                                        </button>
+                                                                                        </button> -->
+
+                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
+                                                                                                                href="addcart.php?id=%27<?php echo $arr_CF[$cf]['product_id']?>%27"
+                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
+                                                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                                                title="" tabindex="0">
+                                                                                                                <i class="icon_cart"></i>
+                                                                                         </a>
 
                                                                                     </form>
 
                                                                                     <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="#" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
                                                                                             <i class="fa_quickview"></i>
                                                                                         </a>
                                                                                     </div>
@@ -783,7 +750,7 @@ session_start();
                                                                         <div class="item-product item-animate ">
 
                                                                             <div class="thumbnail-container has-multiimage">
-                                                                                <a href="/products/rimond-balo-stud-cum">
+                                                                                <a href="Details.php?id=%27<?php echo $arr_DF[$df]['product_id']; ?>%27">
                                                                                     <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt="">
                                                                                     <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt="">
                                                                                 </a>
@@ -815,14 +782,22 @@ session_start();
                                                                                         <input type="hidden" name="id" value="33119332040757" />
 
 
-                                                                                        <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
-                                                                                        </button>
+                                                                                        </button> -->
+
+                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
+                                                                                                                href="addcart.php?id=%27<?php echo $arr_DF[$df]['product_id']?>%27"
+                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
+                                                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                                                title="" tabindex="0">
+                                                                                                                <i class="icon_cart"></i>
+                                                                                         </a>
 
                                                                                     </form>
 
                                                                                     <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="#" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_DF[$df]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
                                                                                             <i class="fa_quickview"></i>
                                                                                         </a>
                                                                                     </div>
@@ -878,7 +853,7 @@ session_start();
                                                                             </div>
                                                                             <div class="product__info">
                                                                                 <div class="product__title">
-                                                                                    <a href="/products/rimond-balo-stud-cum"><?php echo $arr_FF[$ff]['name'];?></a>
+                                                                                    <a href="Details.php?id=%27<?php echo $arr_FF[$ff]['product_id']; ?>%27"><?php echo $arr_FF[$ff]['name'];?></a>
                                                                                 </div>
 
 
@@ -901,14 +876,22 @@ session_start();
                                                                                         <input type="hidden" name="id" value="33119332040757" />
 
 
-                                                                                        <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
-                                                                                        </button>
+                                                                                        </button> -->
+
+                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
+                                                                                                                href="addcart.php?id=%27<?php echo $arr_FF[$ff]['product_id']?>%27"
+                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
+                                                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                                                title="" tabindex="0">
+                                                                                                                <i class="icon_cart"></i>
+                                                                                         </a>
 
                                                                                     </form>
 
                                                                                     <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="#" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_FF[$ff]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
                                                                                             <i class="fa_quickview"></i>
                                                                                         </a>
                                                                                     </div>
@@ -1027,7 +1010,7 @@ session_start();
                                                                                             <div class="item-product item-animate ">
 
                                                                                                 <div class="thumbnail-container has-multiimage">
-                                                                                                    <a href="/products/rimond-balo-stud-cum">
+                                                                                                    <a href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27">
 
 
                                                                                                         <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $result_allpro[$j]['image_blob'];?>" alt="">
@@ -1040,7 +1023,7 @@ session_start();
                                                                             
                                                                                                 <div class="product__info">
                                                                                                     <div class="product__title">
-                                                                                                        <a href="/products/rimond-balo-stud-cum"><?php echo $result_allpro[$j]['name'];?></a>
+                                                                                                        <a href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27"><?php echo $result_allpro[$j]['name'];?></a>
                                                                                                     </div>
 
 
@@ -1058,18 +1041,26 @@ session_start();
 
                                                                                                     <div class="group-buttons d-flex">
 
-                                                                                                        <form class="formAddToCart" action="/cart/add" method="post" enctype="multipart/form-data">
+                                                                                                        <form class="formAddToCart" action="addcart.php?id=%27<?php echo  $result_allpro[$j]['product_id']; ?>%27" method="post" enctype="multipart/form-data">
                                                                                                             <input type="hidden" name="id" value="33119332040757" />
 
 
-                                                                                                            <button class="btn btnAddToCart" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                                            <!-- <button class="btn btnAddToCart" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                                                 <i class="icon_cart"></i>
-                                                                                                            </button>
+                                                                                                            </button> -->
+
+                                                                                                            <a class="btn btnAddToCart btnChooseVariant"
+                                                                                                                href="addcart.php?id=%27<?php echo $result_allpro[$j]['product_id']?>%27"
+                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
+                                                                                                                data-toggle="tooltip" data-placement="top"
+                                                                                                                title="" tabindex="0">
+                                                                                                                <i class="icon_cart"></i>
+                                                                                                            </a>
 
                                                                                                         </form>
 
                                                                                                         <div class="productQuickView d-md-block">
-                                                                                                            <a class="btn btnProduct btnProductQuickview" href="#" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                                            <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
                                                                                                                 <i class="fa_quickview"></i>
                                                                                                             </a>
                                                                                                         </div>
