@@ -2,7 +2,7 @@
                 <div class="header-mobile d-md-none">
                     <div class="d-flex align-items-center">
                         <div class="mobile_logo text-center">
-                            <a href="/" class="site-header__logo-image img-fluid">
+                            <a href="index.php" class="site-header__logo-image img-fluid">
                                 <img class="lazyload js" src="./assets/img/logo_HexaFood-removebg.png" alt="" style="max-width: 150px">
                             </a>
                         </div>
@@ -29,7 +29,7 @@
                         <div class="row align-items-center">
                             <div class="contentsticky_logo col-xl-3 col-lg-2 col-md-2">
                                 <h1 class="h2 site-header__logo">
-                                    <a href="./Home.php" itemprop="url" class="site-header__logo-image">
+                                    <a href="index.php" itemprop="url" class="site-header__logo-image">
                                         <img class="lazyload js img-fluid" src="./assets/img/logo_HexaFood-removebg.png" alt="logo">
                                     </a>
                                 </h1>
@@ -163,13 +163,13 @@
                                     <ul class="site-nav list--inline " id="SiteNav">
 
                                         <li class="site-nav--active">
-                                            <a href="./Home.php" class="site-nav__link site-nav__link--main">Home</a>
+                                            <a href="index.php" class="site-nav__link site-nav__link--main">Home</a>
 
 
                                         </li>
 
                                         <li class="site-nav--has-dropdown hasMegaMenu center">
-                                            <a class="d-flex" href="#" title="Products">
+                                            <a class="d-flex" href="Product.php" title="Products">
 
                                                 <div class="group_title">PRODUCTS
                                                     
@@ -197,7 +197,7 @@
                                                                         
                                                                     ?>
                                                                         <li class="category-item">
-                                                                            <a href="Product_Category.php?act=category&id=<?php echo $result[$i]['category_id'] ?>" title=""><?php echo $result[$i]['name'];?></a>
+                                                                            <a href="./Product.php?act=category&id=<?php echo $result[$i]['category_id'] ?>" title=""><?php echo $result[$i]['name'];?></a>
                                                                         </li>
                                                                         
                                                                     <?php

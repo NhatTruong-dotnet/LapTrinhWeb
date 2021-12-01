@@ -98,8 +98,8 @@
       <!-- partial -->
       <?php
         $servername = "localhost";
-        $username = "root";
-        $password = "";
+        $username = "sneoiuvk_laptrinhweb";
+        $password = "147258369";
         $conn = new mysqli($servername, $username, $password);
         $conn->set_charset("utf8");
         // include('/config/connectdb.php');

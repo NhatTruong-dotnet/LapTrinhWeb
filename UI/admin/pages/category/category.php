@@ -119,13 +119,10 @@
                       <tbody>
                       <tbody>
                         <?php
-                        // $servername = "sql6.freemysqlhosting.net";
-                        // $username = "sql6448508";
-                        // $password = '2SHPjvRite';
                         $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.category";
+                        $username = "sneoiuvk_laptrinhweb";
+                        $password = "147258369";
+                        $showAllBillingCommand = "SELECT * FROM category";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);

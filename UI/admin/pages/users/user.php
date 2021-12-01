@@ -128,14 +128,12 @@
                       </thead>
                       <tbody>
                         <?php
-                        // $servername = "sql6.freemysqlhosting.net";
-                        // $username = "sql6448508";
-                        // $password = '2SHPjvRite';
+                        
                         $servername = "localhost";
-                        $username = "root";
-                        $password = "";
+                        $username = "sneoiuvk_laptrinhweb";
+                        $password = "147258369";
                         // $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing" . " Order By billing_id desc Limit 0,10 ";
-                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.user";
+                        $showAllBillingCommand = "SELECT * FROM user";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);

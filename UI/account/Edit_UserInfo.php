@@ -5,7 +5,7 @@
     $email = $_POST['email'];
 
 
-    $conn = connectDB('localhost:3307',"root","","laptrinhweb");
+    $conn = connectDB('localhost',"sneoiuvk_laptrinhweb","147258369","sneoiuvk_laptrinhweb");
 
     if($conn){
 

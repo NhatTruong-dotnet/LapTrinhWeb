@@ -278,10 +278,10 @@
                       </thead>
                       <tbody>
                         <?php
-                        $servername = "sql6.freemysqlhosting.net";
-                        $username = "sql6448508";
-                        $password = '2SHPjvRite';
-                        $showAllBillingCommand = "SELECT * FROM sql6448508.billing" . " Order By billing_id desc Limit 0,10 ";
+                        $servername = "localhost";
+                        $username = "sneoiuvk_laptrinhweb";
+                        $password = '147258369';
+                        $showAllBillingCommand = "SELECT * FROM billing" . " Order By billing_id desc Limit 0,10 ";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
@@ -301,7 +301,7 @@
                             echo '<script>console.log("Start loading data to table")</script>';
                             while ($row = mysqli_fetch_assoc($result)) {
                               $username = "";
-                              $getUserByIdCommand = "SELECT hoten FROM sql6448508.user where user_id =" . $row['user_id'];
+                              $getUserByIdCommand = "SELECT hoten FROM user where user_id =" . $row['user_id'];
                               $resultQuery = mysqli_query($conn, $getUserByIdCommand);
                               while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
                                 $username = $rowInner['hoten'];

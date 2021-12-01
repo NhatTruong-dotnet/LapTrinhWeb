@@ -1,35 +1,4 @@
-<?php
-// Start the session
-session_start();
-// unset($_SESSION['error']);4
-// setcookie('error','Invalid username or password');
 
-?>
-
-<?php 
-    require_once("config/conndb.php");
-
-    function execResult ($sql){
-        $conn = new mysqli(HOST, USER, PASS, DATABASE);
-        
-        if($conn->connect_error){
-            die('ket noi that bai:' . $conn->connect_error);
-        }
-
-        $conn->set_charset("utf8");
-
-        $result = $conn->query($sql);
-
-        $data = array();
-
-        while($row = $result->fetch_array(1)){
-            $data[] = $row;
-        }
-        return $data;
-
-        $conn->close();
-    }
-?>
 <!doctype html>
 <!--[if IE 9]> <html class="ie9 no-js" lang="en"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
@@ -540,6 +509,38 @@ session_start();
 			document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
 		})();</script>
 </head>
+<head>
+    <?php require_once("config/heade_tag.php");?>
+</head>
+<?php
+// Start the session
+session_start();
+// unset($_SESSION['error']);4
+// setcookie('error','Invalid username or password');
+
+    require_once("config/conndb.php");
+
+    function execResult ($sql){
+        $conn = new mysqli(HOST, USER, PASS, DATABASE);
+        
+        if($conn->connect_error){
+            die('ket noi that bai:' . $conn->connect_error);
+        }
+
+        $conn->set_charset("utf8");
+
+        $result = $conn->query($sql);
+
+        $data = array();
+
+        while($row = $result->fetch_array(1)){
+            $data[] = $row;
+        }
+        return $data;
+
+        $conn->close();
+    }
+?>
 <body class="template-index">
 	<a class="in-page-link visually-hidden skip-link" href="#MainContent">Skip to content</a>
 	<div id="shopify-section-nov-header" class="shopify-section">
@@ -584,12 +585,12 @@ session_start();
 								</div>
 								<?php
 									function loadCategory() {
-										$servername = "sql6.freemysqlhosting.net";
-                        				$username = "sql6448508";
-                        				$password = '2SHPjvRite';
+										$servername = "localhost";
+                        				$username = "sneoiuvk_laptrinhweb";
+                        				$password = '147258369';
 										$conn = new mysqli($servername, $username, $password);
 										$conn->set_charset("utf8");
-										$sql = "SELECT * FROM sql6448508.category";
+										$sql = "SELECT * FROM sneoiuvk_laptrinhweb.category";
 										$result=$conn->query($sql);
 										$stmt=array();
 										$i=0;
@@ -604,9 +605,9 @@ session_start();
 								<!-- ============================================================ -->
 								<div class="page-width product_deals col-md-9">
 								<?php
-									$servername = "sql6.freemysqlhosting.net";
-									$username = "sql6448508";
-									$password = '2SHPjvRite';
+									$servername = "localhost";
+									$username = "sneoiuvk_laptrinhweb";
+									$password = '147258369';
 									$conn = new mysqli($servername, $username, $password);
 									$conn->set_charset("utf8");
 									//=================
@@ -614,7 +615,7 @@ session_start();
 									$current_page=!empty($_GET['page'])?$_GET['page']:1;
 									$offset=($current_page-1)* $item_per_page;
 									$b=$_GET['id'];
-									$sql1= "SELECT * from product where  category_id = $b";
+									$sql1= "SELECT * from sneoiuvk_laptrinhweb.product where  category_id = $b";
 									$totalRecords= mysqli_query($conn,$sql1);
 									$totalRecords=$totalRecords->num_rows;
 									$totalPages=ceil($totalRecords/$item_per_page);
@@ -668,12 +669,12 @@ session_start();
                                     }
 									
                                 function danhmuc($a,$item_per_page,$offset){
-									$servername = "sql6.freemysqlhosting.net";
-                        				$username = "sql6448508";
-                        				$password = '2SHPjvRite';
+									$servername = "localhost";
+                        				$username = "sneoiuvk_laptrinhweb";
+                        				$password = '147258369';
 										$conn = new mysqli($servername, $username, $password);
 										$conn->set_charset("utf8");
-									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM sql6448508.product join sql6448508.product_image on product.product_id=product_image.product_id   Where category_id=$a limit $item_per_page offset $offset" ;
+									$sql = "SELECT name,product.product_id,product_image.image_blob, price, currency, category_id FROM sneoiuvk_laptrinhweb.product join sneoiuvk_laptrinhweb.product_image on product.product_id=product_image.product_id   Where category_id=$a limit $item_per_page offset $offset" ;
 									$result=mysqli_query($conn,$sql);
 									$arr= array();
 									$i=0;
@@ -1398,4 +1399,3 @@ session_start();
 		type="text/javascript"></script> -->
 </body>
 </html>
-

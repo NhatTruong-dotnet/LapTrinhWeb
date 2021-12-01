@@ -278,10 +278,10 @@
 
                       <tbody>
                         <?php
-                        $servername = "sql6.freemysqlhosting.net";
-                        $username = "sql6448508";
-                        $password = '2SHPjvRite';
-                        $showAllBillingCommand = "SELECT * FROM sql6448508.billing" . " Order By billing_id desc Limit 0,10 ";
+                        $servername = "localhost";
+                        $username = "sneoiuvk_laptrinhweb";
+                        $password = '147258369';
+                        $showAllBillingCommand = "SELECT * FROM billing" . " Order By billing_id desc Limit 0,10 ";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
@@ -355,10 +355,10 @@
                       </thead>
                       <tbody>
                         <?php
-                        $servername = "sql6.freemysqlhosting.net";
-                        $username = "sql6448508";
-                        $password = '2SHPjvRite';
-                        $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM sql6448508.billing_detail" . " group by product_id" . " Order By billing_id desc Limit 0,10 ";
+                        $servername = "localhost";
+                        $username = "sneoiuvk_laptrinhweb";
+                        $password = '147258369';
+                        $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM billing_detail" . " group by product_id" . " Order By billing_id desc Limit 0,10 ";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
@@ -376,7 +376,7 @@
                               $productName = "";
                               $status = "";
                               $priceProduct = 0;
-                              $getProductNameByIDCommand = "SELECT * FROM sql6448508.product where product_id =" . "'" . strval($row['product_id'] . "'");
+                              $getProductNameByIDCommand = "SELECT * FROM product where product_id =" . "'" . strval($row['product_id'] . "'");
                               $resultQuery = $conn->query($getProductNameByIDCommand);
                               while ($rowInner = mysqli_fetch_assoc($resultQuery)) {
                                 $productName = $rowInner['name'];
@@ -436,10 +436,10 @@
                       </thead>
                       <tbody>
                         <?php
-                        $servername = "sql6.freemysqlhosting.net";
-                        $username = "sql6448508";
-                        $password = '2SHPjvRite';
-                        $showAllBillingCommand = "SELECT * FROM sql6448508.billing" . " Order By billing_id desc Limit 0,10 ";
+                        $servername = "localhost";
+                        $username = "sneoiuvk_laptrinhweb";
+                        $password = '147258369';
+                        $showAllBillingCommand = "SELECT * FROM billing" . " Order By billing_id desc Limit 0,10 ";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
