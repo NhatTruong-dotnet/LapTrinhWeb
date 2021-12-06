@@ -5,7 +5,8 @@
     $password = $_POST['password'];
     $hashPassword = md5($password);
 
-    $conn = connectDB('localhost',"sneoiuvk_laptrinhweb","147258369","sneoiuvk_laptrinhweb");
+    // $conn = connectDB('localhost',"sneoiuvk_laptrinhweb","147258369","sneoiuvk_laptrinhweb");
+    $conn = connectDB("localhost","root","","laptrinhweb");
 
     if($conn){
         $sql = "SELECT hoten,email,sdt,role FROM user WHERE email='$email' and password='$hashPassword'";
