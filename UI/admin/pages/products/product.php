@@ -129,17 +129,21 @@
                             <th>
                               Net Profit
                             </th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
                         <?php
-                        $servername = "localhost";
-                        $username = "sneoiuvk_laptrinhweb";
-                        $password = '147258369';
+                        // $servername = "localhost";
+                        // $username = "sneoiuvk_laptrinhweb";
+                        // $password = '147258369';
+                        $servername = "localhost:3307";
+                        $username = "root";
+                        $password = '';
                         $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM billing_detail" . " group by product_id" . " Order By billing_id desc Limit 0,10 ";
                         error_reporting(0);
                         // Create connection
-                        $conn = new mysqli($servername, $username, $password);
+                        $conn = new mysqli($servername, $username, $password,"laptrinhweb");
                         // use utf8 character
                         $conn->set_charset("utf8");
                         // Check connection
@@ -161,6 +165,7 @@
                                 $priceProduct = $rowInner["price"];
                               }
                               echo '<tr>';
+                              echo '<td></td>';
                               echo '<td>' . $productName . '</td>';
                               if ($status == "hết hàng") {
                                 echo '<td><label class="badge badge-warning">' . $status . '</label></td>';
@@ -171,6 +176,7 @@
 
 
                               echo '<td>' . number_format($row['sum'] * $priceProduct * 0.45) . '</td>';
+                              echo '<td><a href="edit_product.php?id='.$row['product_id'].'">Edit</a></td>';
                               echo '</tr>';
                             }
 
