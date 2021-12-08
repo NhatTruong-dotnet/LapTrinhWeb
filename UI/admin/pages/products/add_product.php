@@ -98,7 +98,7 @@
       <!-- partial -->
     <div class="main-panel">
       <?php
-        $conn= new mysqli('localhost','sneoiuvk_laptrinhweb','147258369','sneoiuvk_laptrinhweb');
+        $conn= new mysqli('localhost','root','','laptrinhweb');
         $sql = "SELECT * FROM category";
         $cate= mysqli_query($conn,$sql);
         if(isset($_POST['name'])){

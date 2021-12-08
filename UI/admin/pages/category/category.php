@@ -120,9 +120,9 @@
                       <tbody>
                         <?php
                         $servername = "localhost";
-                        $username = "sneoiuvk_laptrinhweb";
-                        $password = "147258369";
-                        $showAllBillingCommand = "SELECT * FROM category";
+                        $username = "root";
+                        $password = "";
+                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.category";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);

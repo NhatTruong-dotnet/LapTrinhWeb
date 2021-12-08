@@ -113,10 +113,10 @@
                             User
                           </th>
                           <th>
-                            First name
+                            Email
                           </th>
                           <th>
-                            Progress
+                            Phone
                           </th>
                           <th>
                             Total Buy
@@ -130,10 +130,10 @@
                         <?php
                         
                         $servername = "localhost";
-                        $username = "sneoiuvk_laptrinhweb";
-                        $password = "147258369";
+                        $username = "root";
+                        $password = "";
                         // $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing" . " Order By billing_id desc Limit 0,10 ";
-                        $showAllBillingCommand = "SELECT * FROM user";
+                        $showAllBillingCommand = "SELECT * FROM laptrinhweb.user";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password);
