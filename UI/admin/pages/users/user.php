@@ -166,6 +166,12 @@
                               echo '<td>' . $username . '</td>';
                               echo '<td>' . $email . '</td>';
                               echo '<td>' .  $sodienthoai . '</td>';
+			      echo '<td>
+                                      <a class="btn btn-primary btn-sm" href="#" role="button">Edit</a>
+                                      <a class="btn btn-danger btn-sm" href="deleteUser.php?id='.$id.'" role="button">Delete</a>
+                                      
+                                    </td>';
+
                               echo '<tr>';
                             }
                             // while ($row = mysqli_fetch_assoc($result)) {
