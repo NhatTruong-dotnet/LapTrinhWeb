@@ -98,9 +98,10 @@
       <!-- partial -->
       <?php
         $servername = "localhost";
-        $username = "sneoiuvk_laptrinhweb";
-        $password = "147258369";
-        $conn = new mysqli($servername, $username, $password);
+        $username = "root";
+        $password = "";
+        $dbname = 'laptrinhweb';
+        $conn = new mysqli($servername, $username, $password, $dbname);
         $conn->set_charset("utf8");
         // include('/config/connectdb.php');
         $sqlSelect = "SELECT * FROM laptrinhweb.user";
