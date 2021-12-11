@@ -99,6 +99,17 @@
     <div class="main-panel">
       <?php
         $conn= new mysqli('localhost:3307','root','','laptrinhweb');
+        // ==========
+        if(isset($_GET["id"])){
+            $id_sp=$_GET["id"];
+        }
+       
+        $sqlSelectSanPham = "SELECT * FROM `product` sp 
+        WHERE sp.product_id ='$id_sp'";
+        $result = mysqli_query($conn, $sqlSelectSanPham);
+        $data = mysqli_fetch_row($result);
+        // var_dump($data);
+         // ==========
         $sql = "SELECT * FROM category";
         $cate= mysqli_query($conn,$sql);
         if(isset($_POST['name'])){
@@ -115,53 +126,53 @@
             move_uploaded_file($file['tmp_name'],'../LapTrinhWeb/UI/assets/img/'.$file_name);
           }
           
-          $shortname=mysqli_query($conn,"SELECT * FROM category where category_id=$category");
+        //   $shortname=mysqli_query($conn,"SELECT * FROM category where category_id=$category");
          
-          while($row=mysqli_fetch_assoc($shortname)){
-            $s=$row['shortname'];
-          };	
-          $num= mysqli_query($conn,"select count(product_id)as so from product where category_id=$category");
-					while($row=mysqli_fetch_assoc($num)){
-            $n=$row['so'];
-          };	
-          $id= $s.$n;
+        //   while($row=mysqli_fetch_assoc($shortname)){
+        //     $s=$row['shortname'];
+        //   };	
+        //   $num= mysqli_query($conn,"select count(product_id)as so from product where category_id=$category");
+		// 			while($row=mysqli_fetch_assoc($num)){
+        //     $n=$row['so'];
+        //   };	
+        //   $id= $s.$n;
          
           $date= date("Y-m-d").' '.date("H:i:s");
          
-          $insert="INSERT INTO product(product_id,name,description,category_id,price,unit,created_date,currency,amount) 
-                    VALUES('$id','$name','$description','$category','$price','$unit','$date','$currency','$amount')";
-
+          $insert="UPDATE product SET name ='$name',description='$description',category_id='$category',price='$price',unit='$unit',created_date='$date',currency='$currency',amount='$amount'Where product_id='$id_sp'";
+          
           $query=mysqli_query($conn,$insert);
          
-          $insert_img=mysqli_query($conn,"INSERT INTO product_image(product_id,image_blob) VALUES('$id','$file_name')");
+          $insert_img=mysqli_query($conn,"UPDATE product_image SET image_blob = '$file_name' where product_id = '$id_sp'");
 
-          // if($query){
-          //   header('location: product.php');
+        //   // if($query){
+        //   //   header('location: product.php');
   
-          // }else
-          // echo "loi";
+        //   // }else
+        //   // echo "loi";
+          
          
         }
-       
-       
+        
+		
       ?>
         <!-- =========================== -->
         <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Add a new product</h4>
+                  <h4 class="card-title">Edit product</h4>
                   <p class="card-description">
                     
                   </p>
                   <form class="forms-sample" action="product.php" method="POST" role="form" enctype="multipart/form-data" id="add_product">
                     <div class="form-group">
                       <label for="exampleInputName1">Name</label>
-                      <input type="text" class="form-control" id="name" placeholder="Name" name="name"><div class="message"></div>
+                      <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="<?php echo $data[1];?>"><div class="message"></div>
                     </div>
                     
                     <div class="form-group">
                       <label for="exampleInputEmail3">Price</label>
-                      <input type="text" class="form-control" id="price" placeholder="Price" name="price"><div class="message"></div>
+                      <input type="text" class="form-control" id="price" placeholder="Price" name="price"value="<?php echo $data[6];?>"><div class="message"></div>
                     </div>
                     
                     <div class="form-group">
@@ -179,7 +190,7 @@
                       <label for="exampleSelectGender">Category</label>
                         <select class="form-control" id="exampleSelectGender"name="category">
                          <?php foreach($cate as $key =>$value){?>
-                          <option value="<?php echo $value['category_id'] ?>"><?php echo $value['name'] ?></option>
+                          <option value="<?php echo $value['category_id'] ?>"<?php if($value['category_id']==$data[5]){?> selected="selected"<?php } ?>><?php echo $value['name'] ?></option>
                           <?php }?>
                         </select>
                       </div>
@@ -195,22 +206,23 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputCity1">Unit</label>
-                      <input type="text" class="form-control" id="unit" placeholder="Unit" name="unit"><div class="message"></div>
+                      <input type="text" class="form-control" id="unit" placeholder="Unit" name="unit"value="<?php echo $data[7];?>"><div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputCity1">Amount</label>
-                      <input type="text" class="form-control" id="amount" placeholder="Amount"name="amount"><div class="message"></div>
+                      <input type="text" class="form-control" id="amount" placeholder="Amount"name="amount"value="<?php echo $data[10];?>"><div class="message"></div>
                     </div>
                     <div class="form-group">
                       <label for="exampleTextarea1">Description</label>
-                      <textarea class="form-control" id="description" rows="4" name="description"></textarea><div class="message"></div>
+                      <textarea class="form-control" id="description" rows="4" name="description"><?php echo $data[2];?></textarea><div class="message"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button type="submit" class="btn btn-primary mr-2">Save</button>
                    
                   </form>
                 </div>
               </div>
             </div>
+           
         <!-- ================-->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
