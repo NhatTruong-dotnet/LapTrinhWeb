@@ -98,8 +98,8 @@
       <!-- partial -->
       <?php
         $servername = "localhost";
-        $username = "sneoiuvk_laptrinhweb";
-        $password = "147258369";
+        $username = "root";
+        $password = "";
         $conn = new mysqli($servername, $username, $password);
         $conn->set_charset("utf8");
         // include('/config/connectdb.php');
@@ -137,18 +137,18 @@
                       <div class="message"></div>
                     </div>
                     <div class="form-group">
-                      <label for="firstname">First name</label>
-                      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name">
+                      <label for="firstname">Email</label>
+                      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Email">
                       <div class="message"></div>
                     </div>
                     <div class="form-group">
-                      <label for="process">Process</label>
-                      <input type="text" class="form-control" id="process" name="process" placeholder="Process">
+                      <label for="process">Phone</label>
+                      <input type="text" class="form-control" id="process" name="process" placeholder="Phone">
                       <div class="message"></div>
                     </div>
                     <div class="form-group">
-                      <label for="total">Total Buy</label>
-                      <input type="text" class="form-control" id="total" name="total" placeholder="Total Buy">
+                      <label for="total">Password</label>
+                      <input type="password" class="form-control" id="total" name="total" placeholder="Password">
                       <div class="message"></div>
                     </div>
                     <div class="form-group">
