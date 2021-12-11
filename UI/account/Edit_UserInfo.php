@@ -5,7 +5,8 @@
     $email = $_POST['email'];
 
 
-    $conn = connectDB('localhost',"sneoiuvk_laptrinhweb","147258369","sneoiuvk_laptrinhweb");
+    // $conn = connectDB('localhost',"sneoiuvk_laptrinhweb","147258369","sneoiuvk_laptrinhweb");
+    $conn = connectDB("localhost","root","","laptrinhweb");
 
     if($conn){
 
@@ -30,6 +31,7 @@
 <?php
     function connectDB($server, $username, $password, $database){
         $conn =  new mysqli($server, $username, $password, $database);
+        $conn->set_charset("utf8");
         if ($conn->connect_error) {
             return null;
         }

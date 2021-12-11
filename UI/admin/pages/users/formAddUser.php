@@ -100,7 +100,8 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $conn = new mysqli($servername, $username, $password);
+        $dbname = 'laptrinhweb';
+        $conn = new mysqli($servername, $username, $password, $dbname);
         $conn->set_charset("utf8");
         // include('/config/connectdb.php');
         $sqlSelect = "SELECT * FROM laptrinhweb.user";

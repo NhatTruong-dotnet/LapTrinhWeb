@@ -1134,20 +1134,24 @@ session_start();
                                         <div class="block-form-register">
                                             <div class="form-group   custom-form novform-firstname">
                                                 <input type="text" name="name" id="name" placeholder="Họ tên" >
+                                            
                                                 <div class="message"></div>
                                               </div>
                                             <div class="form-group  custom-form novform-lastname">
                                                 <input type="text" name="numberphone" id="numberphone" placeholder="Số điện thoại" >
+                                                
                                                 <div class="message"></div>
 
                                             </div>
                                             <div class="form-group custom-form novform-email">
                                                 <input type="email" name="email" id="email" class="" placeholder="Email" >
+                                              
                                                 <div class="message"></div>
 
                                             </div>
                                             <div class="form-group custom-form novform-password">
                                                 <input type="password" name="password" id="CreatePassword" class="" placeholder="Password" >
+                                               
                                                 <div class="message"></div>
 
                                             </div>
@@ -1160,7 +1164,7 @@ session_start();
                                                 </label>
                                             </div>
                                             <div class="form_submit">
-                                                <input type="submit" value="Register" class="btn">
+                                                <input type="submit" name="submit" value="Register" class="btn">
                                             </div>
                                         </div>
                                     </form>

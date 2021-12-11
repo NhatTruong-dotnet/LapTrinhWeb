@@ -1,9 +1,12 @@
 <?php
   session_start();
 
-  require_once("../config/conndb.php");
+  const HOST = "localhost";
+  const USER = "root";
+  const PASS = "";
+  const DATABASE = "laptrinhweb";
 
-  function execResult ($sql){
+  function execQuery ($sql){
       $conn = new mysqli(HOST, USER, PASS, DATABASE);
       
       if($conn->connect_error){
@@ -49,12 +52,12 @@
 <?php
 
 
-    $emaillogin = $_SESSION['email'];
+    $emaillogin = $_GET['email'];
 
+   
     $sql = "SELECT * FROM user WHERE email LiKE '%$emaillogin%'";
-    $result = execResult($sql);
+    $result = execQuery($sql);
     
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,8 +80,10 @@
 
 <div class="container" style="max-width:800px; margin-top: 50px;">
 
-<!-- action="Edit_UserInfo.php" -->
-<form action="My_Account.php" id="editInfo" method="post">
+<!-- action="editUser.php" 
+  editUser.php?email= echo $emaillogin
+-->
+<form action="editUser.php?email=<?php echo $emaillogin;?>" id="editInfo" method="post">
   <div class="form-group row ">
     <label for="email" class="col-sm-2 col-form-label">Email</label>
     <div class="form-group col-sm-10">
@@ -103,7 +108,9 @@
   
   
   <div class="form-group row mt-5" >
+    
     <div class="col-sm-12">
+      <a class="btn btn-danger" href="./user.php" role="button">Back</a>
       <button type="submit" name="updateuser" class="btn btn-primary float-right" >Lưu thay đổi</button>
     </div>
   </div>
@@ -112,13 +119,19 @@
 </div>
 
 <?php 
+
+  
+  
   if(isset($_POST['updateuser'])){
+    
     $fullname = $_POST['name'];
     $numberphone = $_POST['numberphone'];
 
     $updateuser = "UPDATE user SET hoten = '$fullname', sdt = '$numberphone' WHERE email LIKE '%$emaillogin%'";
 
-    $update = updateUser($updateuser); 
+    $update = updateUser($updateuser);
+
+    $emaillogin = $_POST['email'];
 
     header("Refresh:0");
 

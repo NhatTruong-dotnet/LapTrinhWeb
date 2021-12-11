@@ -110,7 +110,7 @@
                       <thead>
                         <tr>
                           <th>
-                            User
+                            User Name
                           </th>
                           <th>
                             Email
@@ -132,11 +132,13 @@
                         $servername = "localhost";
                         $username = "root";
                         $password = "";
+                        $dbname = 'laptrinhweb';
+      
                         // $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing" . " Order By billing_id desc Limit 0,10 ";
                         $showAllBillingCommand = "SELECT * FROM laptrinhweb.user";
                         error_reporting(0);
                         // Create connection
-                        $conn = new mysqli($servername, $username, $password);
+                        $conn = new mysqli($servername, $username, $password, $dbname);
                         // use utf8 character
                         $conn->set_charset("utf8");
                         // Check connection
@@ -162,18 +164,22 @@
                                 $email = $rowInner['email'];
                                 $sodienthoai = $rowInner['sdt'];
                               }
+
+                              
+                              
                               echo '<tr>';
-                              echo '<td>' . $username . '</td>';
-                              echo '<td>' . $email . '</td>';
-                              echo '<td>' .  $sodienthoai . '</td>';
-			      echo '<td>
-                                      <a class="btn btn-primary btn-sm" href="#" role="button">Edit</a>
-                                      <a class="btn btn-danger btn-sm" href="deleteUser.php?id='.$id.'" role="button">Delete</a>
+                              echo '<td name="username">' . $username . '</td>';
+                              echo '<td name="email">' . $email . '</td>';
+                              echo '<td name="numberphone">' .  $sodienthoai . '</td>';
+                              echo '<td>';
+                              echo    '<a class="btn btn-primary btn-sm" href="./editUser.php?email='.$email.'" role="button" style="margin-right: 10px;">Edit</a>';
+                              echo    '<a class="btn btn-danger btn-sm" href="#" role="button">Delete</a>
                                       
                                     </td>';
-
                               echo '<tr>';
+                             
                             }
+                            // href="./editUser.php?email='.$email.'"
                             // while ($row = mysqli_fetch_assoc($result)) {
                             //   echo '<tr>';
                             //   echo '<td>' . $row['hoten'] . '</td>';
@@ -194,6 +200,7 @@
                         ?>
                       </tbody>
                     </table>
+                   
                   </div>
                 </div>
               </div>
