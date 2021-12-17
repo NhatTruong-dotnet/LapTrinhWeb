@@ -8,7 +8,7 @@ session_start();
 
 <?php 
     require_once("config/conndb.php");
-
+    $conn = new mysqli(HOST, USER, PASS, DATABASE);
     function execResult ($sql){
         $conn = new mysqli(HOST, USER, PASS, DATABASE);
         
