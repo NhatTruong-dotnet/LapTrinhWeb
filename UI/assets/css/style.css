@@ -1,3 +1,10 @@
+:root {
+    --margin-left-50: 50px;
+    --margin-right-50: 50px;
+    --w-100: 100%;
+}
+
+
 /* commons css*/
 
 .grid_product {
@@ -44,8 +51,64 @@
     height: 90px;
 }
 
+.mrleft-40 {
+    margin-left: 40px !important;
+}
+
+.site-nav__dropdown ul li.category-item {
+    cursor: pointer;
+}
+
 
 /* End edit header */
+
+
+/* Start Title category */
+
+.marg-left-0 {
+    margin-left: 0 !important;
+}
+
+.margin-tl {
+    margin-top: 10px;
+    margin-left: 0 !important;
+}
+
+.mrgleft-15 {
+    margin-left: -15px;
+}
+
+.left_30 {
+    left: 32% !important;
+}
+
+.padrigh-0 {
+    padding-right: 0 !important;
+}
+
+
+/* End Title Category */
+
+
+/* Start Reponsive Header */
+
+@media (max-width: 991px) {
+    .none_info {
+        display: none;
+    }
+    .icon-margin-left {
+        margin-left: var(--margin-left-50);
+    }
+    .icon-margin-right {
+        margin-right: var(--margin-right-50);
+    }
+    .mar-top {
+        margin-top: 10px;
+    }
+}
+
+
+/* End Reponsive Header */
 
 
 /* Button Login */
@@ -123,6 +186,14 @@
     display: block;
 }
 
+.nav-item:not(:last-child) {
+    margin-right: 0 !important;
+}
+
+.nav-item {
+    margin-bottom: 10px !important;
+}
+
 
 /* End mode edit create account and login */
 
@@ -160,7 +231,7 @@
     font-weight: 400;
     color: #333;
     line-height: 2.8rem;
-    height: 3.0rem;
+    height: 3rem;
     margin: 5px;
     text-align: center;
     overflow: hidden;
@@ -172,13 +243,13 @@
 
 .product-item__rating {
     font-size: 1.4rem;
-    color: #D5D5D5;
+    color: #d5d5d5;
     padding: auto 12px;
     text-align: center;
 }
 
 .product-item__start-gold {
-    color: #FFCE3E;
+    color: #ffce3e;
 }
 
 .product-item__price {
@@ -250,3 +321,56 @@
 
 
 /* End Pagenation */
+
+
+/* map */
+
+@media (max-width: 750px) {
+    #MapSection--nov-page-contact {
+        display: none;
+    }
+}
+
+
+/* form */
+
+.form-group.custom-form {
+    margin-bottom: 30px;
+}
+
+.form-group.contact {
+    margin-bottom: 20px;
+}
+
+.form-group .message {
+    position: absolute;
+    padding-left: 3px;
+    color: red;
+    font-size: 13px;
+}
+
+.form-group.invalid input,
+.form-group.invalid textarea#ContactFormMessage {
+    border: 1px solid red !important;
+    background-color: rgba(255, 0, 0, 0.02) !important;
+}
+
+.form-group.invalid input:hover,
+.form-group.invalid textarea#ContactFormMessage:hover {
+    background-color: #fff !important;
+}
+
+
+/* Tablet: width >= 740px and width < 1024px */
+
+@media (max-width: 767px) {
+    .ovef-auto {
+        overflow-x: auto !important;
+    }
+    .padrigh-0 {
+        padding-right: 14px !important;
+    }
+}
+
+
+/* Mobile width < 740px */
