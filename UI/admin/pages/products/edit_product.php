@@ -1,3 +1,64 @@
+<?php
+        $conn= new mysqli('localhost:3306','root','admin','laptrinhweb');
+        // ==========
+        if(isset($_GET["id"])){
+            $id_sp=$_GET["id"];
+            $sqlSelectSanPham = "SELECT * FROM `product` sp 
+        WHERE sp.product_id ='$id_sp'";
+        $result = mysqli_query($conn, $sqlSelectSanPham);
+        $data = mysqli_fetch_row($result);
+        // var_dump($data);
+         // ==========
+        $sql = "SELECT * FROM category";
+        $cate= mysqli_query($conn,$sql);
+        }
+       
+        
+        if(isset($_POST['name'])){
+          $id = $_POST['id'];
+          $name=$_POST['name'];
+          $price=$_POST['price'];
+          $currency=$_POST['currency'];
+          $category=$_POST['category'];
+          $unit=$_POST['unit'];
+          $amount=$_POST['amount'];
+          $description=$_POST['description'];
+          if(isset($_FILES['img'])){
+            $file=$_FILES['img'];
+            $file_name=$file['name'];
+            move_uploaded_file($file['tmp_name'],'./img/'.$file_name);
+          }
+          
+        //   $shortname=mysqli_query($conn,"SELECT * FROM category where category_id=$category");
+         
+        //   while($row=mysqli_fetch_assoc($shortname)){
+        //     $s=$row['shortname'];
+        //   };	
+        //   $num= mysqli_query($conn,"select count(product_id)as so from product where category_id=$category");
+		// 			while($row=mysqli_fetch_assoc($num)){
+        //     $n=$row['so'];
+        //   };	
+        //   $id= $s.$n;
+         
+          $date= date("Y-m-d").' '.date("H:i:s");
+         
+          $insert="UPDATE product SET name ='$name',description='$description',category_id='$category',price='$price',unit='$unit',created_date='$date',currency='$currency',amount='$amount'Where product_id='$id'";
+          
+          $query=mysqli_query($conn,$insert);
+         
+          $insert_img=mysqli_query($conn,"UPDATE product_image SET image_blob = '$file_name' where product_id = '$id'");
+
+          if($query){
+            header('location: product.php');
+  
+          }else
+          echo "loi";
+          
+         
+        }
+        
+		
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,65 +158,7 @@
       </nav>
       <!-- partial -->
     <div class="main-panel">
-      <?php
-        $conn= new mysqli('localhost:3307','root','','laptrinhweb');
-        // ==========
-        if(isset($_GET["id"])){
-            $id_sp=$_GET["id"];
-        }
-       
-        $sqlSelectSanPham = "SELECT * FROM `product` sp 
-        WHERE sp.product_id ='$id_sp'";
-        $result = mysqli_query($conn, $sqlSelectSanPham);
-        $data = mysqli_fetch_row($result);
-        // var_dump($data);
-         // ==========
-        $sql = "SELECT * FROM category";
-        $cate= mysqli_query($conn,$sql);
-        if(isset($_POST['name'])){
-          $name=$_POST['name'];
-          $price=$_POST['price'];
-          $currency=$_POST['currency'];
-          $category=$_POST['category'];
-          $unit=$_POST['unit'];
-          $amount=$_POST['amount'];
-          $description=$_POST['description'];
-          if(isset($_FILES['img'])){
-            $file=$_FILES['img'];
-            $file_name=$file['name'];
-            move_uploaded_file($file['tmp_name'],'../LapTrinhWeb/UI/assets/img/'.$file_name);
-          }
-          
-        //   $shortname=mysqli_query($conn,"SELECT * FROM category where category_id=$category");
-         
-        //   while($row=mysqli_fetch_assoc($shortname)){
-        //     $s=$row['shortname'];
-        //   };	
-        //   $num= mysqli_query($conn,"select count(product_id)as so from product where category_id=$category");
-		// 			while($row=mysqli_fetch_assoc($num)){
-        //     $n=$row['so'];
-        //   };	
-        //   $id= $s.$n;
-         
-          $date= date("Y-m-d").' '.date("H:i:s");
-         
-          $insert="UPDATE product SET name ='$name',description='$description',category_id='$category',price='$price',unit='$unit',created_date='$date',currency='$currency',amount='$amount'Where product_id='$id_sp'";
-          
-          $query=mysqli_query($conn,$insert);
-         
-          $insert_img=mysqli_query($conn,"UPDATE product_image SET image_blob = '$file_name' where product_id = '$id_sp'");
-
-        //   // if($query){
-        //   //   header('location: product.php');
-  
-        //   // }else
-        //   // echo "loi";
-          
-         
-        }
-        
-		
-      ?>
+      
         <!-- =========================== -->
         <div class="col-12 grid-margin stretch-card">
               <div class="card">
@@ -164,7 +167,8 @@
                   <p class="card-description">
                     
                   </p>
-                  <form class="forms-sample" action="product.php" method="POST" role="form" enctype="multipart/form-data" id="add_product">
+                  <form class="forms-sample" action="edit_product.php" method="POST" role="form" enctype="multipart/form-data" id="add_product">
+                    <input type="hidden" name="id" value="<?php echo $data[0];?>" />
                     <div class="form-group">
                       <label for="exampleInputName1">Name</label>
                       <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="<?php echo $data[1];?>"><div class="message"></div>

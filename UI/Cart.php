@@ -1,7 +1,9 @@
 <?php
     session_start();
     // unset($_SESSION["cart"]);
-    include('config/connectdb.php');
+    include('config/conndb.php');
+    $conn = new mysqli(HOST, USER, PASS, DATABASE);
+
     if(isset($_GET["id"]) && isset($_GET["sl"])){
         //update giỏ hàng
         $id = $_GET['id'];
@@ -697,7 +699,7 @@
                     <form action="/cart" method="post" novalidate class="cart">
                         <div class="row data-sticky_parent">
                             <!-- Cột giỏ hàng -->
-                            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="cart__layout_left">
                                     <div class="cart__header d-xs-none">
                                         <div class="row spacing-0">
@@ -770,54 +772,13 @@
                                     ?>
                                     <!-- Các button dưới giỏ hàng -->
                                     <div class="button_cart">
-                                        <input type="submit" name="checkout" class="btn btn--small-wide" value="Proceed to checkout">
+                                        <a href="checkout.php" class="btn btn--small-wide">Proceed to checkout</a>
                                         <a href="Product.php" class="btn cart__update cart__continue--large">Continue shopping</a>
                                     </div>
                                 </div>
                                 <!-- Sản phẩm đề cử -->
                             </div>
-                            <!-- Cột Note -->
-                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 data-sticky_column mt-md-40">
-                                <div class="cart__layout_right">
-                                    <div class="cart__heading">
-                                        <span>There are 1 items in your cart</span>
-                                    </div>
-                                    <div class="grid">
-                                        <div class="grid__item">
-                                            <div class="cart__total d-flex align-items-center justify-content-between">
-                                                <span class="cart__subtotal-title">Total:</span>
-                                                <span class="cart__subtotal"><span class="money">$147.00</span></span>
-                                            </div>
-                                            <div class="cart__shipping d-flex align-items-xl-center justify-content-between">
-                                                <div class="cart__shipping-title">Shipping :</div>
-                                                <div class="cart__shipping-sub">Shipping &amp; taxes calculated at checkout</div>
-                                            </div>
-                                            <div id="threshold_bar_popup">
-                                                <div class="threshold_it">
-                                                    <div class="ic_threshold_bar">
-                                                        <i class="zmdi zmdi-truck"></i>
-                                                    </div>
-                                                    <div class="threshold_bar">
-                                                        <span class="animate" style="width:7%!important">
-                                                            7%
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <div class="threshold_spend">Spend <span class="money">$1,853.00</span> for free shipping
-                                                </div>
-                                            </div>
-                                            <div class="cart-notice-total">
-                                                Free shipping for any orders above <span><span class="money">$2,000.00</span></span>
-                                            </div>
-                                        </div>
-                                        <div class="grid__item cart-note">
-                                            <div class="cart-note_label">Add a note to your order :</div>
-                                            <textarea rows="12" name="note" id="CartSpecialInstructions" class="cart-note__input"
-                                            placeholder="Add your note here"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </form>
                   </div>

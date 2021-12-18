@@ -115,7 +115,7 @@
                         <thead>
                           <tr>
                             <th>
-                              Product image
+                              Id
                             </th>
                             <th>
                               Name
@@ -124,12 +124,16 @@
                               Price
                             </th>
                             <th>
+                            Status
+
+                            </th>
+                            <th>
                               Amount
                             </th>
                             <th>
-                              Net Profit
+                              Unit
                             </th>
-                            <th></th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -137,10 +141,11 @@
                         // $servername = "localhost";
                         // $username = "sneoiuvk_laptrinhweb";
                         // $password = '147258369';
-                        $servername = "localhost:3307";
+                        $servername = "localhost";
                         $username = "root";
-                        $password = '';
-                        $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM billing_detail" . " group by product_id" . " Order By billing_id desc Limit 0,10 ";
+                        $password = 'admin';
+                        // $showTop10ProductCommand = "SELECT sum(amount) as sum, product_id FROM billing_detail" . " group by product_id" . " Order By billing_id desc Limit 0,10 ";
+                        $sql = "select * from laptrinhweb.product order by created_date desc limit 10";
                         error_reporting(0);
                         // Create connection
                         $conn = new mysqli($servername, $username, $password,"laptrinhweb");
@@ -151,7 +156,7 @@
                           die("Connection failed: " . $conn->connect_error);
                         } else {
                           #region Load Billing to 
-                          $result = mysqli_query($conn, $showTop10ProductCommand);
+                          $result = mysqli_query($conn, $sql);
                           if (mysqli_num_rows($result) > 0) {
                             // while ($row = mysqli_fetch_assoc($result)) {
                             //   $productName = "";
@@ -165,20 +170,23 @@
                               $status = $rowInner["status"];
                               $priceProduct = $rowInner["price"];
                               $productDiscount = $rowInner["discount"];
+                              $amount = $rowInner["amount"];
+                              $unit = $rowInner["unit"];
+                              $description = $rowInner["description"];
                               echo '<tr>';
-                              echo '<td></td>';
-                              echo '<td>' . $productName . '</td>';
+                              echo '<td>'.$idProduct.'</td>';
+                              echo '<td title="'.$description.'">' . $productName . '</td>';
                               echo '<td>' . number_format($priceProduct) . ' ' . $rowInner['currency'] . '</td>';
                               if ($status == "hết hàng") {
                                 echo '<td><label class="badge badge-warning">' . $status . '</label></td>';
                               } else {
                                 echo '<td><label class="badge badge-success">' . $status . '</label></td>';
                               }
-                              echo '<td>' . $row['sum'] . '</td>';
+                              echo '<td>' . $amount . '</td>';
 
 
-                              echo '<td>' . number_format($row['sum'] * $priceProduct * 0.45) . '</td>';
-                              echo '<td><a href="edit_product.php?id='.$row['product_id'].'">Edit</a></td>';
+                              echo '<td>' . $unit . '</td>';
+                              echo '<td><a href="edit_product.php?id='.$idProduct.'">Edit</a><a style="margin-left:10px;color:#f00;" href="deleteProduct.php?id='.$idProduct.'">Delete</a></td>';
                               echo '</tr>';
                             }
                           }
@@ -219,23 +227,23 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <script src="../../vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
-  <script src="vendors/chart.js/Chart.min.js"></script>
-  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="../../vendors/chart.js/Chart.min.js"></script>
+  <script src="../../vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="../../vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <!-- End plugin js for this page-->
   <!-- inject:js -->
-  <script src="js/off-canvas.js"></script>
-  <script src="js/hoverable-collapse.js"></script>
-  <script src="js/template.js"></script>
+  <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/template.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="js/dashboard.js"></script>
-  <script src="js/data-table.js"></script>
-  <script src="js/jquery.dataTables.js"></script>
-  <script src="js/dataTables.bootstrap4.js"></script>
+  <script src="../../js/dashboard.js"></script>
+  <script src="../../js/data-table.js"></script>
+  <script src="../../js/jquery.dataTables.js"></script>
+  <script src="../../js/dataTables.bootstrap4.js"></script>
   <!-- End custom js for this page-->
 </body>
 

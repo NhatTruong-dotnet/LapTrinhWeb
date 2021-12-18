@@ -5,153 +5,136 @@
 <!--<![endif]-->
 
 <head>
+  <?php
+  // Start the session
+  session_start();
+  // unset($_SESSION['error']);4
+  // setcookie('error','Invalid username or password');
+
+  ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport"
-    content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta name="theme-color" content="#000000">
   <link rel="canonical" href="https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum">
-
+  <link rel="stylesheet" href="styleReview.css">
 
   <link rel="shortcut icon" href="images/TitleIcon.png" type="image/png">
-    <?php
-      include('config/connectdb.php');
-      if(isset($_GET['id'])){
-        //Truy xuất chi tiết sản phẩm
-        $sqlSelectSanPham = "SELECT * FROM `product` sp 
+  <?php
+  include('config/conndb.php');
+  $conn = new mysqli(HOST, USER, PASS, DATABASE);
+
+  if (isset($_GET['id'])) {
+    //Truy xuất chi tiết sản phẩm
+    $sqlSelectSanPham = "SELECT * FROM `product` sp 
                               JOIN `category` cate ON sp.category_id = cate.category_id
                               JOIN `product_image` pdi ON sp.product_id = pdi.product_id  
-                              WHERE sp.product_id =".$_GET['id'];
-        $resultSelectSanPham = mysqli_query($conn, $sqlSelectSanPham);
-        $row = mysqli_fetch_row($resultSelectSanPham);
-        //Truy xuất các sản phẩm liên quan
-        $sqlSelectSanPhamRelated = "SELECT * FROM `product` sp
+                              WHERE sp.product_id =" . $_GET['id'];
+    $resultSelectSanPham = mysqli_query($conn, $sqlSelectSanPham);
+    $row = mysqli_fetch_row($resultSelectSanPham);
+    //Truy xuất các sản phẩm liên quan
+    $sqlSelectSanPhamRelated = "SELECT * FROM `product` sp
                               JOIN `product_image` pdi ON sp.product_id = pdi.product_id  
-                              WHERE sp.category_id =".$row[5];
-        $resultSelectSanPhamRelated = mysqli_query($conn, $sqlSelectSanPhamRelated);
-        $sanphamRelatedRow = array();
-        $i_length = 0;
-        while ($rowRelated = mysqli_fetch_array($resultSelectSanPhamRelated, MYSQLI_ASSOC)) {
-            $sanphamRelatedRow[] = array(
-                $rowRelated['product_id'],
-                $rowRelated['name'],
-                $rowRelated['description'],
-                $rowRelated['status'],
-                $rowRelated['discount'],
-                $rowRelated['category_id'],
-                number_format($rowRelated['price'], 0, ",", "."),
-                $rowRelated['unit'],
-                $rowRelated['created_date'],
-                $rowRelated['currency'],
-                $rowRelated['amount'],
-                $rowRelated['image_blob']
-            );
-            $i_length++;
-        }
-        // echo "<pre>";
-        // print_r($row);
-        // echo "<pre>";
-        // print_r($sanphamRelatedRow);
-        // echo "<pre>";
-        // die;
-      }
-    ?>
+                              WHERE sp.category_id =" . $row[5];
+    $resultSelectSanPhamRelated = mysqli_query($conn, $sqlSelectSanPhamRelated);
+    $sanphamRelatedRow = array();
+    $i_length = 0;
+    while ($rowRelated = mysqli_fetch_array($resultSelectSanPhamRelated, MYSQLI_ASSOC)) {
+      $sanphamRelatedRow[] = array(
+        $rowRelated['product_id'],
+        $rowRelated['name'],
+        $rowRelated['description'],
+        $rowRelated['status'],
+        $rowRelated['discount'],
+        $rowRelated['category_id'],
+        number_format($rowRelated['price'], 0, ",", "."),
+        $rowRelated['unit'],
+        $rowRelated['created_date'],
+        $rowRelated['currency'],
+        $rowRelated['amount'],
+        $rowRelated['image_blob']
+      );
+      $i_length++;
+    }
+    // echo "<pre>";
+    // print_r($row);
+    // echo "<pre>";
+    // print_r($sanphamRelatedRow);
+    // echo "<pre>";
+    // die;
+  }
+  ?>
 
   <title>
     <?php echo $row[1]; ?>&ndash; Hexa Food
   </title>
 
 
-  <meta name="description"
-    content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu lus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringil">
-
-
-
-
-
-
-
+  <meta name="description" content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu lus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringil">
   <meta property="og:site_name" content="Warehouse Electronic">
   <meta property="og:url" content="https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum">
   <meta property="og:title" content="Rimond Balo Stud Cum">
   <meta property="og:type" content="product">
-  <meta property="og:description"
-    content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu lus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringil">
+  <meta property="og:description" content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu lus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringil">
 
   <meta property="og:price:amount" content="636.00">
   <meta property="og:price:currency" content="USD">
 
-  <meta property="og:image"
-    content="http://cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_1200x1200.jpg?v=1603253183">
-  <meta property="og:image"
-    content="http://cdn.shopify.com/s/files/1/0272/1493/8165/products/9_903bd6e5-4773-4b43-8e5c-053061f35e15_1200x1200.jpg?v=1603253186">
-  <meta property="og:image"
-    content="http://cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a56e67ac-4cfc-40fd-81b0-18aaa2704535_1200x1200.jpg?v=1603253186">
-  <meta property="og:image:secure_url"
-    content="https://cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_1200x1200.jpg?v=1603253183">
-  <meta property="og:image:secure_url"
-    content="https://cdn.shopify.com/s/files/1/0272/1493/8165/products/9_903bd6e5-4773-4b43-8e5c-053061f35e15_1200x1200.jpg?v=1603253186">
-  <meta property="og:image:secure_url"
-    content="https://cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a56e67ac-4cfc-40fd-81b0-18aaa2704535_1200x1200.jpg?v=1603253186">
+  <meta property="og:image" content="http://cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_1200x1200.jpg?v=1603253183">
+  <meta property="og:image" content="http://cdn.shopify.com/s/files/1/0272/1493/8165/products/9_903bd6e5-4773-4b43-8e5c-053061f35e15_1200x1200.jpg?v=1603253186">
+  <meta property="og:image" content="http://cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a56e67ac-4cfc-40fd-81b0-18aaa2704535_1200x1200.jpg?v=1603253186">
+  <meta property="og:image:secure_url" content="https://cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_1200x1200.jpg?v=1603253183">
+  <meta property="og:image:secure_url" content="https://cdn.shopify.com/s/files/1/0272/1493/8165/products/9_903bd6e5-4773-4b43-8e5c-053061f35e15_1200x1200.jpg?v=1603253186">
+  <meta property="og:image:secure_url" content="https://cdn.shopify.com/s/files/1/0272/1493/8165/products/10_a56e67ac-4cfc-40fd-81b0-18aaa2704535_1200x1200.jpg?v=1603253186">
 
 
   <meta name="twitter:site" content="@vinovatheme">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Rimond Balo Stud Cum">
-  <meta name="twitter:description"
-    content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu lus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringil">
+  <meta name="twitter:description" content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridicu lus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringil">
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Roboto:200,300,400,400i,500,600,700,700i,800,900" rel="stylesheet"
-    type="text/css" media="all" />
+  <link href="//fonts.googleapis.com/css?family=Roboto:200,300,400,400i,500,600,700,700i,800,900" rel="stylesheet" type="text/css" media="all" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Poppins:400,200,300,400,400i,500,600,600i,700,700i,800,900,900i"
-    rel="stylesheet" type="text/css" media="all" />
+  <link href="//fonts.googleapis.com/css?family=Poppins:400,200,300,400,400i,500,600,600i,700,700i,800,900,900i" rel="stylesheet" type="text/css" media="all" />
 
 
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
 
 
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/bootstrap.min.css?v=1870661302080397320"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/font-awesome.min.css?v=2186963269736709578"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/animate.min.css?v=17994142116093151525"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/common.scss.css?v=1783903928985450775"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/owl.carousel.min.css?v=12020896668547037267"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/owl.theme.default.css?v=7403898552657340749"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/slick.scss.css?v=4183328445935139797"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.mmenu.all.css?v=4886679590842084323"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.fancybox.css?v=64276779368273403"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.ui.min.css?v=134184973364075517"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/layout.scss.css?v=18147943782365055731"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/theme.scss.css?v=6260282728517554258"
-    rel="stylesheet" type="text/css" media="all" />
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/magnific-popup.css?v=13248041680675607908"
-    rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/bootstrap.min.css?v=1870661302080397320" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/font-awesome.min.css?v=2186963269736709578" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/animate.min.css?v=17994142116093151525" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/common.scss.css?v=1783903928985450775" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/owl.carousel.min.css?v=12020896668547037267" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/owl.theme.default.css?v=7403898552657340749" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/slick.scss.css?v=4183328445935139797" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.mmenu.all.css?v=4886679590842084323" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.fancybox.css?v=64276779368273403" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.ui.min.css?v=134184973364075517" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/layout.scss.css?v=18147943782365055731" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/theme.scss.css?v=6260282728517554258" rel="stylesheet" type="text/css" media="all" />
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/magnific-popup.css?v=13248041680675607908" rel="stylesheet" type="text/css" media="all" />
 
-  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/responsive.scss.css?v=6115984924464988315"
-    rel="stylesheet" type="text/css" media="all" />
-
+  <link href="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/responsive.scss.css?v=6115984924464988315" rel="stylesheet" type="text/css" media="all" />
+<style>
+  .checked {
+  color: orange;
+}
+.rating-block{
+  border-bottom: 1px solid #f1f1f1;
+  padding: 20px 0;
+}
+</style>
 
   <script>
     var theme = {
@@ -191,77 +174,58 @@
 
   <!--[if (lte IE 9) ]><script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/match-media.min.js?v=133481920766363426" type="text/javascript"></script><![endif]-->
 
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.2.2.4.min.js?v=17029281091488042083"
-    type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.2.2.4.min.js?v=17029281091488042083" type="text/javascript"></script>
 
 
 
   <!--[if (gt IE 9)|!(IE)]><!-->
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/lazysizes.js?v=11108925680240414664"
-    async="async"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/lazysizes.js?v=11108925680240414664" async="async"></script>
   <!--<![endif]-->
 
   <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/vendor.js?v=17488561840499520118" defer="defer">
   </script>
 
-  <script
-    src="//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/api.jquery-e94e010e92e659b566dbc436fdfe5242764380e00398907a14955ba301a4749f.js"
-    type="text/javascript"></script>
-  <script
-    src="//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/option_selection-fe6b72c2bbdd3369ac0bfefe8648e3c889efca213baefd4cfb0dd9363563831f.js"
-    type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/history.js?v=11918144862523007200"
-    type="text/javascript"></script>
+  <script src="//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/api.jquery-e94e010e92e659b566dbc436fdfe5242764380e00398907a14955ba301a4749f.js" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/shopifycloud/shopify/assets/themes_support/option_selection-fe6b72c2bbdd3369ac0bfefe8648e3c889efca213baefd4cfb0dd9363563831f.js" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/history.js?v=11918144862523007200" type="text/javascript"></script>
   <script src="//cdn.shopify.com/s/javascripts/currencies.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.currencies.min.js?v=7811281348689238064"
-    type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.owl.carousel.min.js?v=1202207770212250950"
-    defer="defer"></script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.mmenu.all.min.js?v=2270961737868857635"
-    defer="defer"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.currencies.min.js?v=7811281348689238064" type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.owl.carousel.min.js?v=1202207770212250950" defer="defer"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.mmenu.all.min.js?v=2270961737868857635" defer="defer"></script>
 
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.sticky-kit.min.js?v=16047785878809509472"
-    defer="defer"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.sticky-kit.min.js?v=16047785878809509472" defer="defer"></script>
 
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/handlebars.min.js?v=13774848309150936004"
-    defer="defer"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/handlebars.min.js?v=13774848309150936004" defer="defer"></script>
   <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/ajax-cart.js?v=5586912308121472721" defer="defer">
   </script>
   <script>
-    jQuery(function ($) {
+    jQuery(function($) {
       ajaxCart.init({
         moneyFormat: "\u003cspan class=\"money\"\u003e${{amount}}\u003c\/span\u003e"
       });
     });
 
-    jQuery('body').on('afterCartLoad.ajaxCart', function (evt, cart) {});
+    jQuery('body').on('afterCartLoad.ajaxCart', function(evt, cart) {});
   </script>
 
 
 
-  <script type="text/javascript"
-    src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.zoom.min.js?v=12765501454049967912"
-    defer=”defer”>
+  <script type="text/javascript" src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.zoom.min.js?v=12765501454049967912" defer=”defer”>
   </script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.countdown.js?v=12021617251275445820"
-    defer="defer">
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.countdown.js?v=12021617251275445820" defer="defer">
   </script>
   <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/theme.js?v=15969572028892212420" defer="defer">
   </script>
   <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/global.js?v=13338212605681253444" defer="defer">
   </script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/lazysizes.min.js?v=2452739876120086881"
-    defer="defer"></script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.lazy.min.js?v=12302263741863665774"
-    defer="defer"></script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.magnific-popup.js?v=13313941312436081541"
-    defer="defer"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/lazysizes.min.js?v=2452739876120086881" defer="defer"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.lazy.min.js?v=12302263741863665774" defer="defer"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.magnific-popup.js?v=13313941312436081541" defer="defer"></script>
   <script>
     window.performance && window.performance.mark && window.performance.mark('shopify.content_for_header.start');
   </script>
   <meta id="shopify-digital-wallet" name="shopify-digital-wallet" content="/27214938165/digital_wallets/dialog">
-  <link rel="alternate" type="application/json+oembed"
-    href="https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum.oembed">
+  <link rel="alternate" type="application/json+oembed" href="https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum.oembed">
   <script id="shopify-features" type="application/json">
     {
       "accessToken": "d8efa478165ba201a438240f394cbbe5",
@@ -296,9 +260,13 @@
     };
     Shopify.cdnHost = "cdn.shopify.com";
   </script>
-  <script type="module">!function(o){(o.Shopify=o.Shopify||{}).modules=!0}(window);</script>
+  <script type="module">
+    ! function(o) {
+      (o.Shopify = o.Shopify || {}).modules = !0
+    }(window);
+  </script>
   <script>
-    ! function (o) {
+    ! function(o) {
       function n() {
         var o = [];
 
@@ -312,7 +280,7 @@
     }(window);
   </script>
   <script>
-    (function () {
+    (function() {
       function asyncLoad() {
         var urls = ["\/\/productreviews.shopifycdn.com\/assets\/v4\/spr.js?shop=nuranium-electronic.myshopify.com"];
         for (var i = 0; i < urls.length; i++) {
@@ -348,8 +316,8 @@
     window.ShopifyPaypalV4VisibilityTracking = true;
   </script>
   <script>
-    ! function (o) {
-      o.addEventListener("DOMContentLoaded", function () {
+    ! function(o) {
+      o.addEventListener("DOMContentLoaded", function() {
         window.Shopify = window.Shopify || {}, window.Shopify.recaptchaV3 = window.Shopify.recaptchaV3 || {
           siteKey: "6LcCR2cUAAAAANS1Gpq_mDIJ2pQuJphsSQaUEuc9"
         };
@@ -380,7 +348,7 @@
     }(document);
   </script>
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       const previewBarInjector = new Shopify.PreviewBarInjector({
         targetNode: document.body,
         iframeRoot: 'https://nuranium-electronic.myshopify.com',
@@ -392,17 +360,9 @@
       previewBarInjector.init();
     });
   </script>
-  <script integrity="sha256-pVJhp6mHZ0dJmJmDtYierarGeV2NSFSPthRwqW7blSQ=" data-source-attribution="shopify.loadfeatures"
-    defer="defer"
-    src="//cdn.shopify.com/shopifycloud/shopify/assets/storefront/load_feature-a55261a7a987674749989983b5889eadaac6795d8d48548fb61470a96edb9524.js"
-    crossorigin="anonymous"></script>
-  <script integrity="sha256-h+g5mYiIAULyxidxudjy/2wpCz/3Rd1CbrDf4NudHa4="
-    data-source-attribution="shopify.dynamic-checkout" defer="defer"
-    src="//cdn.shopify.com/shopifycloud/shopify/assets/storefront/features-87e8399988880142f2c62771b9d8f2ff6c290b3ff745dd426eb0dfe0db9d1dae.js"
-    crossorigin="anonymous"></script>
-  <script integrity="sha256-HjpxOt032ssmooRgVOW/c8loNAwGy026qLmF3OAx9M0=" defer="defer"
-    src="//cdn.shopify.com/shopifycloud/shopify/assets/storefront/bars/preview_bar_injector-1e3a713add37dacb26a2846054e5bf73c968340c06cb4dbaa8b985dce031f4cd.js"
-    crossorigin="anonymous"></script>
+  <script integrity="sha256-pVJhp6mHZ0dJmJmDtYierarGeV2NSFSPthRwqW7blSQ=" data-source-attribution="shopify.loadfeatures" defer="defer" src="//cdn.shopify.com/shopifycloud/shopify/assets/storefront/load_feature-a55261a7a987674749989983b5889eadaac6795d8d48548fb61470a96edb9524.js" crossorigin="anonymous"></script>
+  <script integrity="sha256-h+g5mYiIAULyxidxudjy/2wpCz/3Rd1CbrDf4NudHa4=" data-source-attribution="shopify.dynamic-checkout" defer="defer" src="//cdn.shopify.com/shopifycloud/shopify/assets/storefront/features-87e8399988880142f2c62771b9d8f2ff6c290b3ff745dd426eb0dfe0db9d1dae.js" crossorigin="anonymous"></script>
+  <script integrity="sha256-HjpxOt032ssmooRgVOW/c8loNAwGy026qLmF3OAx9M0=" defer="defer" src="//cdn.shopify.com/shopifycloud/shopify/assets/storefront/bars/preview_bar_injector-1e3a713add37dacb26a2846054e5bf73c968340c06cb4dbaa8b985dce031f4cd.js" crossorigin="anonymous"></script>
 
   <style id="shopify-dynamic-checkout">
     .shopify-payment-button__button--hidden {
@@ -471,18 +431,27 @@
       display: flex !important;
       flex-direction: column !important;
     }
+    .add-cart-btn {
+    border: none;
+    padding: 8px 40px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+}
   </style>
   <script>
     window.performance && window.performance.mark && window.performance.mark('shopify.content_for_header.end');
   </script>
   <link href="https://monorail-edge.shopifysvc.com" rel="dns-prefetch">
   <script>
-    (function () {
+    (function() {
       if ("sendBeacon" in navigator && "performance" in window) {
         var session_token = document.cookie.match(/_shopify_s=([^;]*)/);
 
         function handle_abandonment_event(e) {
-          var entries = performance.getEntries().filter(function (entry) {
+          var entries = performance.getEntries().filter(function(entry) {
             return /monorail-edge.shopifysvc.com/.test(entry.name);
           });
           if (!window.abandonment_tracked && entries.length === 0) {
@@ -546,13 +515,13 @@
     }
   </script>
   <script>
-    window.ShopifyAnalytics.merchantGoogleAnalytics = function () {
+    window.ShopifyAnalytics.merchantGoogleAnalytics = function() {
 
     };
   </script>
   <script class="analytics">
-    (function () {
-      var customDocumentWrite = function (content) {
+    (function() {
+      var customDocumentWrite = function(content) {
         var jquery = null;
 
         if (window.jQuery) {
@@ -566,14 +535,14 @@
         }
       };
 
-      var hasLoggedConversion = function (token) {
+      var hasLoggedConversion = function(token) {
         if (token) {
           return document.cookie.indexOf('loggedConversion=' + token) !== -1;
         }
         return false;
       }
 
-      var setCookieIfConversion = function (token) {
+      var setCookieIfConversion = function(token) {
         if (token) {
           var twoMonthsFromNow = new Date(Date.now());
           twoMonthsFromNow.setMonth(twoMonthsFromNow.getMonth() + 2);
@@ -594,8 +563,8 @@
         'trackForm',
         'trackLink'
       ];
-      trekkie.factory = function (method) {
-        return function () {
+      trekkie.factory = function(method) {
+        return function() {
           var args = Array.prototype.slice.call(arguments);
           args.unshift(method);
           trekkie.push(args);
@@ -606,16 +575,16 @@
         var key = trekkie.methods[i];
         trekkie[key] = trekkie.factory(key);
       }
-      trekkie.load = function (config) {
+      trekkie.load = function(config) {
         trekkie.config = config || {};
         trekkie.config.initialDocumentCookie = document.cookie;
         var first = document.getElementsByTagName('script')[0];
         var script = document.createElement('script');
         script.type = 'text/javascript';
-        script.onerror = function (e) {
+        script.onerror = function(e) {
           var scriptFallback = document.createElement('script');
           scriptFallback.type = 'text/javascript';
-          scriptFallback.onerror = function (error) {
+          scriptFallback.onerror = function(error) {
             var Monorail = {
               produce: function produce(monorailDomain, schemaId, payload) {
                 var currentMs = new Date().getTime();
@@ -704,7 +673,7 @@
       });
 
       var loaded = false;
-      trekkie.ready(function () {
+      trekkie.ready(function() {
         if (loaded) return;
         loaded = true;
 
@@ -717,7 +686,7 @@
           window.ShopifyAnalytics.merchantGoogleAnalytics.call(this);
         } catch (error) {};
         document.write = originalDocumentWrite;
-        (function () {
+        (function() {
           if (window.BOOMR && (window.BOOMR.version || window.BOOMR.snippetExecuted)) {
             return;
           }
@@ -755,7 +724,7 @@
             var doc = document;
             var win = window;
             window.BOOMR.snippetMethod = wasFallback ? "if" : "i";
-            bootstrap = function (parent, scriptId) {
+            bootstrap = function(parent, scriptId) {
               var script = doc.createElement("script");
               script.id = scriptId || "boomr-if-as";
               script.src = window.BOOMR.url;
@@ -789,13 +758,13 @@
               doc = win.document.open();
             }
             if (dom) {
-              doc._boomrl = function () {
+              doc._boomrl = function() {
                 this.domain = dom;
                 bootstrap();
               };
               doc.write("<body onload='document._boomrl();'>");
             } else {
-              win._boomrl = function () {
+              win._boomrl = function() {
                 bootstrap();
               };
               if (win.addEventListener) {
@@ -816,10 +785,10 @@
             link.rel = "preload";
             link.as = "script";
             link.addEventListener("load", promote);
-            link.addEventListener("error", function () {
+            link.addEventListener("error", function() {
               iframeLoader(true);
             });
-            setTimeout(function () {
+            setTimeout(function() {
               if (!promoted) {
                 iframeLoader(true);
               }
@@ -839,7 +808,7 @@
             window.attachEvent("onload", boomerangSaveLoadTime);
           }
           if (document.addEventListener) {
-            document.addEventListener("onBoomerangLoaded", function (e) {
+            document.addEventListener("onBoomerangLoaded", function(e) {
               e.detail.BOOMR.init({
                 producer_url: "https://monorail-edge.shopifysvc.com/v1/produce",
                 ResourceTiming: {
@@ -850,7 +819,7 @@
               e.detail.BOOMR.t_end = new Date().getTime();
             });
           } else if (document.attachEvent) {
-            document.attachEvent("onpropertychange", function (e) {
+            document.attachEvent("onpropertychange", function(e) {
               if (!e) e = event;
               if (e.propertyName === "onBoomerangLoaded") {
                 e.detail.BOOMR.init({
@@ -920,31 +889,32 @@
 </head>
 
 <head>
-    <?php include 'config/heade_tag.php' ?>
+  <?php include 'config/heade_tag.php' ?>
 </head>
-<?php 
-    require_once("config/conndb.php");
+<?php
+require_once("config/conndb.php");
 
-    function execResult ($sql){
-        $conn = new mysqli(HOST, USER, PASS, DATABASE);
-        
-        if($conn->connect_error){
-            die('ket noi that bai:' . $conn->connect_error);
-        }
+function execResult($sql)
+{
+  $conn = new mysqli(HOST, USER, PASS, DATABASE);
 
-        $conn->set_charset("utf8");
+  if ($conn->connect_error) {
+    die('ket noi that bai:' . $conn->connect_error);
+  }
 
-        $result = $conn->query($sql);
+  $conn->set_charset("utf8");
 
-        $data = array();
+  $result = $conn->query($sql);
 
-        while($row = $result->fetch_array(1)){
-            $data[] = $row;
-        }
-        return $data;
+  $data = array();
 
-        $conn->close();
-    }
+  while ($row = $result->fetch_array(1)) {
+    $data[] = $row;
+  }
+  return $data;
+
+  $conn->close();
+}
 
 ?>
 
@@ -952,7 +922,8 @@
   <a class="in-page-link visually-hidden skip-link" href="#MainContent">Skip to content</a>
   <div id="shopify-section-nov-header" class="shopify-section">
     <div data-section-id="nov-header" data-section-type="header-section">
-    <?php include 'Common/Header/header.php' ?>
+
+      <?php include 'Common/Header/header.php' ?>
       <div id="header-sticky" style="background-color: #ffffff;">
         <div class="container">
           <div class="row align-items-center justify-content-between">
@@ -964,7 +935,7 @@
       </div>
     </div>
   </div>
-  <main class="main-content" id="MainContent">    
+  <main class="main-content" id="MainContent">
     <section class="page-container" id="PageContainer">
       <section id="NovBreadcrumbs">
         <div class="container">
@@ -975,8 +946,7 @@
               </a>
               <meta itemprop="position" content="1" />
             </li>
-            <li class="active list-inline-item" itemprop="itemListElement" itemscope
-              itemtype="http://schema.org/ListItem">
+            <li class="active list-inline-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
               <span itemprop="item"><span itemprop="name"><?php echo $row[1]; ?></span></span>
               <meta itemprop="position" content="2" />
             </li>
@@ -986,39 +956,27 @@
       <div class="page-width">
         <div class="container">
           <div id="shopify-section-nov-product-template" class="shopify-section">
-            <div class="product-template__container tabdesc" itemscope itemtype="http://schema.org/Product"
-              id="ProductSection-nov-product-template" data-section-id="nov-product-template"
-              data-enable-history-state="true" data-type="product-template" data-wishlist-product>
+            <div class="product-template__container tabdesc" itemscope itemtype="http://schema.org/Product" id="ProductSection-nov-product-template" data-section-id="nov-product-template" data-enable-history-state="true" data-type="product-template" data-wishlist-product>
               <meta itemprop="name" content="Rimond Balo Stud Cum">
               <meta itemprop="url" content="https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum">
-              <meta itemprop="image"
-                content="//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_800x.jpg?v=1603253183">
+              <meta itemprop="image" content="//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_800x.jpg?v=1603253183">
               <div class="TopContent mb-115 pb-xs-60">
                 <div class="product-single row position-static">
                   <div class="col-md-6 col-xs-12 position-static">
                     <div class="product-single__photos block_img_sticky">
                       <div class="proFeaturedImage">
                         <div class="block_content d-flex">
-                          <img id="ProductPhotoImg" class="img-fluid image-zoom img-responsive lazyload"
-                            src="<?php echo $row[16]; ?>" 
-                            alt="<?php echo $row[1]; ?>" />
+                          <img id="ProductPhotoImg" class="img-fluid image-zoom img-responsive lazyload" src="<?php echo $row[16]; ?>" alt="<?php echo $row[1]; ?>" />
                         </div>
                       </div>
                       <div id="productThumbs" class="mt-10">
                         <div class="thumblist" data-pswp-uid="1">
-                          <div class="owl-carousel owl-theme" data-autoplay="false" data-autoplayTimeout="6000"
-                            data-items="5" data-margin="10" data-nav="false" data-dots="false" data-loop="false"
-                            data-items_tablet="4" data-items_mobile="5">
+                          <div class="owl-carousel owl-theme" data-autoplay="false" data-autoplayTimeout="6000" data-items="5" data-margin="10" data-nav="false" data-dots="false" data-loop="false" data-items_tablet="4" data-items_mobile="5">
                             <div class="thumbItem">
-                              <a href="javascript:void(0)"
-                                data-image="<?php echo $row[16]; ?>"
-                                data-zoom-image="<?php echo $row[16]; ?>"
-                                class="product-single__thumbnail">
-                                <img id="ProductPhotoImg" class="img-fluid image-zoom img-responsive lazyload"
-                                  src="<?php echo $row[16]; ?>" 
-                                  alt="<?php echo $row[1]; ?>" />
+                              <a href="javascript:void(0)" data-image="<?php echo $row[16]; ?>" data-zoom-image="<?php echo $row[16]; ?>" class="product-single__thumbnail">
+                                <img id="ProductPhotoImg" class="img-fluid image-zoom img-responsive lazyload" src="<?php echo $row[16]; ?>" alt="<?php echo $row[1]; ?>" />
                               </a>
-                            </div>                          
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1033,7 +991,48 @@
                           <link itemprop="availability" href="http://schema.org/InStock">
                           <div class="group-reviews has-border d-flex align-items-center mb-25">
                             <div class="detail-reviews">
-                              <span class="shopify-product-reviews-badge" data-id="4907756027957"></span>
+                              <?php
+                              if (isset($_SESSION['isLogin']) === TRUE) {
+                                $isRating = false;
+
+                                require_once("config/conndb.php");
+                                $conn = new mysqli(HOST, USER, PASS, DATABASE);
+
+                                $sqlGetRatingForCurrentProduct = 'SELECT * FROM `rating` WHERE user_email='."'". $_SESSION['email']."'". ' AND product_id='.$_GET['id'];
+                                $objectQuery = (mysqli_query($conn, $sqlGetRatingForCurrentProduct));
+                                $valueRating="";
+                                if((mysqli_num_rows($objectQuery)) != 0){
+                                  $valueRating =  mysqli_fetch_object($objectQuery) -> rating_star;
+                                  $isRating = true;
+                                  // echo $isRating;
+                                  
+                                }
+                                else{
+                                }
+                              ?>
+                                <form action="updateRating.php"  method="POST"  >
+                                  <input class="star star-5" value="5"   id="star-5" type="radio" name="star" onchange="this.form.submit()" />
+                                  <label class="star star-5" for="star-5"></label>
+                                  <input class="star star-4" value="4"  id="star-4" type="radio" name="star" onchange="this.form.submit()"/>
+                                  <label class="star star-4" for="star-4"></label>
+                                  <input class="star star-3" value="3" id="star-3" type="radio" name="star" onchange="this.form.submit()"/>
+                                  <label class="star star-3" for="star-3"></label>
+                                  <input hidden name="host-address" value=<?php echo HOST ?> />
+                                  <input hidden  id="isRating" value=<?php echo  $isRating ?> />
+                                  <input hidden  id="ratingValue" value=<?php echo  $valueRating ?> />
+                                  <input hidden name="user-email" value=<?php echo $_SESSION['email'] ?> />
+                                  <input hidden name="product-id" value=<?php echo $_GET['id'] ?> />
+                                  <input class="star star-2" value="2" id="star-2" type="radio" name="star" onchange="this.form.submit()"/>
+                                  <label class="star star-2" for="star-2"></label>
+                                  <input class="star star-1" value="1" id="star-1" type="radio" name="star" onchange="this.form.submit()"/>
+                                  <label class="star star-1" for="star-1"></label>
+                                </form>
+                              <?php
+                              } else {
+                                // show rating avg star
+                              }
+                              ?>
+
                             </div>
                           </div>
                           <div class="available_product d-flex align-items-center">
@@ -1044,35 +1043,33 @@
                               <span><?php echo $row[3]; ?></span>
                             </span>
                           </div>
-                          <div class="group-single__sku has-border">                  
+                          <div class="group-single__sku has-border">
                             <p itemprop="cat" class="product-single__cat">
                               <span class="label control-label">Category:</span>
-                              <span class="pr-lt__collec">                                
+                              <span class="pr-lt__collec">
                                 <a href="/collections/smartwatch" title="<?php echo $row[12]; ?>"><?php echo $row[12]; ?></a>
                               </span>
-                            </p>                            
+                            </p>
                             <div class="product-single__shortdes mb-20" itemprop="description">
-                              Sản phẩm của Hexa Food tươi ngon được tuyển chọn từ các nguồn cung đạt chuẩn chất lượng về an toàn vệ sinh thực phẩm. Đảm bảo vừa tươi ngon vừa giàu chất dinh dưỡng.
+                              <!-- Sản phẩm của Hexa Food tươi ngon được tuyển chọn từ các nguồn cung đạt chuẩn chất lượng về an toàn vệ sinh thực phẩm. Đảm bảo vừa tươi ngon vừa giàu chất dinh dưỡng. -->
+                              <?php echo $row[2]; ?>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <p
-                        class="product-single__price product-single__price-nov-product-template d-flex align-items-center">
+                      <p class="product-single__price product-single__price-nov-product-template d-flex align-items-center">
                         <span class="visually-hidden">Regular price</span>
                         <span>
                           <span>
-                            <span class="money"><?php echo number_format($row[6], 0, ',', '.')." ".$row[9]; ?></span>
+                            <span class="money"><?php echo number_format($row[6], 0, ',', '.') . " " . $row[9]; ?></span>
                           </span>
-                          <span
-                            class="money product-price__sale-label product-price__sale-label-nov-product-template d-none">Sale</span>
+                          <span class="money product-price__sale-label product-price__sale-label-nov-product-template d-none">Sale</span>
                         </span>
                         <s id="ComparePrice-nov-product-template"></s>
                       </p>
-                      <form  action="addcart.php?id=%27<?php echo $row[0]; ?>%27" method="post">
+                      <form action="addcart.php?id=%27<?php echo $row[0]; ?>%27" method="post">
                         <div class="selectorVariants">
-                          <select name="id" id="productSelect" data-section="nov-product-template"
-                            class="enable_swatch hide">
+                          <select name="id" id="productSelect" data-section="nov-product-template" class="enable_swatch hide">
                             <option selected="selected" value="33119332040757">
                               Default Title
                             </option>
@@ -1084,69 +1081,112 @@
                             <label for="Quantity" class="quantity-selector"></label>
                             <div class="quick_view_qty">
                               <a href="javascript:void(0);" class="quick_view-qty quick_view-qty-minus">-</a>
-                              <input type="number" id="soluong" name="quantity" value="1" min="1" max="10" step="1"
-                                class="quantity-selector product-form__input" pattern="[0-9]*">
+                              <input type="number" id="soluong" name="quantity" value="1" min="1" max="10" step="1" class="quantity-selector product-form__input" pattern="[0-9]*">
                               <a href="javascript:void(0);" class="quick_view-qty quick_view-qty-plus">+</a>
                             </div>
-                            <div class="productWishList">
-                              <a class="wishlist btnProductWishlist" data-icon-wishlist href="#"
-                                data-product-handle="rimond-balo-stud-cum" data-id="4907756027957">
+                            <!-- <div class="productWishList">
+                              <a class="wishlist btnProductWishlist" data-icon-wishlist href="#" data-product-handle="rimond-balo-stud-cum" data-id="4907756027957">
                                 <i class="zmdi zmdi-favorite"></i>
                                 <span class="wishlist-text">Add To Wishlist</span>
                               </a>
-                            </div>
+                            </div> -->
                           </div>
                           <div class="product_option_sub">
                             <div class="product-form__item product-form__item--submit">
-                                <button name="add-to-cart" onclick="addCart(<?php echo $row[0]?>)">
-                                  <span id="AddToCartText">Add to cart</span>
-                                </button>
+                              <button name="add-to-cart " class="add-cart-btn" onclick="addCart(<?php echo $row[0] ?>)">
+                                <span id="AddToCartText">Add to cart</span>
+                              </button>
                             </div>
                           </div>
                       </form>
-                      <div class="productbuttons d-flex align-items-center mt-40 pb-30">
-                        <a target="_blank"
-                          href="//www.facebook.com/sharer.php?u=https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum"
-                          class="btn--share share-facebook" title="Share on Facebook">
+                      <!-- <div class="productbuttons d-flex align-items-center mt-40 pb-30">
+                        <a target="_blank" href="//www.facebook.com/sharer.php?u=https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum" class="btn--share share-facebook" title="Share on Facebook">
                           <i class="fa fa-facebook" aria-hidden="true"></i>
                           <span class="share-title" aria-hidden="true">Facebook</span>
                           <span class="visually-hidden">Share on Facebook</span>
                         </a>
-                        <a target="_blank"
-                          href="//twitter.com/share?text=&amp;url=https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum"
-                          class="btn--share share-twitter" title="Tweet on Twitter">
+                        <a target="_blank" href="//twitter.com/share?text=&amp;url=https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum" class="btn--share share-twitter" title="Tweet on Twitter">
                           <i class="fa fa-twitter" aria-hidden="true"></i>
                           <span class="share-title" aria-hidden="true">Tweeter</span>
                           <span class="visually-hidden">Tweet on Twitter</span>
                         </a>
-                        <a target="_blank"
-                          href="//pinterest.com/pin/create/button/?url=https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum&amp;media=//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_1024x1024.jpg?v=1603253183"
-                          class="btn--share share-pinterest" title="Pin on Pinterest">
+                        <a target="_blank" href="//pinterest.com/pin/create/button/?url=https://nuranium-electronic.myshopify.com/products/rimond-balo-stud-cum&amp;media=//cdn.shopify.com/s/files/1/0272/1493/8165/products/15_85ddb99d-27d8-4425-9640-ca6307daade2_1024x1024.jpg?v=1603253183" class="btn--share share-pinterest" title="Pin on Pinterest">
                           <i class="fa fa-pinterest" aria-hidden="true"></i>
                           <span class="share-title" aria-hidden="true">Pin it</span>
                           <span class="visually-hidden">Pin on Pinterest</span>
                         </a>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
-                <div class="product-single__tabs mt-105 mt-lg-60">
+                <div class="product-single__tabs mt-105 mt-lg-60 ">
                   <div class="block_nav d-flex justify-content-center">
-                    <ul class="nav nav-tabs">
+                    <!-- <ul class="nav nav-tabs">
                       <li><a class="active" href="#proTabs1" data-toggle="tab">Description</a></li>
-                    </ul>
+                    </ul> -->
                   </div>
-                  <div class="tab-content">
+                  <!-- <div class="tab-content">
                     <div class="tab-pane active" id="proTabs1">
                       <div>
                         <div><?php echo $row[2]; ?></div>
                         <div><br></div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
-              <div class="BottomContent">
+              <br>
+              <br>
+              <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="rating-container">
+                    <strong style="font-size:20px">Review</strong>
+                    <?php
+                    $productId = $_GET["id"];
+                        $sqlGetRatingForCurrentProduct = "select rating_star, hoten from rating join user on user.email = rating.user_email where product_id = $productId";
+                        $result = mysqli_query($conn, $sqlGetRatingForCurrentProduct);
+                        // var_dump($result);
+                        $ratingData = array();
+
+                      while ($row = $result->fetch_array(1)) {
+                        $ratingData[] = $row;
+                      }
+                      // var_dump($ratingData);
+
+
+                      function renderStar($ratingStar){
+                        $result = "";
+                        for($i = 0; $i < 5 ; $i++){
+                          if($i < $ratingStar){
+                            $result .= "<span class='fa fa-star checked'></span>";
+                          }else{
+                            $result .= "<span class='fa fa-star '></span>";
+
+                          }
+                        }
+                        return $result;
+                      }
+                      for($i = 0; $i < sizeof($ratingData) ; $i++){
+
+                      
+                      ?>
+                          <div class="rating-block">
+
+                            <div class="rating-user-name">
+                              <?php echo $ratingData[$i]["hoten"]; ?>
+                            </div>
+                            <div class="rating-star">
+                            <?php echo renderStar($ratingData[$i]["rating_star"]); ?>
+                            </div>
+                          </div>
+                    <?php } ?>
+                    
+                  </div>
+                  
+                </div>
+              </div>
+              <div class="BottomContent" style="margin-top: 100px;">
+              
                 <div class="ProductRelated block_margin" data-wishlist-related>
                   <div class="block_padding">
                     <div class="title_block">
@@ -1154,14 +1194,12 @@
                     </div>
                     <div class="block__content">
                       <div class="grid grid--view-items">
-                        <div class="owl-relatedproduct owl-carousel owl-drag" data-autoplay="false"
-                          data-autoplayTimeout="6000" data-items="4" data-nav="true" data-dots="false" data-loop="false"
-                          data-items_tablet="3" data-items_mobile="2" data-margin="30">
-                        <?php
-                          for($i = 0 ;$i < $i_length;$i++){
+                        <div class="owl-relatedproduct owl-carousel owl-drag" data-autoplay="false" data-autoplayTimeout="6000" data-items="4" data-nav="true" data-dots="false" data-loop="false" data-items_tablet="3" data-items_mobile="2" data-margin="30">
+                          <?php
+                          for ($i = 0; $i < $i_length; $i++) {
                             include('module/RelatedProduct.php');
-                        }
-                        ?>
+                          }
+                          ?>
                         </div>
                       </div>
                     </div>
@@ -1169,6 +1207,20 @@
                 </div>
               </div>
             </div>
+            
+            <script>
+              function ratingChange() {
+                let ratingValue =  $("#ratingValue").val();
+                let isRating =  $("#isRating").val();
+                if(isRating == 1){
+                  let idStarValueChecked = "star-" + ratingValue;
+                  document.getElementById(idStarValueChecked).checked = true;
+                  console.log(document.getElementById(idStarValueChecked));
+                }
+              }
+              ratingChange();
+            </script>
+            
             <script type="application/json" id="ProductJson-nov-product-template">
               {
                 "id": 4907756027957,
@@ -1326,7 +1378,7 @@
           unavailable: "Unavailable"
         }
         if ($('.thumb_none').length != 0) {
-          var selectCallbackProduct = function (variant, selector) {
+          var selectCallbackProduct = function(variant, selector) {
             var moneyFormat = theme.moneyFormat;
             var $productImage = $('.thumb_none #productThumbs .active img'),
               $addToCart = $('.thumb_none #AddToCart'),
@@ -1349,7 +1401,7 @@
               if (variant.featured_image) {
                 var newImage = variant.featured_image;
                 var element = $productImage[0];
-                Shopify.Image.switchImage(newImage, element, function (src, imgObject, el) {
+                Shopify.Image.switchImage(newImage, element, function(src, imgObject, el) {
                   console.log(imgObject);
                   $('.thumbItem').parent().removeClass('active');
                   $('.thumbItem[data-image-id="' + imgObject.id + '"]').parent().addClass('active');
@@ -1389,7 +1441,7 @@
             }
           };
         } else if ($('.thumb_vertical').length != 0) {
-          var selectCallbackProduct = function (variant, selector) {
+          var selectCallbackProduct = function(variant, selector) {
             var moneyFormat = theme.moneyFormat;
             var $productImage = $('.thumb_vertical #productThumbs .active img'),
               $addToCart = $('.thumb_vertical #AddToCart'),
@@ -1412,7 +1464,7 @@
               if (variant.featured_image) {
                 var newImage = variant.featured_image;
                 var element = $productImage[0];
-                Shopify.Image.switchImage(newImage, element, function (src, imgObject, el) {
+                Shopify.Image.switchImage(newImage, element, function(src, imgObject, el) {
                   $('.thumbItem').parent().removeClass('active');
                   $('.thumbItem[data-image-id="' + imgObject.id + '"]').parent().addClass('active');
                   $('.thumbItem[data-image-id="' + imgObject.id + '"]').find('img').attr('src', src);
@@ -1458,7 +1510,7 @@
             }
           };
         } else {
-          var selectCallbackProduct = function (variant, selector) {
+          var selectCallbackProduct = function(variant, selector) {
             novtheme.productPage({
               money_format: theme.moneyFormat,
               variant: variant,
@@ -1467,7 +1519,7 @@
           };
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
           new Shopify.OptionSelectors('productSelect', {
             product: {
               "id": 4907756027957,
@@ -1671,32 +1723,27 @@
                       <div class="social-icons">
                         <ul class="site-footer__social-icons p-0">
                           <li>
-                            <a class="social-icons__link" href="https://facebook.com/vinovatheme"
-                              title="Warehouse Electronic on Facebook">
+                            <a class="social-icons__link" href="https://facebook.com/vinovatheme" title="Warehouse Electronic on Facebook">
                               <i class="zmdi zmdi-facebook"></i>
                             </a>
                           </li>
                           <li>
-                            <a class="social-icons__link" href="https://twitter.com/vinovatheme"
-                              title="Warehouse Electronic on Twitter">
+                            <a class="social-icons__link" href="https://twitter.com/vinovatheme" title="Warehouse Electronic on Twitter">
                               <i class="zmdi zmdi-twitter"></i>
                             </a>
                           </li>
                           <li>
-                            <a class="social-icons__link" href="https://pinterest.com/vinovatheme"
-                              title="Warehouse Electronic on Pinterest">
+                            <a class="social-icons__link" href="https://pinterest.com/vinovatheme" title="Warehouse Electronic on Pinterest">
                               <i class="fa fa-pinterest" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li>
-                            <a class="social-icons__link" href="https://vimeo.com/vinovatheme"
-                              title="Warehouse Electronic on Vimeo">
+                            <a class="social-icons__link" href="https://vimeo.com/vinovatheme" title="Warehouse Electronic on Vimeo">
                               <i class="fa fa-vimeo" aria-hidden="true"></i>
                             </a>
                           </li>
                           <li>
-                            <a class="social-icons__link" href="https://instagram.com/vinovatheme"
-                              title="Warehouse Electronic on Instagram">
+                            <a class="social-icons__link" href="https://instagram.com/vinovatheme" title="Warehouse Electronic on Instagram">
                               <i class="fa fa-instagram" aria-hidden="true"></i>
                             </a>
                           </li>
@@ -1727,8 +1774,7 @@
                     </li>
                   </ul>
                 </div>
-                <div
-                  class="newsletter btn_icon footer-block footer-block__3 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="newsletter btn_icon footer-block footer-block__3 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
                   <div class="title-block">
                     Newsletter
                   </div>
@@ -1736,17 +1782,12 @@
                     products</div>
                   <div class="block-content">
                     <div class="site-footer__newsletter">
-                      <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8"
-                        class="contact-form"><input type="hidden" name="form_type" value="customer" /><input
-                          type="hidden" name="utf8" value="✓" />
+                      <form method="post" action="/contact#contact_form" id="contact_form" accept-charset="UTF-8" class="contact-form"><input type="hidden" name="form_type" value="customer" /><input type="hidden" name="utf8" value="✓" />
                         <div class="input-group">
                           <input type="hidden" name="contact[tags]" value="newsletter">
-                          <input type="email" name="contact[email]" id="Email_Footer"
-                            class="input-group__field newsletter__input form-control pl-15"
-                            value="builehoangnhattruong@gmail.com" placeholder="Enter your email">
+                          <input type="email" name="contact[email]" id="Email_Footer" class="input-group__field newsletter__input form-control pl-15" value="builehoangnhattruong@gmail.com" placeholder="Enter your email">
                           <span class="input-group__btn">
-                            <button type="submit" class="btn newsletter__submit d-flex align-items-center" name="commit"
-                              id="Subscribe_footer">
+                            <button type="submit" class="btn newsletter__submit d-flex align-items-center" name="commit" id="Subscribe_footer">
                               <span class="newsletter__submit-text--large">Subscribe</span>
                             </button>
                           </span>
@@ -1831,9 +1872,7 @@
           </div>
           <div class="row align-items-center">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center mb-20 wow fadeIn animated">
-              <img
-                src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/payment-footer_3cd5e244-331d-4433-ac29-eb0f0c257a18_300x.png?v=1601623316"
-                alt="img">
+              <img src="//cdn.shopify.com/s/files/1/0272/1493/8165/files/payment-footer_3cd5e244-331d-4433-ac29-eb0f0c257a18_300x.png?v=1601623316" alt="img">
             </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center wow fadeIn animated">
               <div class="copyright">Copyright © 2020 Vinovathemes. All rights reserved.</div>
@@ -1865,8 +1904,7 @@
             product sku.</div>
         </div>
         <div class="search-container-inner">
-          <input class="search__input search-bar__input" type="search" name="q" value=""
-            placeholder="Enter your keyword" aria-label="Enter your keyword">
+          <input class="search__input search-bar__input" type="search" name="q" value="" placeholder="Enter your keyword" aria-label="Enter your keyword">
           <button class="search-bar__submit search__submit btn--link" type="submit">
             <span class="icon__fallback-text"><i class="zmdi zmdi-search"></i></span>
           </button>
@@ -1894,8 +1932,7 @@
         <div>
           <div id="_mobile_account_list"></div>
 
-          <div class="links-currency" data-target="#box-currency" data-titlebox="Currency"><span>Currency</span><i
-              class="zmdi zmdi-arrow-right"></i></div>
+          <div class="links-currency" data-target="#box-currency" data-titlebox="Currency"><span>Currency</span><i class="zmdi zmdi-arrow-right"></i></div>
         </div>
       </div>
       <div id="box-currency" class="box-content list-unstyled">
@@ -1905,13 +1942,9 @@
   </div>
   <div id="stickymenu_bottom_mobile" class="d-flex align-items-center justify-content-center d-md-none text-center">
     <div class="stickymenu-item"><a href="/"><i class="icon-home"></i><span>Home</span></a></div>
-    <div class="stickymenu-item"><a href="/pages/page-wishlist"><i
-          class="zmdi zmdi-favorite-outline"></i><span>Wishlist</span></a></div>
-    <div class="stickymenu-item"><a href="#" class="nov-toggle-page" data-target="#mobile-blockcart"><span
-          id="_mobile_cart_count" class="cart-products-count"></span><i
-          class="icon-shopping-cart"></i><span>Cart</span></a></div>
-    <div class="stickymenu-item"><a href="#" class="nov-toggle-page" data-target="#mobile-pageaccount"><i
-          class="icon-account"></i><span>Setting</span></a></div>
+    <div class="stickymenu-item"><a href="/pages/page-wishlist"><i class="zmdi zmdi-favorite-outline"></i><span>Wishlist</span></a></div>
+    <div class="stickymenu-item"><a href="#" class="nov-toggle-page" data-target="#mobile-blockcart"><span id="_mobile_cart_count" class="cart-products-count"></span><i class="icon-shopping-cart"></i><span>Cart</span></a></div>
+    <div class="stickymenu-item"><a href="#" class="nov-toggle-page" data-target="#mobile-pageaccount"><i class="icon-account"></i><span>Setting</span></a></div>
     <div class="stickymenu-item">
       <div id="back_top">
         <div>
@@ -1928,8 +1961,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content row no-gutters">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
-                class="zmdi zmdi-hc-fw zmdi-close"></i></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="zmdi zmdi-hc-fw zmdi-close"></i></button>
           </div>
           <div class="modal-body col-md-6 text-center d-flex justify-content-center align-items-end">
             <div class="subscribe_form">
@@ -1938,8 +1970,7 @@
                 <p>Sign up for newsletter to receive special offers and exclusive news about Minimart products</p>
                 <div class="input-subscribe-wrap">
                   <input type="hidden" name="contact[tags]" value="newsletter">
-                  <input type="email" name="contact[email]" class="inputNew form-control grey newsletter-input" value=""
-                    placeholder="Enter your email">
+                  <input type="email" name="contact[email]" class="inputNew form-control grey newsletter-input" value="" placeholder="Enter your email">
                   <span class="input-group-btn mt-10 d-block">
                     <button id="Subscribe" type="submit" name="commit" class="btn btn-primary">
                       Subscribe
@@ -1974,8 +2005,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-6">
-              <form method="post" action="/account" id="create_customer" accept-charset="UTF-8"><input type="hidden"
-                  name="form_type" value="create_customer" /><input type="hidden" name="utf8" value="✓" />
+              <form method="post" action="/account" id="create_customer" accept-charset="UTF-8"><input type="hidden" name="form_type" value="create_customer" /><input type="hidden" name="utf8" value="✓" />
                 <div class="title_block"><span>Create an account</span></div>
                 <div class="sub-title"><span>No account? Create one here:</span></div>
                 <div class="block-form-register">
@@ -1986,12 +2016,10 @@
                     <input type="text" name="customer[last_name]" id="LastName" placeholder="Last Name" required>
                   </div>
                   <div class="form-group novform-email">
-                    <input type="email" name="customer[email]" id="email_rigester" class="" placeholder="Email"
-                      required>
+                    <input type="email" name="customer[email]" id="email_rigester" class="" placeholder="Email" required>
                   </div>
                   <div class="form-group novform-password">
-                    <input type="password" name="customer[password]" id="CreatePassword" class="" placeholder="Password"
-                      required>
+                    <input type="password" name="customer[password]" id="CreatePassword" class="" placeholder="Password" required>
                   </div>
                   <div class="form-checkbox novform-newsletter">
                     <label id="form-checkbox" class="custom_checkbox d-inline-flex">
@@ -2008,20 +2036,17 @@
               </form>
             </div>
             <div class="col-6">
-              <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8"><input
-                  type="hidden" name="form_type" value="customer_login" /><input type="hidden" name="utf8" value="✓" />
+              <form method="post" action="./account/login.php" id="customer_login" accept-charset="UTF-8"><input type="hidden" name="form_type" value="customer_login" /><input type="hidden" name="utf8" value="✓" />
                 <div class="title-login">
                   <div class="title_block"><span class="text-bold">Login</span></div>
                 </div>
                 <div class="block-form-login">
                   <div class="title_form"><span>Insert your account information:</span></div>
                   <div class="form-group novform-email">
-                    <input type="email" name="customer[email]" id="Email_login" class="" placeholder="Email" required
-                      autofocus>
+                    <input type="email" name="email" id="Email_login" class="" placeholder="Email" required autofocus>
                   </div>
                   <div class="form-group novform-password">
-                    <input type="password" value="" name="customer[password]" id="HeaderPassword" class=""
-                      placeholder="Password" required>
+                    <input type="password" value="" name="password" id="HeaderPassword" class="" placeholder="Password" required>
                     <div class="hide_show_password" style="display: block;">
                       <span class="show"><i class="zmdi zmdi-eye-off"></i></span>
                     </div>
@@ -2042,11 +2067,9 @@
                   Reset your password
                 </div>
                 <div class="form-vertical">
-                  <form method="post" action="/account/recover" accept-charset="UTF-8"><input type="hidden"
-                      name="form_type" value="recover_customer_password" /><input type="hidden" name="utf8" value="✓" />
+                  <form method="post" action="/account/recover" accept-charset="UTF-8"><input type="hidden" name="form_type" value="recover_customer_password" /><input type="hidden" name="utf8" value="✓" />
                     <div class="form-group novform-email">
-                      <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email"
-                        required>
+                      <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email" required>
                     </div>
                     <div class="d-flex groups-sub">
                       <input type="submit" class="btn" value="Submit">
@@ -2092,8 +2115,7 @@
     </div>
   </div>
   <script src="//cdn.shopify.com/s/javascripts/currencies.js" type="text/javascript"></script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.currencies.min.js?v=7811281348689238064"
-    type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/jquery.currencies.min.js?v=7811281348689238064" type="text/javascript"></script>
   <script>
     // Pick your format here:
     // money_format or money_with_currency_format
@@ -2104,11 +2126,11 @@
     Currency.moneyFormats[shopCurrency].money_format = "${{amount}}";
     var cookieCurrency = Currency.cookie.read();
     // Fix for customer account pages.
-    jQuery('span.money span.money').each(function () {
+    jQuery('span.money span.money').each(function() {
       jQuery(this).parents('span.money').removeClass('money');
     });
     // Saving the current price.
-    jQuery('span.money').each(function () {
+    jQuery('span.money').each(function() {
       jQuery(this).attr('data-currency-USD', jQuery(this).html());
     });
     // Select all your currencies buttons.
@@ -2127,7 +2149,7 @@
     var txt = jQuery('#currencies span.selected').text();
     jQuery('.currency-selector .current-currency').text(txt);
     // // When customer clicks on a currency button.
-    buttons.click(function () {
+    buttons.click(function() {
       buttons.removeClass('selected');
       jQuery(this).addClass('selected');
       var newCurrency = jQuery(this).attr('data-currency');
@@ -2137,20 +2159,20 @@
     });
     // For options.
     var original_selectCallback = window.selectCallback;
-    var selectCallback = function (variant, selector) {
+    var selectCallback = function(variant, selector) {
       original_selectCallback(variant, selector);
       Currency.convertAll(shopCurrency, jQuery('#currencies span.selected').attr('data-currency'));
       jQuery('.selected-currency').text(Currency.currentCurrency);
     };
-    $('body').on('ajaxCart.afterCartLoad', function (cart) {
+    $('body').on('ajaxCart.afterCartLoad', function(cart) {
       Currency.convertAll(shopCurrency, jQuery('#currencies span.selected').attr('data-currency'));
       jQuery('.selected-currency').text(Currency.currentCurrency);
     });
     jQuery('.selected-currency').text(Currency.currentCurrency);
   </script>
   <script>
-    jQuery(function () {
-      jQuery('.swatch :radio').change(function () {
+    jQuery(function() {
+      jQuery('.swatch :radio').change(function() {
         var optionIndex = jQuery(this).closest('.swatch').attr('data-option-index');
         var optionValue = jQuery(this).val();
         jQuery(this)
@@ -2165,14 +2187,13 @@
     });
   </script>
   <script>
-    function addCart(id){
+    function addCart(id) {
       num = document.getElementById(`soluong`).value;
       // await fetch("Cart.php?id="+id+"&num="+num)
-      $.get("Cart.php?id="+id+"&num="+num);
+      $.get("Cart.php?id=" + id + "&num=" + num);
     }
   </script>
-  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/nuranium.js?v=9641916987731097208"
-    type="text/javascript"></script>
+  <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/30/assets/nuranium.js?v=9641916987731097208" type="text/javascript"></script>
 </body>
 
 </html>

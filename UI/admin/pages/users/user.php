@@ -118,27 +118,23 @@
                           <th>
                             Phone
                           </th>
-                          <th>
-                            Total Buy
-                          </th>
-                          <th>
-                            Date Join
-                          </th>
+
                         </tr>
                       </thead>
                       <tbody>
                         <?php
                         
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = 'laptrinhweb';
+                        // $servername = "localhost";
+                        // $username = "root";
+                        // $password = "";
+                        // $dbname = 'laptrinhweb';
+                        require_once("./../../../config/conndb.php");
       
                         // $showAllBillingCommand = "SELECT * FROM laptrinhweb.billing" . " Order By billing_id desc Limit 0,10 ";
                         $showAllBillingCommand = "SELECT * FROM laptrinhweb.user";
                         error_reporting(0);
                         // Create connection
-                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        $conn = new mysqli(HOST, USER, PASS, DATABASE);
                         // use utf8 character
                         $conn->set_charset("utf8");
                         // Check connection

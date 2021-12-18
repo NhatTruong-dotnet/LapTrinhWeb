@@ -1,10 +1,11 @@
 <?php
   session_start();
 
-  const HOST = "localhost";
-  const USER = "root";
-  const PASS = "";
-  const DATABASE = "laptrinhweb";
+  // const HOST = "localhost";
+  // const USER = "root";
+  // const PASS = "";
+  // const DATABASE = "laptrinhweb";
+  require_once("./../../../config/conndb.php");
 
   function execQuery ($sql){
       $conn = new mysqli(HOST, USER, PASS, DATABASE);

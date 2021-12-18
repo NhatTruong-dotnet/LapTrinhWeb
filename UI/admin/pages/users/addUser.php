@@ -1,5 +1,6 @@
 <?php
   include('../../../config/connectdb.php');
+  $conn = new mysqli(HOST, USER, PASS, DATABASE);
   if(isset($_POST["submit"])){
     $userID="";
     $user="";

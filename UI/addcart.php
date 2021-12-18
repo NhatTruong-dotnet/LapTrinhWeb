@@ -1,5 +1,6 @@
 <?php
-    include('config/connectdb.php');
+    include('config/conndb.php');
+    $conn = new mysqli(HOST, USER, PASS, DATABASE);
     session_start();
     if(isset($_GET["id"])){
         // var_dump($_GET);
@@ -20,6 +21,7 @@
             //Kiểm tra lần thứ 2 mua có id chưa
             if(array_key_exists($id,$_SESSION["cart"])){
                 $cart[$id] = array(
+                    "id" =>$id,
                     "soluong" => (int)$cart[$id]["soluong"]+$soluong,
                     "price" => $data[6],
                     "name" => $data[1],
@@ -27,6 +29,7 @@
                 );
             }else{
                 $cart[$id] = array(
+                    "id" =>$id,
                     "soluong" => $soluong,
                     "price" => $data[6],
                     "name" => $data[1],
@@ -36,6 +39,7 @@
         }else{
             //Lần đầu tiên mua
             $cart[$id] = array(
+                "id" =>$id,
                 "soluong" => $soluong,
                 "price" => $data[6],
                 "name" => $data[1],
@@ -44,9 +48,9 @@
         }
         $_SESSION["cart"] = $cart;
     }else{
-
-
+        header("Refresh:0");
     }
+    header("location: Cart.php");
     // echo "<pre>";
     // print_r($_SESSION["cart"]);
     // die;

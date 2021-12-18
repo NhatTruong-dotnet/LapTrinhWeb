@@ -1,3 +1,54 @@
+<?php
+        $conn= new mysqli('localhost:3306','root','admin','laptrinhweb');
+        $sql = "SELECT * FROM category";
+        $cate= mysqli_query($conn,$sql);
+        if(isset($_POST['name'])){
+          $name=$_POST['name'];
+          $price=$_POST['price'];
+          $currency=$_POST['currency'];
+          $category=$_POST['category'];
+          $unit=$_POST['unit'];
+          $amount=$_POST['amount'];
+          $description=$_POST['description'];
+          if(isset($_FILES['img'])){
+            $file=$_FILES['img'];
+            $file_name=$file['name'];
+            move_uploaded_file($file['tmp_name'],'./img/'.$file_name);
+          }
+          
+          $shortname=mysqli_query($conn,"SELECT * FROM category where category_id=$category");
+          
+          while($row=mysqli_fetch_assoc($shortname)){
+            $s=$row['shortname'];
+          };	
+          $num= mysqli_query($conn,"select count(product_id)as so from product where category_id=$category");
+					while($row=mysqli_fetch_assoc($num)){
+            $n=$row['so'];
+          };	
+          $n += 1;
+          $id= $s.$n;
+         
+          $date= date("Y-m-d").' '.date("H:i:s");
+         
+          $status = $amount > 0 ? "Còn hàng" : "Hết hàng";
+
+          $insert="INSERT INTO product(product_id,name,description,status, discount, category_id,price,unit,created_date,currency,amount) 
+                    VALUES('$id','$name','$description','$status','None','$category','$price','$unit','$date','$currency','$amount')";
+
+          $query=mysqli_query($conn,$insert);
+         
+          $insert_img=mysqli_query($conn,"INSERT INTO product_image(product_id,image_blob) VALUES('$id','$file_name')");
+
+          if($query){
+            header('location: product.php');
+  
+          }else
+          echo "loi";
+         
+        }
+       
+       
+      ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,54 +148,7 @@
       </nav>
       <!-- partial -->
     <div class="main-panel">
-      <?php
-        $conn= new mysqli('localhost:3307','root','','laptrinhweb');
-        $sql = "SELECT * FROM category";
-        $cate= mysqli_query($conn,$sql);
-        if(isset($_POST['name'])){
-          $name=$_POST['name'];
-          $price=$_POST['price'];
-          $currency=$_POST['currency'];
-          $category=$_POST['category'];
-          $unit=$_POST['unit'];
-          $amount=$_POST['amount'];
-          $description=$_POST['description'];
-          if(isset($_FILES['img'])){
-            $file=$_FILES['img'];
-            $file_name=$file['name'];
-            move_uploaded_file($file['tmp_name'],'../LapTrinhWeb/UI/assets/img/'.$file_name);
-          }
-          
-          $shortname=mysqli_query($conn,"SELECT * FROM category where category_id=$category");
-         
-          while($row=mysqli_fetch_assoc($shortname)){
-            $s=$row['shortname'];
-          };	
-          $num= mysqli_query($conn,"select count(product_id)as so from product where category_id=$category");
-					while($row=mysqli_fetch_assoc($num)){
-            $n=$row['so'];
-          };	
-          $id= $s.$n;
-         
-          $date= date("Y-m-d").' '.date("H:i:s");
-         
-          $insert="INSERT INTO product(product_id,name,description,category_id,price,unit,created_date,currency,amount) 
-                    VALUES('$id','$name','$description','$category','$price','$unit','$date','$currency','$amount')";
-
-          $query=mysqli_query($conn,$insert);
-         
-          $insert_img=mysqli_query($conn,"INSERT INTO product_image(product_id,image_blob) VALUES('$id','$file_name')");
-
-          // if($query){
-          //   header('location: product.php');
-  
-          // }else
-          // echo "loi";
-         
-        }
-       
-       
-      ?>
+     
         <!-- =========================== -->
         <div class="col-12 grid-margin stretch-card">
               <div class="card">
@@ -153,7 +157,7 @@
                   <p class="card-description">
                     
                   </p>
-                  <form class="forms-sample" action="product.php" method="POST" role="form" enctype="multipart/form-data" id="add_product">
+                  <form class="forms-sample" action="add_product.php" method="POST" role="form" enctype="multipart/form-data" id="add_product">
                     <div class="form-group">
                       <label for="exampleInputName1">Name</label>
                       <input type="text" class="form-control" id="name" placeholder="Name" name="name"><div class="message"></div>

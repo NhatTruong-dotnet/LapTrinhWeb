@@ -8,7 +8,7 @@ session_start();
 
 <?php 
     require_once("config/conndb.php");
-    $conn = new mysqli(HOST, USER, PASS, DATABASE);
+
     function execResult ($sql){
         $conn = new mysqli(HOST, USER, PASS, DATABASE);
         
@@ -1060,7 +1060,7 @@ session_start();
 
                             <div class="content__modal">
                                 <div class="content__modal--block active">
-                                <form method="post" action="account/login.php" id="customer_login" accept-charset="UTF-8">
+                                <form method="post" action="./../UI/account/login.php" id="customer_login" accept-charset="UTF-8">
                                         <input type="hidden" name="form_type" value="customer_login" />
                                         <input type="hidden" name="utf8" value="✓" />
 
@@ -1092,8 +1092,8 @@ session_start();
                                                 </a>
 
                                             </div>
-
-                                            <div class="form_submit">
+                                            
+                                            <div class="form_submit" >
                                                 <input type="submit" class="btn" value="Login">
                                             </div>
                                         </div>

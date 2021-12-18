@@ -119,13 +119,14 @@
                       <tbody>
                       <tbody>
                         <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
+                        // $servername = "localhost";
+                        // $username = "root";
+                        // $password = "";
+                        require_once("./../../../config/conndb.php");
                         $showAllBillingCommand = "SELECT * FROM laptrinhweb.category";
                         error_reporting(0);
                         // Create connection
-                        $conn = new mysqli($servername, $username, $password);
+                        $conn = new mysqli(HOST, USER, PASS, DATABASE);
                         // use utf8 character
                         $conn->set_charset("utf8");
                         // Check connection

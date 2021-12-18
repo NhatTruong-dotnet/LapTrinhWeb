@@ -6,12 +6,12 @@
         $numberPhone = $_POST['numberphone'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-
+        require_once("./../config/conndb.php");
         // hash password
         $hashPassword = md5($password);
         // connect DB
         // $conn = connectDB("localhost","sneoiuvk_laptrinhweb","147258369","sneoiuvk_laptrinhweb");
-        $conn = connectDB("localhost","root","","laptrinhweb");
+        $conn = new mysqli(HOST, USER, PASS, DATABASE);
         
         if($conn){
             

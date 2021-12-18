@@ -5,30 +5,64 @@ session_start();
 // setcookie('error','Invalid username or password');
 
 ?>
+    <?php 
+        //include required phpmailer files
+        require './phpMailer/includes/PHPMailer.php';
+        require './phpMailer/includes/SMTP.php';
+        require './phpMailer/includes/Exception.php';
 
-<?php 
-    require_once("config/conndb.php");
+        //Define namespace
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\SMTP;
+        use PHPMailer\PHPMailer\Exception;
 
-    function execResult ($sql){
-        $conn = new mysqli(HOST, USER, PASS, DATABASE);
-        
-        if($conn->connect_error){
-            die('ket noi that bai:' . $conn->connect_error);
+        //create instance
+        $mail = new PHPMailer();
+
+        //set mailer use smtp
+        $mail->isSMTP();
+        $mail->Host="smtp.mandrillapp.com";
+        $mail->SMTPAuth="true";
+        $mail->SMTPSecure="tls";
+        $mail->Port=587;
+        $mail->Username="FoodAndGo";
+        $mail->Password="QRZcvDcj9JkY-Xw3vHQaUw";
+        $mail->Subject="test";
+        $mail->setFrom("builehoangnhattruong@gmail.com");
+        $mail->Body="This is body";
+        $mail->addAddress("builehoangnhattruong@gmail.com");
+        if($mail->Send()){
+            echo 'ok'; 
         }
+        else
+            echo 'nah';
 
-        $conn->set_charset("utf8");
+        $mail->smtpClose();
+    ?>
+<?php
+require_once("config/conndb.php");
 
-        $result = $conn->query($sql);
+function execResult($sql)
+{
+    $conn = new mysqli(HOST, USER, PASS, DATABASE);
 
-        $data = array();
-
-        while($row = $result->fetch_array(1)){
-            $data[] = $row;
-        }
-        return $data;
-
-        $conn->close();
+    if ($conn->connect_error) {
+        die('ket noi that bai:' . $conn->connect_error);
     }
+
+    $conn->set_charset("utf8");
+
+    $result = $conn->query($sql);
+
+    $data = array();
+
+    while ($row = $result->fetch_array(1)) {
+        $data[] = $row;
+    }
+    return $data;
+
+    $conn->close();
+}
 
 ?>
 <!doctype html>
@@ -42,7 +76,7 @@ session_start();
 
     <div id="shopify-section-nov-header" class="shopify-section">
         <div data-section-id="nov-header" data-section-type="header-section">
-        <?php require('Common/Header/header.php') ?>
+            <?php require('Common/Header/header.php') ?>
 
             <div id="header-sticky" style="background-color: #ffffff;">
                 <div class="container">
@@ -64,7 +98,7 @@ session_start();
 
                     <div class="container">
 
-                        
+
 
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
@@ -74,13 +108,13 @@ session_start();
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                <img class="d-block w-100" src="https://cdn.tgdd.vn/bachhoaxanh/banners/2505/redbull-10112021194115.jpg"  alt="First slide" >
+                                    <img class="d-block w-100" src="https://cdn.tgdd.vn/bachhoaxanh/banners/2505/redbull-10112021194115.jpg" alt="First slide">
                                 </div>
                                 <div class="carousel-item">
-                                <img class="d-block w-100" src="https://cdn.tgdd.vn/bachhoaxanh/banners/2505/fami-canxi-vi-moi-1211202193218.png" alt="Second slide">
+                                    <img class="d-block w-100" src="https://cdn.tgdd.vn/bachhoaxanh/banners/2505/fami-canxi-vi-moi-1211202193218.png" alt="Second slide">
                                 </div>
                                 <div class="carousel-item">
-                                <img class="d-block w-100" src="https://cdn.tgdd.vn/bachhoaxanh/banners/2505/khuyen-mai-sieu-hap-dan-0911202119555.jpg" alt="Third slide">
+                                    <img class="d-block w-100" src="https://cdn.tgdd.vn/bachhoaxanh/banners/2505/khuyen-mai-sieu-hap-dan-0911202119555.jpg" alt="Third slide">
                                 </div>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -97,7 +131,7 @@ session_start();
 
                 </div>
             </div>
-            
+
             <div id="shopify-section-1602131451931" class="shopify-section index-section section-collection-tabs wow fadeIn animated">
 
                 <div class="distance" style="padding-top: 41px;padding-bottom: 15px">
@@ -105,7 +139,7 @@ session_start();
                         <div class="page-width nov-collection-tabs nov-collection-tabs-slider">
 
                             <div class="container">
-                      
+
                                 <div id="product-tabs-categories-1602131451931" class="block product-tabs-categories">
                                     <div class="box-tab">
                                         <div class="row text-left marg-left-0">
@@ -116,8 +150,8 @@ session_start();
 
                                         </div>
                                         <div class="row list-menu margin-tl">
-                                            
-                                        <!-- nav-tabs -->
+
+                                            <!-- nav-tabs -->
                                             <ul class="row nav nav-tabs list-product-tabs w-100 mrgleft-15 ovef-auto" role="tablist">
 
 
@@ -161,38 +195,38 @@ session_start();
                                         </div>
                                     </div>
 
-                                <?php 
-                                
-                                            $sql = "SELECT product.*,category.name AS category_name, category.shortname , 
+                                    <?php
+
+                                    $sql = "SELECT product.*,category.name AS category_name, category.shortname , 
                                                         product_image.image_id, product_image.image_blob
                                                     FROM product 
                                                     JOIN category
                                                         ON product.category_id = category.category_id
                                                     JOIN product_image
                                                         ON product_image.product_id = product.product_id";
-                                            $result = execResult($sql);
-                                            
+                                    $result = execResult($sql);
 
-                                            $arr_FF = array();
-                                            $arr_AF = array();
-                                            $arr_CF = array();
-                                            $arr_DF = array();
 
-                                            for($i = 0; $i < count($result); $i++){
-                                                if($result[$i]['shortname'] == 'FF'){
-                                                    $arr_FF[] = $result[$i];
-                                                }else if($result[$i]['shortname'] == 'AF'){
-                                                    $arr_AF[] = $result[$i];
-                                                }else if($result[$i]['shortname'] == 'CF'){
-                                                    $arr_CF[] = $result[$i];
-                                                }else{
-                                                    $arr_DF[] = $result[$i];
-                                                }
-                                            }
+                                    $arr_FF = array();
+                                    $arr_AF = array();
+                                    $arr_CF = array();
+                                    $arr_DF = array();
 
-                                            
-                                
-                                ?>
+                                    for ($i = 0; $i < count($result); $i++) {
+                                        if ($result[$i]['shortname'] == 'FF') {
+                                            $arr_FF[] = $result[$i];
+                                        } else if ($result[$i]['shortname'] == 'AF') {
+                                            $arr_AF[] = $result[$i];
+                                        } else if ($result[$i]['shortname'] == 'CF') {
+                                            $arr_CF[] = $result[$i];
+                                        } else {
+                                            $arr_DF[] = $result[$i];
+                                        }
+                                    }
+
+
+
+                                    ?>
 
                                     <div class="product_tab_content tab-content product-tabs-content">
 
@@ -204,82 +238,78 @@ session_start();
                                                             <div class="grid_product">
                                                                 <div class="grid__row">
 
-                                                            <?php
-                                                                
-                                                                for($af = 0; $af < 5; $af++){
-                                                            ?> 
-                                                               
-                                                                <div class="grid__column-2-4">
+                                                                    <?php
 
-                                                                    <div class="item">
-                                                                        <div class="item-product item-animate">
+                                                                    for ($af = 0; $af < 5; $af++) {
+                                                                    ?>
 
-                                                                            <div class="thumbnail-container has-multiimage ">
-                                                                                <a href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
-                                                                                </a>
-                                                                                <div class="badge_sale">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="product__info">
-                                                                                <div class="product__title">
-                                                                                    <a href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27"><?php echo $arr_AF[$af]['name'];?></a>
-                                                                                </div>
+                                                                        <div class="grid__column-2-4">
 
+                                                                            <div class="item">
+                                                                                <div class="item-product item-animate">
 
-                                                                                <div class="product__review">
-                                                                                    <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
-                                                                                </div>
+                                                                                    <div class="thumbnail-container has-multiimage ">
+                                                                                        <a href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27">
+                                                                                            <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_AF[$af]['image_blob']; ?>" alt="">
+                                                                                            <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_AF[$af]['image_blob']; ?>" alt="">
+                                                                                        </a>
+                                                                                        <div class="badge_sale">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="product__info">
+                                                                                        <div class="product__title">
+                                                                                            <a href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27"><?php echo $arr_AF[$af]['name']; ?></a>
+                                                                                        </div>
 
 
-                                                                                <div class="product__price">
-                                                                                    
-
-                                                                                    <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_AF[$af]['price'])." ". $arr_AF[$af]['currency'];?></span></span>
-
-                                                                                </div>
-
-                                                                                <div class="group-buttons d-flex concenter">
-
-                                                                                    <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
-                                                                                        <input type="hidden" name="id" value="33119332040757" />
+                                                                                        <div class="product__review">
+                                                                                            <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
+                                                                                        </div>
 
 
-                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <div class="product__price">
+
+
+                                                                                            <span class="visually-hidden">Regular price</span>
+                                                                                            <span class="product-price__price"><span class="money"><?php echo number_format($arr_AF[$af]['price']) . " " . $arr_AF[$af]['currency']; ?></span></span>
+
+                                                                                        </div>
+
+                                                                                        <div class="group-buttons d-flex concenter">
+
+                                                                                            <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
+                                                                                                <input type="hidden" name="id" value="33119332040757" />
+
+
+                                                                                                <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
                                                                                         </button> -->
 
-                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
-                                                                                                                href="addcart.php?id=%27<?php echo $arr_AF[$af]['product_id']?>%27"
-                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
-                                                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                                                title="" tabindex="0">
-                                                                                                                <i class="icon_cart"></i>
-                                                                                         </a>
+                                                                                                <a class="btn btnAddToCart btnChooseVariant btnSize" href="addcart.php?id=%27<?php echo $arr_AF[$af]['product_id'] ?>%27" data-url="/products/diamond-halo-stud-earrings?view=json" data-toggle="tooltip" data-placement="top" title="" tabindex="0">
+                                                                                                    <i class="icon_cart"></i>
+                                                                                                </a>
 
-                                                                                    </form>
+                                                                                            </form>
 
-                                                                                    <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
-                                                                                            <i class="fa_quickview"></i>
-                                                                                        </a>
+                                                                                            <div class="productQuickView d-md-block">
+                                                                                                <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                                    <i class="fa_quickview"></i>
+                                                                                                </a>
+                                                                                            </div>
+
+
+
+
+                                                                                        </div>
                                                                                     </div>
-
-
-                        
-
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
 
-                                                                </div>
-                                                            <?php 
-                                                                }
-                                                                
-                                                            ?>
+                                                                        </div>
+                                                                    <?php
+                                                                    }
+
+                                                                    ?>
 
                                                                 </div>
 
@@ -300,80 +330,76 @@ session_start();
                                                             <div class="grid_product">
                                                                 <div class="grid__row">
 
-                                                            <?php
-                                                                
-                                                                for($cf = 0; $cf < 5; $cf++){
-                                                            ?> 
-                                                               
-                                                                <div class="grid__column-2-4">
+                                                                    <?php
 
-                                                                    <div class="item">
-                                                                        <div class="item-product item-animate ">
+                                                                    for ($cf = 0; $cf < 5; $cf++) {
+                                                                    ?>
 
-                                                                            <div class="thumbnail-container has-multiimage">
-                                                                                <a href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt="">
-                                                                                </a>
-                                                                                <div class="badge_sale">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="product__info">
-                                                                                <div class="product__title">
-                                                                                    <a href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27"><?php echo $arr_CF[$cf]['name'];?></a>
-                                                                                </div>
+                                                                        <div class="grid__column-2-4">
 
+                                                                            <div class="item">
+                                                                                <div class="item-product item-animate ">
 
-                                                                                <div class="product__review">
-                                                                                    <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
-                                                                                </div>
+                                                                                    <div class="thumbnail-container has-multiimage">
+                                                                                        <a href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27">
+                                                                                            <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob']; ?>" alt="">
+                                                                                            <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob']; ?>" alt="">
+                                                                                        </a>
+                                                                                        <div class="badge_sale">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="product__info">
+                                                                                        <div class="product__title">
+                                                                                            <a href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27"><?php echo $arr_CF[$cf]['name']; ?></a>
+                                                                                        </div>
 
 
-                                                                                <div class="product__price">
-                                                                                    
-
-                                                                                    <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_CF[$cf]['price'])." ". $arr_CF[$cf]['currency'];?></span></span>
-
-                                                                                </div>
-
-                                                                                <div class="group-buttons d-flex concenter">
-
-                                                                                    <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
-                                                                                        <input type="hidden" name="id" value="33119332040757" />
+                                                                                        <div class="product__review">
+                                                                                            <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
+                                                                                        </div>
 
 
-                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <div class="product__price">
+
+
+                                                                                            <span class="visually-hidden">Regular price</span>
+                                                                                            <span class="product-price__price"><span class="money"><?php echo number_format($arr_CF[$cf]['price']) . " " . $arr_CF[$cf]['currency']; ?></span></span>
+
+                                                                                        </div>
+
+                                                                                        <div class="group-buttons d-flex concenter">
+
+                                                                                            <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
+                                                                                                <input type="hidden" name="id" value="33119332040757" />
+
+
+                                                                                                <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
                                                                                         </button> -->
 
-                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
-                                                                                                                href="addcart.php?id=%27<?php echo $arr_CF[$cf]['product_id']?>%27"
-                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
-                                                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                                                title="" tabindex="0">
-                                                                                                                <i class="icon_cart"></i>
-                                                                                         </a>
+                                                                                                <a class="btn btnAddToCart btnChooseVariant btnSize" href="addcart.php?id=%27<?php echo $arr_CF[$cf]['product_id'] ?>%27" data-url="/products/diamond-halo-stud-earrings?view=json" data-toggle="tooltip" data-placement="top" title="" tabindex="0">
+                                                                                                    <i class="icon_cart"></i>
+                                                                                                </a>
 
-                                                                                    </form>
+                                                                                            </form>
 
-                                                                                    <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
-                                                                                            <i class="fa_quickview"></i>
-                                                                                        </a>
+                                                                                            <div class="productQuickView d-md-block">
+                                                                                                <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                                    <i class="fa_quickview"></i>
+                                                                                                </a>
+                                                                                            </div>
+
+
+                                                                                        </div>
                                                                                     </div>
-
-
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
 
-                                                                </div>
-                                                            <?php 
-                                                                }
-                                                                
-                                                            ?>
+                                                                        </div>
+                                                                    <?php
+                                                                    }
+
+                                                                    ?>
 
                                                                 </div>
 
@@ -391,83 +417,79 @@ session_start();
                                                     <div class="products-grid row collection-carousel" data-items="4" data-items_lg_tablet="4" data-items_tablet="3" data-items_mobile="2" data-items_mobiles="2" data-row="1" data-loop="false" data-dots="false" data-nav="false" data-autoplay="false">
                                                         <div class="loading">
 
-                                                        <div class="grid_product">
+                                                            <div class="grid_product">
                                                                 <div class="grid__row">
 
-                                                            <?php
-                                                                
-                                                                for($df = 0; $df < 5; $df++){
-                                                            ?> 
-                                                               
-                                                                <div class="grid__column-2-4">
+                                                                    <?php
 
-                                                                    <div class="item">
-                                                                        <div class="item-product item-animate ">
+                                                                    for ($df = 0; $df < 5; $df++) {
+                                                                    ?>
 
-                                                                            <div class="thumbnail-container has-multiimage">
-                                                                                <a href="Details.php?id=%27<?php echo $arr_DF[$df]['product_id']; ?>%27">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt="">
-                                                                                </a>
-                                                                                <div class="badge_sale">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="product__info">
-                                                                                <div class="product__title">
-                                                                                    <a href="/products/rimond-balo-stud-cum"><?php echo $arr_DF[$df]['name'];?></a>
-                                                                                </div>
+                                                                        <div class="grid__column-2-4">
 
+                                                                            <div class="item">
+                                                                                <div class="item-product item-animate ">
 
-                                                                                <div class="product__review">
-                                                                                    <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
-                                                                                </div>
+                                                                                    <div class="thumbnail-container has-multiimage">
+                                                                                        <a href="Details.php?id=%27<?php echo $arr_DF[$df]['product_id']; ?>%27">
+                                                                                            <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_DF[$df]['image_blob']; ?>" alt="">
+                                                                                            <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_DF[$df]['image_blob']; ?>" alt="">
+                                                                                        </a>
+                                                                                        <div class="badge_sale">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="product__info">
+                                                                                        <div class="product__title">
+                                                                                            <a href="/products/rimond-balo-stud-cum"><?php echo $arr_DF[$df]['name']; ?></a>
+                                                                                        </div>
 
 
-                                                                                <div class="product__price">
-                                                                                    
-
-                                                                                    <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_DF[$df]['price'])." ". $arr_DF[$df]['currency'];?></span></span>
-
-                                                                                </div>
-
-                                                                                <div class="group-buttons d-flex concenter">
-
-                                                                                    <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
-                                                                                        <input type="hidden" name="id" value="33119332040757" />
+                                                                                        <div class="product__review">
+                                                                                            <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
+                                                                                        </div>
 
 
-                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <div class="product__price">
+
+
+                                                                                            <span class="visually-hidden">Regular price</span>
+                                                                                            <span class="product-price__price"><span class="money"><?php echo number_format($arr_DF[$df]['price']) . " " . $arr_DF[$df]['currency']; ?></span></span>
+
+                                                                                        </div>
+
+                                                                                        <div class="group-buttons d-flex concenter">
+
+                                                                                            <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
+                                                                                                <input type="hidden" name="id" value="33119332040757" />
+
+
+                                                                                                <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
                                                                                         </button> -->
 
-                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
-                                                                                                                href="addcart.php?id=%27<?php echo $arr_DF[$df]['product_id']?>%27"
-                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
-                                                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                                                title="" tabindex="0">
-                                                                                                                <i class="icon_cart"></i>
-                                                                                         </a>
+                                                                                                <a class="btn btnAddToCart btnChooseVariant btnSize" href="addcart.php?id=%27<?php echo $arr_DF[$df]['product_id'] ?>%27" data-url="/products/diamond-halo-stud-earrings?view=json" data-toggle="tooltip" data-placement="top" title="" tabindex="0">
+                                                                                                    <i class="icon_cart"></i>
+                                                                                                </a>
 
-                                                                                    </form>
+                                                                                            </form>
 
-                                                                                    <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_DF[$df]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
-                                                                                            <i class="fa_quickview"></i>
-                                                                                        </a>
+                                                                                            <div class="productQuickView d-md-block">
+                                                                                                <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_DF[$df]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                                    <i class="fa_quickview"></i>
+                                                                                                </a>
+                                                                                            </div>
+
+
+                                                                                        </div>
                                                                                     </div>
-
-
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
 
-                                                                </div>
-                                                            <?php 
-                                                                }
-                                                                
-                                                            ?>
+                                                                        </div>
+                                                                    <?php
+                                                                    }
+
+                                                                    ?>
 
                                                                 </div>
 
@@ -485,85 +507,81 @@ session_start();
                                                     <div class="products-grid row collection-carousel" data-items="4" data-items_lg_tablet="4" data-items_tablet="3" data-items_mobile="2" data-items_mobiles="2" data-row="1" data-loop="false" data-dots="false" data-nav="false" data-autoplay="false">
                                                         <div class="loading">
 
-                                                        <div class="grid_product">
+                                                            <div class="grid_product">
                                                                 <div class="grid__row">
 
-                                                            <?php
-                                                                
-                                                                for($ff = 0; $ff < 5; $ff++){
-                                                            ?> 
-                                                               
-                                                                <div class="grid__column-2-4">
+                                                                    <?php
 
-                                                                    <div class="item">
-                                                                        <div class="item-product item-animate ">
+                                                                    for ($ff = 0; $ff < 5; $ff++) {
+                                                                    ?>
 
-                                                                            <div class="thumbnail-container has-multiimage">
-                                                                                <a href="/products/rimond-balo-stud-cum">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_FF[$ff]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_FF[$ff]['image_blob'];?>" alt="">
-                                                                                </a>
-                                                                                <div class="badge_sale">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="product__info">
-                                                                                <div class="product__title">
-                                                                                    <a href="Details.php?id=%27<?php echo $arr_FF[$ff]['product_id']; ?>%27"><?php echo $arr_FF[$ff]['name'];?></a>
-                                                                                </div>
+                                                                        <div class="grid__column-2-4">
 
+                                                                            <div class="item">
+                                                                                <div class="item-product item-animate ">
 
-                                                                                <div class="product__review">
-                                                                                    <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
-                                                                                </div>
+                                                                                    <div class="thumbnail-container has-multiimage">
+                                                                                        <a href="/products/rimond-balo-stud-cum">
+                                                                                            <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_FF[$ff]['image_blob']; ?>" alt="">
+                                                                                            <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_FF[$ff]['image_blob']; ?>" alt="">
+                                                                                        </a>
+                                                                                        <div class="badge_sale">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="product__info">
+                                                                                        <div class="product__title">
+                                                                                            <a href="Details.php?id=%27<?php echo $arr_FF[$ff]['product_id']; ?>%27"><?php echo $arr_FF[$ff]['name']; ?></a>
+                                                                                        </div>
 
 
-                                                                                <div class="product__price">
-                                                                                    
-
-                                                                                    <span class="visually-hidden">Regular price</span>
-                                                                                    <span class="product-price__price"><span class="money"><?php echo number_format($arr_FF[$ff]['price'])." ". $arr_FF[$ff]['currency'];?></span></span>
-
-                                                                                </div>
-
-                                                                                <div class="group-buttons d-flex concenter">
-
-                                                                                    <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
-                                                                                        <input type="hidden" name="id" value="33119332040757" />
+                                                                                        <div class="product__review">
+                                                                                            <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
+                                                                                        </div>
 
 
-                                                                                        <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                        <div class="product__price">
+
+
+                                                                                            <span class="visually-hidden">Regular price</span>
+                                                                                            <span class="product-price__price"><span class="money"><?php echo number_format($arr_FF[$ff]['price']) . " " . $arr_FF[$ff]['currency']; ?></span></span>
+
+                                                                                        </div>
+
+                                                                                        <div class="group-buttons d-flex concenter">
+
+                                                                                            <form class="formAddToCart btnSize" action="/cart/add" method="post" enctype="multipart/form-data">
+                                                                                                <input type="hidden" name="id" value="33119332040757" />
+
+
+                                                                                                <!-- <button class="btn btnAddToCart btnSize" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                             <i class="icon_cart"></i>
                                                                                         </button> -->
 
-                                                                                        <a class="btn btnAddToCart btnChooseVariant btnSize"
-                                                                                                                href="addcart.php?id=%27<?php echo $arr_FF[$ff]['product_id']?>%27"
-                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
-                                                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                                                title="" tabindex="0">
-                                                                                                                <i class="icon_cart"></i>
-                                                                                         </a>
+                                                                                                <a class="btn btnAddToCart btnChooseVariant btnSize" href="addcart.php?id=%27<?php echo $arr_FF[$ff]['product_id'] ?>%27" data-url="/products/diamond-halo-stud-earrings?view=json" data-toggle="tooltip" data-placement="top" title="" tabindex="0">
+                                                                                                    <i class="icon_cart"></i>
+                                                                                                </a>
 
-                                                                                    </form>
+                                                                                            </form>
 
-                                                                                    <div class="productQuickView d-md-block">
-                                                                                        <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_FF[$ff]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
-                                                                                            <i class="fa_quickview"></i>
-                                                                                        </a>
+                                                                                            <div class="productQuickView d-md-block">
+                                                                                                <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $arr_FF[$ff]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                                    <i class="fa_quickview"></i>
+                                                                                                </a>
+                                                                                            </div>
+
+
+
+
+                                                                                        </div>
                                                                                     </div>
-
-
-                                                                                    
-
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
 
-                                                                </div>
-                                                            <?php 
-                                                                }
-                                                                
-                                                            ?>
+                                                                        </div>
+                                                                    <?php
+                                                                    }
+
+                                                                    ?>
 
                                                                 </div>
 
@@ -574,7 +592,7 @@ session_start();
                                                 </div>
                                             </div>
                                         </div>
-                                   
+
                                     </div>
                                 </div>
 
@@ -624,118 +642,112 @@ session_start();
 
                                                                                 <div class="container">
                                                                                     <div class="row">
-                                                    <?php
-                                                        $sql_pagina = 'SELECT  COUNT(product_id) AS number FROM product';
+                                                                                        <?php
+                                                                                        $sql_pagina = 'SELECT  COUNT(product_id) AS number FROM product';
 
 
-                                                        $result_pagina = execResult($sql_pagina);
+                                                                                        $result_pagina = execResult($sql_pagina);
 
-                                                        $maxNumPage = 0;
-                                                        if($result_pagina != null && count($result_pagina) > 0){
-                                                            $maxNumPage = $result_pagina[0]['number'];
-                                                        }
-                                                        $numberPage = ceil($maxNumPage / 12);
-                                                        $currentPage = 1 ;
-
-
-                                                        if(isset($_GET['page'])){
-                                                            $currentPage = $_GET['page'];
+                                                                                        $maxNumPage = 0;
+                                                                                        if ($result_pagina != null && count($result_pagina) > 0) {
+                                                                                            $maxNumPage = $result_pagina[0]['number'];
+                                                                                        }
+                                                                                        $numberPage = ceil($maxNumPage / 12);
+                                                                                        $currentPage = 1;
 
 
-                                                        }
-                                                        $index = ($currentPage - 1) * 12;
+                                                                                        if (isset($_GET['page'])) {
+                                                                                            $currentPage = $_GET['page'];
+                                                                                        }
+                                                                                        $index = ($currentPage - 1) * 12;
 
-                                                        $sql_allpro = 'SELECT product.*,category.name AS category_name, category.shortname , 
+                                                                                        $sql_allpro = 'SELECT product.*,category.name AS category_name, category.shortname , 
                                                                             product_image.image_id, product_image.image_blob
                                                                             FROM product 
                                                                             JOIN category
                                                                             ON product.category_id = category.category_id
                                                                             JOIN product_image
                                                                             ON product_image.product_id = product.product_id
-                                                                            LIMIT '.$index.', 12';
+                                                                            LIMIT ' . $index . ', 12';
 
 
-                                                        $result_allpro = execResult($sql_allpro);
+                                                                                        $result_allpro = execResult($sql_allpro);
 
 
-                                                        for($j = 0 ;$j < count($result_allpro); $j++){
-                                                        ?>
-                                                                                    <div class="col-md-6 col-lg-4">
-                                                                                        <div class="item">
-                                                                                            <div class="item-product item-animate ">
+                                                                                        for ($j = 0; $j < count($result_allpro); $j++) {
+                                                                                        ?>
+                                                                                            <div class="col-md-6 col-lg-4">
+                                                                                                <div class="item">
+                                                                                                    <div class="item-product item-animate ">
 
-                                                                                                <div class="thumbnail-container has-multiimage">
-                                                                                                    <a href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27">
-
-
-                                                                                                        <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $result_allpro[$j]['image_blob'];?>" alt="">
-                                                                                                        <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $result_allpro[$j]['image_blob'];?>" alt="">
-                                                                                                    </a>
-                                                                                                    <div class="badge_sale"></div>
+                                                                                                        <div class="thumbnail-container has-multiimage">
+                                                                                                            <a href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27">
 
 
-                                                                                                </div>
-                                                                            
-                                                                                                <div class="product__info">
-                                                                                                    <div class="product__title">
-                                                                                                        <a href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27"><?php echo $result_allpro[$j]['name'];?></a>
-                                                                                                    </div>
+                                                                                                                <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $result_allpro[$j]['image_blob']; ?>" alt="">
+                                                                                                                <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $result_allpro[$j]['image_blob']; ?>" alt="">
+                                                                                                            </a>
+                                                                                                            <div class="badge_sale"></div>
 
 
-                                                                                                    <div class="product__review">
-                                                                                                        <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
-                                                                                                    </div>
+                                                                                                        </div>
+
+                                                                                                        <div class="product__info">
+                                                                                                            <div class="product__title">
+                                                                                                                <a href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27"><?php echo $result_allpro[$j]['name']; ?></a>
+                                                                                                            </div>
 
 
-                                                                                                    <div class="product__price">
-
-                                                                                                        <span class="visually-hidden">Regular price</span>
-                                                                                                        <span class="product-price__price"><span class="money"><?php echo number_format($result_allpro[$j]['price']).' '.$result_allpro[$j]['currency'];?></span></span>
-
-                                                                                                    </div>
-
-                                                                                                    <div class="group-buttons d-flex">
-
-                                                                                                        <form class="formAddToCart" action="addcart.php?id=%27<?php echo  $result_allpro[$j]['product_id']; ?>%27" method="post" enctype="multipart/form-data">
-                                                                                                            <input type="hidden" name="id" value="33119332040757" />
+                                                                                                            <div class="product__review">
+                                                                                                                <div class="rating"><span class="shopify-product-reviews-badge" data-id="4907756027957"></span></div>
+                                                                                                            </div>
 
 
-                                                                                                            <!-- <button class="btn btnAddToCart" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
+                                                                                                            <div class="product__price">
+
+                                                                                                                <span class="visually-hidden">Regular price</span>
+                                                                                                                <span class="product-price__price"><span class="money"><?php echo number_format($result_allpro[$j]['price']) . ' ' . $result_allpro[$j]['currency']; ?></span></span>
+
+                                                                                                            </div>
+
+                                                                                                            <div class="group-buttons d-flex">
+
+                                                                                                                <form class="formAddToCart" action="addcart.php?id=%27<?php echo  $result_allpro[$j]['product_id']; ?>%27" method="post" enctype="multipart/form-data">
+                                                                                                                    <input type="hidden" name="id" value="33119332040757" />
+
+
+                                                                                                                    <!-- <button class="btn btnAddToCart" type="submit" value="Submit" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" data-original-title="Add to cart" title="" tabindex="0">
                                                                                                                 <i class="icon_cart"></i>
                                                                                                             </button> -->
 
-                                                                                                            <a class="btn btnAddToCart btnChooseVariant"
-                                                                                                                href="addcart.php?id=%27<?php echo $result_allpro[$j]['product_id']?>%27"
-                                                                                                                data-url="/products/diamond-halo-stud-earrings?view=json"
-                                                                                                                data-toggle="tooltip" data-placement="top"
-                                                                                                                title="" tabindex="0">
-                                                                                                                <i class="icon_cart"></i>
-                                                                                                            </a>
+                                                                                                                    <a class="btn btnAddToCart btnChooseVariant" href="addcart.php?id=%27<?php echo $result_allpro[$j]['product_id'] ?>%27" data-url="/products/diamond-halo-stud-earrings?view=json" data-toggle="tooltip" data-placement="top" title="" tabindex="0">
+                                                                                                                        <i class="icon_cart"></i>
+                                                                                                                    </a>
 
-                                                                                                        </form>
+                                                                                                                </form>
 
-                                                                                                        <div class="productQuickView d-md-block">
-                                                                                                            <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
-                                                                                                                <i class="fa_quickview"></i>
-                                                                                                            </a>
+                                                                                                                <div class="productQuickView d-md-block">
+                                                                                                                    <a class="btn btnProduct btnProductQuickview" href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27" data-url="/products/rimond-balo-stud-cum?view=quick_view" data-handle="rimond-balo-stud-cum" data-pid="33119332040757" data-toggle="tooltip" data-placement="top" title="Quick view">
+                                                                                                                        <i class="fa_quickview"></i>
+                                                                                                                    </a>
+                                                                                                                </div>
+
+
+
+
+                                                                                                            </div>
                                                                                                         </div>
-
-
-                                                                                                        
-
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-                                                                                        </div>
+
+                                                                                        <?php
+                                                                                        }
+                                                                                        ?>
                                                                                     </div>
 
-                                                                            <?php
-                                                                            }
-                                                                            ?>
+
                                                                                 </div>
-
-
-                                                                            </div>
 
 
                                                                             </div>
@@ -754,7 +766,7 @@ session_start();
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
                             </div>
 
@@ -764,44 +776,42 @@ session_start();
                     </div>
 
                     <div class="product_pagination">
-                    <?php 
-                        if($currentPage > 1){
-                    ?>
-                        <a href="?page=<?php echo ($currentPage -1);?>">&laquo;</a>
-                    <?php
+                        <?php
+                        if ($currentPage > 1) {
+                        ?>
+                            <a href="?page=<?php echo ($currentPage - 1); ?>">&laquo;</a>
+                        <?php
                         }
-                    
-                
-                        for($page = 1; $page <= $numberPage; $page++){
-                            
-                            if($page == $currentPage){
+
+
+                        for ($page = 1; $page <= $numberPage; $page++) {
+
+                            if ($page == $currentPage) {
                                 $active = "active";
-                    
+
                                 // <!-- <a href="?page=" class="number_page active"></a> -->
-                    
-                            }else{
+
+                            } else {
                                 $active = "";
-                    
                             }
 
-                            echo '<a href="?page='.$page.'" class="number_page '.$active.'">'.$page.'</a>' ;
-                            
+                            echo '<a href="?page=' . $page . '" class="number_page ' . $active . '">' . $page . '</a>';
                         }
-                        
-                        if($numberPage > $currentPage){
-                    ?>
-                            
-                            <a href="?page=<?php echo ($currentPage +1);?>">&raquo;</a>
-                    <?php
+
+                        if ($numberPage > $currentPage) {
+                        ?>
+
+                            <a href="?page=<?php echo ($currentPage + 1); ?>">&raquo;</a>
+                        <?php
                         }
-                    ?>
+                        ?>
 
                     </div>
 
                 </div>
 
             </div>
-            
+
             <div id="shopify-section-1602139639954" class="shopify-section index-section manufacture-section wow fadeIn animated">
                 <div class="distance" style="padding-bottom: 78px">
                     <div class="section-manufacture" data-section-id="1602139639954" data-section-type="nov-owl">
@@ -931,8 +941,8 @@ session_start();
                 <div class="search-container-inner">
                     <input class="search__input search-bar__input" type="search" name="q" value="" placeholder="Enter your keyword" aria-label="Enter your keyword">
                     <button class="search-bar__submit search__submit btn--link" type="submit">
-          <span class="icon__fallback-text"><i class="zmdi zmdi-search"></i></span>
-        </button>
+                        <span class="icon__fallback-text"><i class="zmdi zmdi-search"></i></span>
+                    </button>
                 </div>
             </form>
         </div>
@@ -1011,18 +1021,18 @@ session_start();
                                     <input type="hidden" name="contact[tags]" value="newsletter">
                                     <input type="email" name="contact[email]" class="inputNew form-control grey newsletter-input" value="" placeholder="Enter your email">
                                     <span class="input-group-btn mt-10 d-block">
-                              <button id="Subscribe" type="submit" name="commit" class="btn btn-primary">
-                                Subscribe
-                              </button>
-                            </span>
+                                        <button id="Subscribe" type="submit" name="commit" class="btn btn-primary">
+                                            Subscribe
+                                        </button>
+                                    </span>
                                 </div>
                                 <div class="checkbox">
                                     <label id="myCheck" class="d-inline-flex">
-                              <span class="custom-checkbox">
-                                <input name="no-view" class="no-view" type="checkbox">
-                              </span>
-                              <span id="text">Don’t show this popup again</span>
-                            </label>
+                                        <span class="custom-checkbox">
+                                            <input name="no-view" class="no-view" type="checkbox">
+                                        </span>
+                                        <span id="text">Don’t show this popup again</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -1047,20 +1057,20 @@ session_start();
                     <div class="row">
                         <div class="col-12">
                             <div class="title_block">
-                                
+
                                 <div class="title-block__item active">
                                     <span>Login</span>
                                 </div>
                                 <div class="title-block__item">
                                     <span>Create an account</span>
                                 </div>
-                                
+
                                 <div class="title-block__line"></div>
                             </div>
 
                             <div class="content__modal">
                                 <div class="content__modal--block active">
-                                <form method="post" action="account/login.php" id="customer_login" accept-charset="UTF-8">
+                                    <form method="post" action="account/login.php" id="customer_login" accept-charset="UTF-8">
                                         <input type="hidden" name="form_type" value="customer_login" />
                                         <input type="hidden" name="utf8" value="✓" />
 
@@ -1069,17 +1079,17 @@ session_start();
                                                 <span>Insert your account information:</span>
                                             </div>
                                             <div class="form-group custom-form novform-email" style="margin-bottom:30px">
-                                                <input type="email" name="email" id="Email_login"   value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ""?>" placeholder="Email"  autofocus>
+                                                <input type="email" name="email" id="Email_login" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : "" ?>" placeholder="Email" autofocus>
                                                 <div class="message"></div>
                                             </div>
 
                                             <div class="form-group custom-form novform-password" style="margin-bottom:30px">
 
-                                                <input type="password" value="" name="password" id="HeaderPassword" class="" placeholder="Password" >
+                                                <input type="password" value="" name="password" id="HeaderPassword" class="" placeholder="Password">
                                                 <div class="message"></div>
 
                                                 <div class="hide_show_password" style="display: block;">
-                                                    <span class="show" ><i class="zmdi zmdi-eye-off"></i></span>
+                                                    <span class="show"><i class="zmdi zmdi-eye-off"></i></span>
                                                     <!-- <span class="show"><i class="zmdi zmdi-eye"></i></span> -->
                                                 </div>
                                             </div>
@@ -1101,30 +1111,30 @@ session_start();
 
 
 
-                                        <div id="RecoverPasswordFormIndex" class="hide">
-                                            <div class="title">
-                                                Reset your password
-                                            </div>
-
-                                            <div class="form-vertical">
-                                                <form method="post" action="/account/recover" accept-charset="UTF-8">
-                                                    <input type="hidden" name="form_type" value="recover_customer_password" />
-                                                    <input type="hidden" name="utf8" value="✓" />
-
-                                                    <div class="form-group novform-email">
-                                                        <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email" required>
-                                                    </div>
-                                                    <div class="d-flex groups-sub">
-                                                        <input type="submit" class="btn" value="Submit">
-                                                        <button type="button" id="HideRecoverPasswordIndex" class="text-link">Cancel</button>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                    <div id="RecoverPasswordFormIndex" class="hide">
+                                        <div class="title">
+                                            Reset your password
                                         </div>
 
+                                        <div class="form-vertical">
+                                            <form method="post" action="/account/recover" accept-charset="UTF-8">
+                                                <input type="hidden" name="form_type" value="recover_customer_password" />
+                                                <input type="hidden" name="utf8" value="✓" />
+
+                                                <div class="form-group novform-email">
+                                                    <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="Email" required>
+                                                </div>
+                                                <div class="d-flex groups-sub">
+                                                    <input type="submit" class="btn" value="Submit">
+                                                    <button type="button" id="HideRecoverPasswordIndex" class="text-link">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
+
+                                </div>
                                 <div class="content__modal--block">
-                                    <form method="post" action="account/register.php" id="create_customer" accept-charset="UTF-8">
+                                    <form method="post" action="./../UI/account/register.php" id="create_customer" accept-charset="UTF-8">
                                         <input type="hidden" name="form_type" value="create_customer" />
                                         <input type="hidden" name="utf8" value="✓" />
 
@@ -1133,28 +1143,28 @@ session_start();
 
                                         <div class="block-form-register">
                                             <div class="form-group   custom-form novform-firstname">
-                                                <input type="text" name="name" id="name" placeholder="Họ tên" >
+                                                <input type="text" name="name" id="name" placeholder="Họ tên">
                                                 <div class="message"></div>
-                                              </div>
+                                            </div>
                                             <div class="form-group  custom-form novform-lastname">
-                                                <input type="text" name="numberphone" id="numberphone" placeholder="Số điện thoại" >
+                                                <input type="text" name="numberphone" id="numberphone" placeholder="Số điện thoại">
                                                 <div class="message"></div>
 
                                             </div>
                                             <div class="form-group custom-form novform-email">
-                                                <input type="email" name="email" id="email" class="" placeholder="Email" >
+                                                <input type="email" name="email" id="email" class="" placeholder="Email">
                                                 <div class="message"></div>
 
                                             </div>
                                             <div class="form-group custom-form novform-password">
-                                                <input type="password" name="password" id="CreatePassword" class="" placeholder="Password" >
+                                                <input type="password" name="password" id="CreatePassword" class="" placeholder="Password">
                                                 <div class="message"></div>
 
                                             </div>
                                             <div class="form-checkbox novform-newsletter">
                                                 <label id="form-checkbox" class="custom_checkbox d-inline-flex">
                                                     <span class="custom-checkbox">
-                                                    <input type="checkbox" name="newsletter" value="1">
+                                                        <input type="checkbox" name="newsletter" value="1">
                                                     </span>
                                                     <span class="text">Sign up for our newsletter</span>
                                                 </label>
@@ -1166,7 +1176,7 @@ session_start();
                                     </form>
                                 </div>
 
-                                
+
                             </div>
 
 
@@ -1186,8 +1196,8 @@ session_start();
                 <i class="zmdi zmdi-notifications-active"></i> This item has been added to your Wishlist
             </div>
             <button type="button" class="close-modal popupwishlistClose">
-            <i class="zmdi zmdi-hc-fw zmdi-close"></i>
-        </button>
+                <i class="zmdi zmdi-hc-fw zmdi-close"></i>
+            </button>
         </div>
         <div class="modal-body">
             <div class="wishlistprimary d-flex align-items-center">
@@ -1207,23 +1217,23 @@ session_start();
     <div id="_desktop_back_top">
         <div id="back-top">
             <span>
-          <i class="zmdi zmdi-chevron-up"></i>
-        </span>
+                <i class="zmdi zmdi-chevron-up"></i>
+            </span>
         </div>
     </div>
 
 
     <!-- Toast message -->
-    <?php 
-    echo isset($_COOKIE['error']) ? '<div class="alert alert-danger" id="toast-message" role="alert" style="position:fixed;bottom:20px;left:20px;">'.
-                                         $_COOKIE['error'].   
-                                    '</div>' : '';
+    <?php
+    echo isset($_COOKIE['error']) ? '<div class="alert alert-danger" id="toast-message" role="alert" style="position:fixed;bottom:20px;left:20px;">' .
+        $_COOKIE['error'] .
+        '</div>' : '';
 
-    echo isset($_COOKIE['success']) ? '<div class="alert alert-success" id="toast-message" role="alert" style="position:fixed;bottom:20px;left:20px;">'.
-    $_COOKIE['success'].   
-    '</div>' : '';
+    echo isset($_COOKIE['success']) ? '<div class="alert alert-success" id="toast-message" role="alert" style="position:fixed;bottom:20px;left:20px;">' .
+        $_COOKIE['success'] .
+        '</div>' : '';
     ?>
-    
+
 
 
     <script src="//cdn.shopify.com/s/javascripts/currencies.js" type="text/javascript"></script>
@@ -1321,106 +1331,102 @@ session_start();
     <script src="//cdn.shopify.com/s/files/1/0272/1493/8165/t/27/assets/nuranium.js?v=11704140786233088045" type="text/javascript"></script>
 
     <script>
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
 
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
-
-function deleteCookie(cname){
-  document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
-}
-
-
-</script>
-<script src="./assets/js/main.js"></script>
-<script src="./assets/js/validator.js"></script>
-<script>
-Validator({
-  form:'#create_customer',
-  errorSelector:".message",
-  rules:[
-    Validator.isRequired('#name'),
-    Validator.isRequired('#numberphone'),
-    Validator.amountNumber('#numberphone', 10),
-    Validator.startWithNumber("#numberphone", 0),
-    Validator.validNumberPhone('#numberphone'),
-    Validator.isRequired('#CreatePassword'),
-    Validator.minLength('#CreatePassword', 6),
-    Validator.atLeastOneUppercaseLetter('#CreatePassword'),
-    Validator.isRequired('#email'),
-    Validator.isEmail('#email'),
-  ]
-})
+        function deleteCookie(cname) {
+            document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+        }
+    </script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/validator.js"></script>
+    <script>
+        Validator({
+            form: '#create_customer',
+            errorSelector: ".message",
+            rules: [
+                Validator.isRequired('#name'),
+                Validator.isRequired('#numberphone'),
+                Validator.amountNumber('#numberphone', 10),
+                Validator.startWithNumber("#numberphone", 0),
+                Validator.validNumberPhone('#numberphone'),
+                Validator.isRequired('#CreatePassword'),
+                Validator.minLength('#CreatePassword', 6),
+                Validator.atLeastOneUppercaseLetter('#CreatePassword'),
+                Validator.isRequired('#email'),
+                Validator.isEmail('#email'),
+            ]
+        })
 
 
-Validator({
-  form:'#customer_login',
-  errorSelector:".message",
-  rules:[
-    Validator.isRequired('#Email_login'),
-    Validator.isEmail('#Email_login'),
-    Validator.isRequired('#HeaderPassword'),
-  ]
-})
+        Validator({
+            form: '#customer_login',
+            errorSelector: ".message",
+            rules: [
+                Validator.isRequired('#Email_login'),
+                Validator.isEmail('#Email_login'),
+                Validator.isRequired('#HeaderPassword'),
+            ]
+        })
 
-Validator({
-  form:'#contact_form',
-  errorSelector:".message",
-  rules:[
-    Validator.isRequired('#ContactFormName'),
+        Validator({
+            form: '#contact_form',
+            errorSelector: ".message",
+            rules: [
+                Validator.isRequired('#ContactFormName'),
 
-    Validator.isRequired('#ContactFormEmail'),
-    Validator.isEmail('#ContactFormEmail'),
-    
-    Validator.isRequired('#ContactFormPhone'),
-    Validator.amountNumber('#ContactFormPhone', 10),
-    Validator.startWithNumber("#ContactFormPhone", 0),
-    Validator.validNumberPhone('#ContactFormPhone'),
-    
-    
-    Validator.isRequired('#ContactFormMessage'),
-  ]
-})
-</script>
+                Validator.isRequired('#ContactFormEmail'),
+                Validator.isEmail('#ContactFormEmail'),
 
-<script>
-
-  const hidePasswordbtn = document.querySelector('.hide_show_password')
-  const icon = hidePasswordbtn.querySelector('.show > i')
-  hidePasswordbtn.onclick = () => {
-    if(icon.classList[1] === 'zmdi-eye-off'){
-      icon.classList.remove('zmdi-eye-off')
-      icon.classList.add('zmdi-eye')
-      document.querySelector('#HeaderPassword').type = 'text'
-    }else{
-      icon.classList.remove('zmdi-eye')
-      icon.classList.add('zmdi-eye-off')
-      document.querySelector('#HeaderPassword').type = 'password'
-    }
-  }
-</script>
+                Validator.isRequired('#ContactFormPhone'),
+                Validator.amountNumber('#ContactFormPhone', 10),
+                Validator.startWithNumber("#ContactFormPhone", 0),
+                Validator.validNumberPhone('#ContactFormPhone'),
 
 
-<script defer>
-    const toastMessage = document.querySelector('#toast-message')
-    if(toastMessage){
-        setTimeout(() => {
-            toastMessage.remove()
-        }, 5000);
-    }
-</script>
+                Validator.isRequired('#ContactFormMessage'),
+            ]
+        })
+    </script>
+
+    <script>
+        const hidePasswordbtn = document.querySelector('.hide_show_password')
+        const icon = hidePasswordbtn.querySelector('.show > i')
+        hidePasswordbtn.onclick = () => {
+            if (icon.classList[1] === 'zmdi-eye-off') {
+                icon.classList.remove('zmdi-eye-off')
+                icon.classList.add('zmdi-eye')
+                document.querySelector('#HeaderPassword').type = 'text'
+            } else {
+                icon.classList.remove('zmdi-eye')
+                icon.classList.add('zmdi-eye-off')
+                document.querySelector('#HeaderPassword').type = 'password'
+            }
+        }
+    </script>
+
+
+    <script defer>
+        const toastMessage = document.querySelector('#toast-message')
+        if (toastMessage) {
+            setTimeout(() => {
+                toastMessage.remove()
+            }, 5000);
+        }
+    </script>
 
 </body>
 

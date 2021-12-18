@@ -3,10 +3,12 @@
 
     $email = $_POST['email'];
     $password = $_POST['password'];
+
     $hashPassword = md5($password);
+    require_once("./../config/conndb.php");
 
     // $conn = connectDB('localhost',"sneoiuvk_laptrinhweb","147258369","sneoiuvk_laptrinhweb");
-    $conn = connectDB("localhost","root","","laptrinhweb");
+    $conn = new mysqli(HOST, USER, PASS, DATABASE);
 
     if($conn){
         $sql = "SELECT hoten,email,sdt,role FROM user WHERE email='$email' and password='$hashPassword'";
