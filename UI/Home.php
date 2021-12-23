@@ -8,7 +8,7 @@ session_start();
 
 <?php 
     require_once("config/conndb.php");
-    $conn = new mysqli(HOST, USER, PASS, DATABASE);
+
     function execResult ($sql){
         $conn = new mysqli(HOST, USER, PASS, DATABASE);
         
@@ -216,8 +216,8 @@ session_start();
 
                                                                             <div class="thumbnail-container has-multiimage ">
                                                                                 <a href="Details.php?id=%27<?php echo $arr_AF[$af]['product_id']; ?>%27">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
+                                                                                    <img style="width:200px;height:200px" class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt="">
+                                                                                    <!-- <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_AF[$af]['image_blob'];?>" alt=""> -->
                                                                                 </a>
                                                                                 <div class="badge_sale">
                                                                                 </div>
@@ -312,8 +312,8 @@ session_start();
 
                                                                             <div class="thumbnail-container has-multiimage">
                                                                                 <a href="Details.php?id=%27<?php echo $arr_CF[$cf]['product_id']; ?>%27">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt="">
+                                                                                    <img style="width:200px;height:200px" class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt="">
+                                                                                    <!-- <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_CF[$cf]['image_blob'];?>" alt=""> -->
                                                                                 </a>
                                                                                 <div class="badge_sale">
                                                                                 </div>
@@ -406,8 +406,8 @@ session_start();
 
                                                                             <div class="thumbnail-container has-multiimage">
                                                                                 <a href="Details.php?id=%27<?php echo $arr_DF[$df]['product_id']; ?>%27">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt="">
+                                                                                    <img style="width:200px;height:200px" class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt="">
+                                                                                    <!-- <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_DF[$df]['image_blob'];?>" alt=""> -->
                                                                                 </a>
                                                                                 <div class="badge_sale">
                                                                                 </div>
@@ -500,8 +500,7 @@ session_start();
 
                                                                             <div class="thumbnail-container has-multiimage">
                                                                                 <a href="/products/rimond-balo-stud-cum">
-                                                                                    <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_FF[$ff]['image_blob'];?>" alt="">
-                                                                                    <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $arr_FF[$ff]['image_blob'];?>" alt="">
+                                                                                    <img style="width:200px;height:200px" class="img-fluid product__thumbnail lazyload" data-src="<?php echo $arr_FF[$ff]['image_blob'];?>" alt="">
                                                                                 </a>
                                                                                 <div class="badge_sale">
                                                                                 </div>
@@ -668,8 +667,8 @@ session_start();
                                                                                                     <a href="Details.php?id=%27<?php echo $result_allpro[$j]['product_id']; ?>%27">
 
 
-                                                                                                        <img class="img-fluid product__thumbnail lazyload" data-src="<?php echo $result_allpro[$j]['image_blob'];?>" alt="">
-                                                                                                        <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $result_allpro[$j]['image_blob'];?>" alt="">
+                                                                                                        <img style="height:200px; width:200px" class="img-fluid product__thumbnail lazyload" data-src="<?php echo $result_allpro[$j]['image_blob'];?>" alt="">
+                                                                                                        <!-- <img class="img-fluid product__thumbnail-second lazyload" data-src="<?php echo $result_allpro[$j]['image_blob'];?>" alt=""> -->
                                                                                                     </a>
                                                                                                     <div class="badge_sale"></div>
 
@@ -1060,7 +1059,7 @@ session_start();
 
                             <div class="content__modal">
                                 <div class="content__modal--block active">
-                                <form method="post" action="account/login.php" id="customer_login" accept-charset="UTF-8">
+                                <form method="post" action="./../UI/account/login.php" id="customer_login" accept-charset="UTF-8">
                                         <input type="hidden" name="form_type" value="customer_login" />
                                         <input type="hidden" name="utf8" value="✓" />
 
@@ -1092,8 +1091,8 @@ session_start();
                                                 </a>
 
                                             </div>
-
-                                            <div class="form_submit">
+                                            
+                                            <div class="form_submit" >
                                                 <input type="submit" class="btn" value="Login">
                                             </div>
                                         </div>
