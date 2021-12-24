@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th12 23, 2021 lúc 03:23 PM
+-- Thời gian đã tạo: Th12 24, 2021 lúc 06:41 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -194,7 +194,9 @@ INSERT INTO `audit_log` (`user_id`, `class`, `object_id`, `field`, `removed`, `a
 (1, 'Bugzilla::User', 4, 'cryptpassword', NULL, 'hashed_with_SHA-256', '2021-12-23 20:48:00'),
 (1, 'Bugzilla::User', 4, 'realname', 'user3', 'tri', '2021-12-23 20:48:01'),
 (1, 'Bugzilla::User', 4, 'cryptpassword', NULL, 'hashed_with_SHA-256', '2021-12-23 20:48:25'),
-(1, 'Bugzilla::User', 4, 'cryptpassword', NULL, 'hashed_with_SHA-256', '2021-12-23 20:50:41');
+(1, 'Bugzilla::User', 4, 'cryptpassword', NULL, 'hashed_with_SHA-256', '2021-12-23 20:50:41'),
+(2, 'Bugzilla::Group', 16, 'description', 'read only', 'post bugs', '2021-12-24 12:34:48'),
+(2, 'Bugzilla::Group', 15, 'description', 'post bugs', 'admin', '2021-12-24 12:36:06');
 
 -- --------------------------------------------------------
 
@@ -411,7 +413,7 @@ CREATE TABLE `bug_user_last_visit` (
 INSERT INTO `bug_user_last_visit` (`id`, `user_id`, `bug_id`, `last_visit_ts`) VALUES
 (3, 2, 2, '2021-12-03 14:42:00'),
 (8, 2, 5, '2021-12-22 10:28:42'),
-(9, 4, 6, '2021-12-22 11:10:14'),
+(9, 4, 6, '2021-12-24 12:39:55'),
 (10, 1, 6, '2021-12-23 20:44:47'),
 (11, 4, 7, '2021-12-23 20:54:58');
 
@@ -1263,8 +1265,8 @@ INSERT INTO `groups` (`id`, `name`, `description`, `isbuggroup`, `userregexp`, `
 (12, 'bz_sudoers', 'Can perform actions as other users', 0, '', 1, NULL),
 (13, 'bz_sudo_protect', 'Can not be impersonated by other users', 0, '', 1, NULL),
 (14, 'bz_quip_moderators', 'Can moderate quips', 0, '', 1, NULL),
-(15, 'Group 1', 'post bugs', 1, 'user1', 1, NULL),
-(16, 'Group 2', 'read only', 1, 'user3', 1, NULL),
+(15, 'Group 1', 'admin', 1, 'user1', 1, NULL),
+(16, 'Group 2', 'post bugs', 1, 'user3', 1, NULL),
 (17, 'Group Read Only', 'Readonly', 1, 'user3', 1, NULL);
 
 -- --------------------------------------------------------
@@ -1294,8 +1296,8 @@ INSERT INTO `group_control_map` (`group_id`, `product_id`, `entry`, `membercontr
 (16, 1, 0, 1, 0, 0, 0, 0, 0),
 (15, 2, 0, 1, 0, 1, 0, 1, 0),
 (16, 2, 0, 1, 0, 0, 0, 0, 0),
-(15, 3, 1, 0, 0, 1, 1, 1, 1),
-(16, 3, 1, 0, 0, 1, 1, 1, 1);
+(15, 3, 1, 1, 0, 1, 1, 1, 1),
+(16, 3, 1, 1, 0, 0, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1359,7 +1361,6 @@ INSERT INTO `group_group_map` (`member_id`, `grantor_id`, `grant_type`) VALUES
 (1, 15, 0),
 (1, 15, 1),
 (1, 15, 2),
-(1, 16, 0),
 (1, 16, 1),
 (1, 16, 2),
 (1, 17, 1),
@@ -1413,6 +1414,7 @@ CREATE TABLE `logincookies` (
 INSERT INTO `logincookies` (`cookie`, `userid`, `ipaddr`, `lastused`) VALUES
 ('8xJ2tY0XI8', 1, NULL, '2021-12-03 14:57:51'),
 ('fXNR5iaX1e', 1, '::1', '2021-12-03 14:40:12'),
+('gcq7rvWa89', 2, NULL, '2021-12-24 12:40:47'),
 ('nyLPewsm90', 1, NULL, '2021-12-23 20:56:49'),
 ('YD3wB6WkrG', 1, NULL, '2021-12-03 15:21:07');
 
@@ -1667,9 +1669,9 @@ CREATE TABLE `profiles` (
 
 INSERT INTO `profiles` (`userid`, `login_name`, `cryptpassword`, `realname`, `disabledtext`, `disable_mail`, `mybugslink`, `extern_id`, `is_enabled`, `last_seen_date`) VALUES
 (1, 'tuanvutran369@gmail.com', 'QYGAegjp,4gg38FNhyHNT79RFR6oXWw3LY9fB8LWaXf8/ikka25I{SHA-256}', 'TuanVu', '', 0, 1, NULL, 1, '2021-12-23 00:00:00'),
-(2, 'user1@gmail.com', '9DU0sclA,NWEuiS9n2l6Zi+X7rvVUY4t5FQlQN/wqQGgXCnBd+Rg{SHA-256}', 'user1', '', 0, 1, NULL, 1, '2021-12-22 00:00:00'),
+(2, 'user1@gmail.com', '9DU0sclA,NWEuiS9n2l6Zi+X7rvVUY4t5FQlQN/wqQGgXCnBd+Rg{SHA-256}', 'user1', '', 0, 1, NULL, 1, '2021-12-24 00:00:00'),
 (3, 'user2@gmail.com', 'nYrMZNHh,dweb7LTYsqXBdoUBJPw0EvCvO0NCBjXVXRG+pWVgpnk{SHA-256}', 'user2', 'can not login', 1, 1, NULL, 0, NULL),
-(4, 'user3@gmail.com', 'jgQQd43A,J3K9O8NWxeuHo4OAK+FptbLIiMOswmSHFylmayeekAI{SHA-256}', 'tri', '', 0, 1, NULL, 1, '2021-12-23 00:00:00'),
+(4, 'user3@gmail.com', 'jgQQd43A,J3K9O8NWxeuHo4OAK+FptbLIiMOswmSHFylmayeekAI{SHA-256}', 'tri', '', 0, 1, NULL, 1, '2021-12-24 00:00:00'),
 (5, 'tri@gmail.com', 'BtWmrQfw,jvqcNhIWbj1ggwqoveOfxtCmYDK3fh7IrRrRwPhk7Ic{SHA-256}', 'Trí', '', 0, 1, NULL, 1, NULL),
 (6, 'tn18894650@gmail.com', 'a50GSQKp,yDapuu5ADu8zqzJjqm61qabCsVETb/TSeH9JThI5+hY{SHA-256}', 'Trọng Trí', '', 0, 1, NULL, 1, NULL),
 (7, 'tn28894650@gmail.com', 'EWhF2hEz,CjCoV/8ba8Vv3mdJFKuSSlzC/eDj31+mDDR2+o0zgQM{SHA-256}', 'Nguyễn Trọng Trí', '', 0, 1, NULL, 1, NULL),
@@ -1728,14 +1730,11 @@ CREATE TABLE `profile_search` (
 
 INSERT INTO `profile_search` (`id`, `user_id`, `bug_list`, `list_order`) VALUES
 (1, 3, '1', 'bug_status,priority,assigned_to,bug_id'),
-(6, 2, '3,2', 'changeddate DESC,bug_status,priority,assigned_to,bug_id'),
 (13, 2, '', NULL),
 (14, 2, '4,2', 'assigned_to DESC,bug_status DESC,changeddate DESC,priority,bug_id'),
 (16, 2, '4,2', 'assigned_to DESC,bug_status DESC,changeddate DESC,priority,bug_id'),
-(17, 4, '', NULL),
 (18, 4, '', NULL),
 (19, 4, '4', 'priority,bug_severity'),
-(22, 1, '2,4', 'priority,bug_severity'),
 (23, 1, '2,4', 'priority,bug_severity'),
 (24, 1, '2,4', 'priority,bug_severity'),
 (25, 1, '', NULL),
@@ -1754,7 +1753,13 @@ INSERT INTO `profile_search` (`id`, `user_id`, `bug_list`, `list_order`) VALUES
 (38, 1, '5', 'priority,bug_severity'),
 (39, 4, '5', 'priority,bug_severity'),
 (40, 4, '6,7', 'priority,bug_severity'),
-(41, 4, '6', 'priority,bug_severity');
+(41, 4, '6', 'priority,bug_severity'),
+(42, 2, '2,5', 'priority,bug_severity'),
+(43, 4, '6,7', 'priority,bug_severity'),
+(44, 2, '2,5', 'priority,bug_severity'),
+(45, 1, '2,5,6', 'priority,bug_severity'),
+(46, 4, '6,7', 'bug_id'),
+(47, 2, '2,5', 'bug_id');
 
 -- --------------------------------------------------------
 
@@ -2099,6 +2104,7 @@ INSERT INTO `tokens` (`userid`, `issuedate`, `token`, `tokentype`, `eventdata`) 
 (1, '2021-12-22 10:20:33', '74LSM5YV6o', 'session', 'edit_product'),
 (1, '2021-12-19 09:03:09', '7Ty0XsaDkW', 'session', 'edit_parameters'),
 (1, '2021-12-22 11:05:05', '7xeuY9g2qd', 'session', 'edit_group'),
+(2, '2021-12-23 21:55:14', '8Lo66N4Gqq', 'session', 'create_bug'),
 (1, '2021-12-17 11:48:33', '8stqNw3Cev', 'session', 'add_group'),
 (1, '2021-12-17 11:48:33', '9EyLXJCC9n', 'session', 'edit_group'),
 (1, '2021-12-17 11:09:56', 'A6qYPZ9WCk', 'session', 'edit_product'),
@@ -2106,19 +2112,24 @@ INSERT INTO `tokens` (`userid`, `issuedate`, `token`, `tokentype`, `eventdata`) 
 (1, '2021-12-19 08:58:13', 'anr2Zoy9d4', 'session', 'edit_parameters'),
 (1, '2021-12-19 08:46:06', 'aSZjJ8FllP', 'session', 'edit_user'),
 (2, '2021-12-22 10:24:01', 'B2m9tuCGk6', 'api_token', ''),
+(2, '2021-12-24 12:37:58', 'bbS0LsJR8u', 'session', 'edit_group_controls'),
 (1, '2021-12-19 08:44:42', 'bsCEtyRtTz', 'session', 'edit_product'),
 (1, '2021-12-17 11:14:33', 'BY2UhOwRNR', 'session', 'edit_user'),
+(2, '2021-12-24 12:37:14', 'DnnraMaQ3Q', 'session', 'edit_product'),
 (1, '2021-12-19 09:40:58', 'e849DIrcj1', 'session', 'edit_parameters'),
 (1, '2021-12-19 09:06:57', 'eOxKMCRXLH', 'session', 'edit_user_prefs'),
 (1, '2021-12-23 20:43:48', 'fEQ92UViuJ', 'session', 'edit_component'),
 (4, '2021-12-17 12:00:02', 'FN2bSR9Ihr', 'api_token', ''),
 (1, '2021-12-19 09:23:37', 'gJRT1McTsj', 'session', 'edit_parameters'),
 (1, '2021-12-17 11:11:02', 'goA6ESZgSt', 'session', 'edit_product'),
+(2, '2021-12-24 12:34:48', 'Hp5FeNmMAf', 'session', 'edit_group'),
 (1, '2021-12-17 11:00:18', 'HPmoafeEYq', 'session', 'edit_product'),
 (1, '2021-12-23 20:48:25', 'iIy9BHtkOw', 'session', 'edit_user'),
 (1, '2021-12-22 10:20:17', 'IN5S7HD5k7', 'session', 'edit_product'),
 (1, '2021-12-17 11:46:56', 'j2L5tIJbzT', 'session', 'edit_group_controls'),
+(1, '2021-12-23 21:54:29', 'JAAKaoqpuh', 'session', 'create_bug'),
 (1, '2021-12-17 11:55:39', 'JrcBBcaoiy', 'session', 'edit_group'),
+(2, '2021-12-24 12:37:53', 'JzH9OwQmwy', 'session', 'edit_product'),
 (1, '2021-12-17 11:57:22', 'KgHyi1s7u7', 'session', 'edit_group'),
 (1, '2021-12-17 12:00:53', 'Kwtz2lYjUA', 'session', 'edit_product'),
 (1, '2021-12-22 10:20:48', 'mAqMV6adan', 'session', 'edit_component'),
@@ -2146,6 +2157,7 @@ INSERT INTO `tokens` (`userid`, `issuedate`, `token`, `tokentype`, `eventdata`) 
 (1, '2021-12-19 09:00:43', 'uf1ZtS84Ta', 'session', 'edit_user'),
 (1, '2021-12-19 09:02:06', 'uvXOgN8BEC', 'session', 'edit_user'),
 (1, '2021-12-19 10:44:24', 'VkrkrOZGmo', 'session', 'edit_product'),
+(2, '2021-12-24 12:36:52', 'W6rPTJkQxk', 'session', 'edit_group'),
 (4, '2021-12-17 12:00:01', 'wuSiqApwUZ', 'session', 'create_bug'),
 (1, '2021-12-17 11:40:35', 'WWrtp1lMv1', 'session', 'edit_user'),
 (1, '2021-12-22 11:05:27', 'Y1lwN58JT0', 'session', 'edit_product'),
@@ -3109,7 +3121,7 @@ ALTER TABLE `profiles_activity`
 -- AUTO_INCREMENT cho bảng `profile_search`
 --
 ALTER TABLE `profile_search`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT cho bảng `quips`
